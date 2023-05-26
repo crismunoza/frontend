@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common'
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +8,20 @@ import { DOCUMENT } from '@angular/common'
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  user:boolean = false;
-  constructor(@Inject(DOCUMENT) private document: Document) { }
+  rol:any= localStorage.getItem('rol');
+  avatar:any=sessionStorage.getItem('user_avatar');
+  nombre:any=sessionStorage.getItem('nombre_us');
+  constructor(@Inject(DOCUMENT) private document: Document, private auth:AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  logOut(){
+    localStorage.clear();
+    //localStorage.removeItem('access_token');
+    const e = localStorage.getItem('access_token');
+    console.log('q queda en access token ',e)
+    this.auth.logout;
   }
   sidebarToggle()
   {

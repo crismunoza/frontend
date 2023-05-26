@@ -18,10 +18,15 @@ import {ReportsComponent} from "../app/components/admin/reports/reports.componen
 import {ViewvalorComponent} from "../app/components/admin/viewvalor/viewvalor.component";
 import { InicioGeneralComponent } from './components/inicio-general/inicio-general.component';
 import { NewproyectComponent } from './components/admin/newproyect/newproyect.component';
+import { AuthGuard } from './utils/auth.guard';
+import { RoleGuard } from './utils/role.guard';
 const routes: Routes = [
   {
   path:'registro',
   loadChildren: () => import('./modules/Registro/registro.module').then(m => m.RegistroModule)
+  },
+  {path:'admin'
+  ,loadChildren:()=>import('./modules/Representante/representante.module').then(m=>m.RepresentanteModule)
   },
   {path: 'login', component: LoginComponent},
   {path: 'certificado', component: CertificadoComponent},
@@ -31,7 +36,7 @@ const routes: Routes = [
   {path: 'solicitudes', component: SolicitudesComponent},
   {path: 'nuevasolicitud', component: NuevasolicitudComponent},
   {path: 'valoracion', component: ValoracionComponent},
-  {path: 'inicio', component: InicioComponent},
+  {path: 'inicio', component: InicioComponent,canActivate:[AuthGuard,RoleGuard]},
   {path: 'addmiembro', component: AddmiembroComponent},
   {path: 'editini', component: EditiniComponent},
   {path: 'editmiembro', component: EditmiembroComponent},
