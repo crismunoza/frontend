@@ -1,0 +1,53 @@
+<header id="header" class="header fixed-top align-items-center ">
+   <div class="d-flex  ">
+     <div class="p-2 flex-grow-1"><a class="navbar-brand" style="color:#012970"><h3>Junt<i class="bi bi-arrow-up-left-circle-fill"></i> a UnClick</h3></a></div>
+     <div class="p-2 flex-grow-1"></div>
+     <div class="ms-auto p-2 "><button class="btn btn-outline-danger" [routerLink]="['']"><i class="bi bi-box-arrow-right"></i> Atrás</button></div>                
+   </div>
+</header>
+<main >
+    <div class="container ">
+       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4 hola">
+          <div class="container ">
+             <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                   
+                   <div class="card mb-3">
+                      <div class="card-body">
+                         <div class="pt-4 pb-2" >
+                            <h5 class="card-title text-center pb-0 fs-4">Inicia Sesión</h5>
+                            <p class="text-center small">Ingresa Correo y Contraseña</p>
+                         </div>
+                         <form class="row g-3" [formGroup]="login" >
+                            <div class="col-12">
+                               <label for="yourUsername" class="form-label">Usuario</label>
+                               <div class="input-group has-validation">
+                                  <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-person-circle"></i></span> <input type="text" formControlName="username" class="form-control" id="Username" [ngClass]="{ 'is-invalid': submit && login.controls['username'].errors }">
+                                  <div *ngIf="submit || login.controls['username'].errors" class="invalid-feedback">
+                                    <div *ngIf="login.controls['username'].errors?.['required']">(*) Campo Obligatorio!</div>
+                                  </div>
+                               </div>
+                            </div>
+                            <div class="col-12">
+                               <label for="yourPassword" class="form-label">Contraseña</label> <input type="password" formControlName="password" class="form-control" id="Password" [ngClass]="{ 'is-invalid': submit && login.controls['password'].errors }">
+                               <div *ngIf="submit || login.controls['password'].errors" class="invalid-feedback">
+                                 <div *ngIf="login.controls['password'].errors?.['required']">(*) Campo Obligatorio!</div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                               <div class="form-check"> <input class="form-check-input" type="checkbox" name="rememberMe" formControlName="rememberMe"  id="rememberMe"> <label class="form-check-label" for="rememberMe">Recordar</label></div>
+                            </div>
+                            <div class="col-12"> <button class="btn btn-primary w-100" type="submit" (click)="onSubmit()">Iniciar</button></div>
+                            <div class="col-12">
+                              <p class="small mb-0">No tienes cuenta? <a href="registro/vecinos/reg-vecino" style="text-decoration: underline; color: blue;">Crear cuenta</a></p>
+                            </div>
+                         </form>
+                      </div>
+                   </div>
+
+                </div>
+             </div>
+          </div>
+       </section>
+    </div>
+ </main>

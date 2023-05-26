@@ -1,0 +1,12 @@
+.avatar-image {
+    width: 100px; /* Adjust the width as desired */
+    height: 100px; /* Adjust the height as desired */
+    object-fit: cover; /* Adjust the object-fit property as needed (e.g., cover, contain, etc.) */
+    border-radius: 50%; /* Apply border-radius to create a circular avatar */
+  }
+  .card .card-header {
+    background: center / contain no-repeat url('/assets/img/bg/hola.gif');
+    background-size:auto;
+    background-position-y: center;
+    padding-top: 100px;
+  }

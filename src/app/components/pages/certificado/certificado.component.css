@@ -1,0 +1,49 @@
+.certificado {
+    font-family: Helvetica, sans-serif;
+    margin: 50px auto;
+    width: 600px;
+    padding: 50px;
+    border: 2px solid #000;
+  }
+  
+  .certificado .card-sub-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .certificado .card-title {
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+  
+  .certificado .card-text {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+  
+  .certificado ul {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 30px;
+  }
+  
+  .certificado ul li {
+    font-size: 16px;
+  }
+  
+  .certificado p {
+    font-size: 16px;
+    margin-bottom: 30px;
+    display: flex;
+    text-align: justify;
+  }
+  
+  .certificado strong {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .sub-title {
+    display: block;
+  }

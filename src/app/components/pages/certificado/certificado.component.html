@@ -1,0 +1,73 @@
+<main id="main" class="main">
+    <div class="pagetitle">
+       <h1>Certificados</h1>
+       <nav>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+             <li class="breadcrumb-item">Menú</li>
+             <li class="breadcrumb-item active">Certificados</li>
+          </ol>
+       </nav>
+    </div>
+    <section class="section">
+       <div class="row align-items-top">
+            <div class="col-lg-12">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <ul class="nav nav-pills card-header-pills">
+                            <li class="nav-item ">
+                                <a class="btn btn-link mb-3" (click)="updateCardTitle('Fines generales')">
+                                    Fines generales
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="btn btn-link mb-3" (click)="updateCardTitle('Educación')">
+                                    Educación
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="btn btn-link mb-3" (click)="updateCardTitle('Laboral')">
+                                    Laboral
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-lg-12">
+                            <div class="card-body text-center certificado" >
+                                <h1 class="card-sub-title" >{{ tittle }}</h1>
+                                <strong class="sub-title">Fines generales</strong>
+                                <p> {{ header }} </p>
+                                <ul >
+                                  <li >
+                                    <strong>NOMBRE:</strong> <span id="nombre"></span>
+                                  </li>
+                                  <li >
+                                    <strong>RUT:</strong> <span id="rut"></span>
+                                  </li>
+                                  <li >
+                                    <strong>DIRECCIÓN:</strong> <span id="direccion"></span>
+                                  </li>
+                                </ul>
+                                <p> {{ paragraph }} </p>
+                                <p> {{ paragraphOne }} </p>
+                                <p> {{ paragraphThree }} </p>
+                                <ul>
+                                    <li *ngFor="let item of this.listItems">
+                                    <strong>{{ item }}</strong>
+                                    </li>
+                                </ul>
+                            </div>    
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <a  class="btn btn-secondary float-right" (click)="downloadPDF()">Descargar  <i class="ri-download-2-line"></i></a>
+                            <a  class="btn btn-success float-left">Enviar  <i class="ri-mail-send-line"></i></a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+       </div>
+    </section>
+ </main>

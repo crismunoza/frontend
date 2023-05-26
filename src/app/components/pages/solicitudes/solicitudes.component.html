@@ -1,0 +1,48 @@
+
+   <main id="main" class="main">
+      <div class="pagetitle">
+         <h1>Solicitud</h1>
+         <nav>
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+               <li class="breadcrumb-item">Menú</li>
+               <li class="breadcrumb-item">Solicitudes</li>
+            </ol>
+         </nav>
+      </div>
+      <section class="section">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="card">
+                  <div class="card-body">
+                     <h5 class="card-title">Tabla Solicitudes</h5>
+
+                     <div class="table-responsive">
+                        <table class="table datatable">
+                           <thead>
+                              <tr>
+                                 <th scope="col">Titulo</th>
+                                 <th scope="col">Asunto</th>
+                                 <th scope="col">Estado</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr>
+                                 <td>colecta ayuda</td>
+                                 <td>Publicacion</td>
+                                 <td>Aprobada</td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                     <div class="d-flex justify-content-end mt-3">
+                        <button type="button" class="btn btn-success" routerLink="/nuevasolicitud">
+                           Nueva Solicitud <i class="ri-file-list-2-line"></i>
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+   </main>
