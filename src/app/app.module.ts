@@ -16,16 +16,9 @@ import { NuevasolicitudComponent } from './components/pages/solicitudes/nuevasol
 import { PerfilComponent } from './components/pages/perfil/perfil.component';
 import { PagesError404Component } from './components/pages/pages-error404/pages-error404.component';
 import { InicioComponent } from './components/pages/inicio/inicio.component';
-import { EditiniComponent } from './components/admin/editini/editini.component';
-import { EditproyecComponent } from './components/admin/editproyec/editproyec.component';
-import { EditsolicitudComponent } from './components/admin/editsolicitud/editsolicitud.component';
-import { EditmiembroComponent } from './components/admin/editmiembro/editmiembro.component';
-import { AddmiembroComponent } from './components/admin/addmiembro/addmiembro.component';
-import { ReportsComponent } from './components/admin/reports/reports.component';
-import { ViewvalorComponent } from './components/admin/viewvalor/viewvalor.component';
 import { HttpClientModule } from '@angular/common/http';
 import { InicioGeneralComponent } from './components/inicio-general/inicio-general.component';
-import { NewproyectComponent } from './components/admin/newproyect/newproyect.component';
+
 
 
 @NgModule({
@@ -43,15 +36,8 @@ import { NewproyectComponent } from './components/admin/newproyect/newproyect.co
     PerfilComponent,
     PagesError404Component,
     InicioComponent,
-    EditiniComponent,
-    EditproyecComponent,
-    EditsolicitudComponent,
-    EditmiembroComponent,
-    AddmiembroComponent,
-    ReportsComponent,
-    ViewvalorComponent,
     InicioGeneralComponent,
-    NewproyectComponent,
+ 
   ],
   imports: [
     BrowserModule,
@@ -65,3 +51,20 @@ import { NewproyectComponent } from './components/admin/newproyect/newproyect.co
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+// import { EditiniComponent } from './components/admin/editini/editini.component';
+// import { EditproyecComponent } from './components/admin/editproyec/editproyec.component';
+// import { EditsolicitudComponent } from './components/admin/editsolicitud/editsolicitud.component';
+// import { EditmiembroComponent } from './components/admin/editmiembro/editmiembro.component';
+// import { AddmiembroComponent } from './components/admin/addmiembro/addmiembro.component';
+// import { ReportsComponent } from './components/admin/reports/reports.component';
+// import { ViewvalorComponent } from './components/admin/viewvalor/viewvalor.component';
+// import { NewproyectComponent } from './components/admin/newproyect/newproyect.component';
+
+    // EditiniComponent,
+    // EditproyecComponent,
+    // EditsolicitudComponent,
+    // EditmiembroComponent,
+    // AddmiembroComponent,
+    // ReportsComponent,
+    // NewproyectComponent,
+    //ViewvalorComponent,   
