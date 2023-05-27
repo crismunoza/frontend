@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
- rol:boolean = false;
+ rol:any = localStorage.getItem('rol');
   constructor(protected router: Router) { }
 
   ngOnInit(): void {

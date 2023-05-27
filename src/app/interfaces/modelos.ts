@@ -81,7 +81,7 @@ export interface Proyect {
 
 };
 export interface Login{
-  rut_representante: string,
+  rut: string,
   contrasenia: string
 };
 export interface User {

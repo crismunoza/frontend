@@ -25,6 +25,7 @@ export class AuthService {
       tap((res:any) => {
         console.log('ingresa aqui en el auth????')
         localStorage.setItem('access_token', res.alo[1]);
+        localStorage.setItem('rol',res.alo[2]);
        // const rol = res.rut;
         console.log('rol que entrega en auth',res.alo[2])
         this.getUserProfile(res.alo[0],res.alo[2]).subscribe((res) => {
@@ -49,16 +50,21 @@ saveUserData(user:any): void {
   const datosSesion1 = datos.id.toString();
   const datosSesion2 = datos.rut.toString();
   const datosSesion3 = datos.name.toString();
+  const datoSesion4 = datos.avatar.toString();
+  const datoSesion5 = datos.name.toString();
+  const datoSesion6 = datos.apellido.toString();
    console.log('que envio de datos en user',datosSesion1,datosSesion2,datosSesion3)
 // this.saveJuntaId(res);
-//   const encryptedData = Buffer.from(JSON.stringify(datos)).toString('base64');
+//   const encryptedData = datosSesion1.toString('base64');
 //   sessionStorage.setItem('data_user',encryptedData)
-//   // const encryptedData = Buffer.from(JSON.stringify(user)).toString('base64'); // Encriptar los datos del usuario
+  sessionStorage.setItem('user_avatar',datoSesion4);
+  sessionStorage.setItem('nombre_us',datoSesion5+' '+datoSesion6);
    sessionStorage.setItem('user_dataID' ,datosSesion1 );
    sessionStorage.setItem('user_datarut' ,datosSesion2 );
 }
 
   logout(): void {
+    
     if (localStorage.removeItem('access_token') == null) {
       this.router.navigate(['/login']);
     }
@@ -68,5 +74,6 @@ saveUserData(user:any): void {
     console.log('que entregamos a get User id',id,' rol',rol)
     return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/users/profile?id=${id}&rol=${rol}`);
   }
+
 }
  

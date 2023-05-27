@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       //captura del dato y envio al metodo login
       //const c = this.login.controls['rememberMe'].value;
       const datos: Login ={
-        rut_representante: this.login.controls['username'].value,
+        rut: this.login.controls['username'].value,
         contrasenia: this.login.controls['password'].value
       }
 

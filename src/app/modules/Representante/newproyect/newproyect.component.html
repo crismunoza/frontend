@@ -1,0 +1,153 @@
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Nuevo Proyecto</h1>
+  </div>
+  <section class="section">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">General Form Elements</h5>
+            <form [formGroup]="formProyect" (ngSubmit)="addProyect()">
+              <div class="row mb-3" >
+                <label for="nombreProyecto" class="col-sm-3 col-form-label">Nombre Proyecto</label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="nombreProyecto"
+                    [ngClass]="{
+                      'is-invalid': formProyect.get('nombreProyecto')?.invalid && formProyect.get('nombreProyecto')?.touched 
+                    }"
+                  />
+                  <div class="invalid-feedback"
+                  *ngIf="formProyect.get('nombreProyecto')?.errors?.['nameWhitoutNUMBERS']"
+                  >
+                    El nombre no puede contener números.
+                  </div>
+                  <div class="invalid-feedback" 
+                  *ngIf="formProyect.get('nombreProyecto')?.invalid && formProyect.get('nombreProyecto')?.errors?.['minlength']"
+                  >
+                    El nombre debe tener al menos 10 caracteres.
+                  </div>
+                  <div class="invalid-feedback" 
+                  *ngIf="formProyect.get('nombreProyecto')?.invalid && formProyect.get('nombreProyecto')?.errors?.['required']"
+                  >
+                    Debes ingresar un nombre de proyecto.
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="cupoMinimo" class="col-sm-3 col-form-label">Cupo Mínimo</label>
+                <div class="col-sm-9">
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="cupoMinimo"
+                    (keydown)="cancelNumberInputMin($event)"
+                    min="1"
+                    [ngClass]="{
+                      'is-invalid': formProyect.get('cupoMaximo')?.invalid && formProyect.get('cupoMaximo')?.touched                    
+                    }"
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="formProyect.get('cupoMinimo')?.invalid && formProyect.get('cupoMinimo')?.touched"
+                  >
+                    Debes ingresar un cupo mínimo.
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="cupoMaximo" class="col-sm-3 col-form-label">Cupo Máximo</label>
+                <div class="col-sm-9">
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="cupoMaximo"
+                    (keydown)="cancelNumberInput($event)"
+                    min="1"
+                    [value]="formProyect.get('cupoMinimo')?.value !== null ? (formProyect.get('cupoMinimo')?.value + 1) : null"
+                    [ngClass]="{
+                     'is-invalid': formProyect.get('cupoMaximo')?.invalid && formProyect.get('cupoMaximo')?.touched 
+                    }"
+                    [class.invalid]="formProyect.hasError('cupoMaximoInvalido') && formProyect.get('cupoMinimo')?.value < formProyect.get('cupoMaximo')?.value"
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="formProyect.get('cupoMaximo')?.errors?.['cupoMaximoInvalido'] && formProyect.get('cupoMaximo')?.touched && formProyect.get('cupoMinimo')?.value <= formProyect.get('cupoMaximo')?.value"
+                  >
+                    El cupo máximo es inválido.
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="descripcion" class="col-sm-3 col-form-label">Descripción</label>
+                <div class="col-sm-9">
+                  <textarea
+                    class="form-control"
+                    formControlName="descripcion"
+                    [ngClass]="{
+                     'is-invalid': formProyect.get('descripcion')?.invalid && formProyect.get('descripcion')?.touched 
+                    }"
+                  ></textarea>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="formProyect.get('descripcion')?.invalid && formProyect.get('descripcion')?.touched"
+                  >
+                    Descripción inválida.
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="fecha" class="col-sm-3 col-form-label">Fecha</label>
+                <div class="col-sm-9">
+                  <input
+                    type="date"
+                    class="form-control"
+                    formControlName="fecha"
+                    [ngClass]="{
+                     'is-invalid': formProyect.get('fecha')?.invalid && formProyect.get('fecha')?.touched 
+                    }"
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="formProyect.get('fecha')?.invalid && formProyect.get('fecha')?.touched"
+                  >
+                    Fecha inválida.
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="imagen" class="col-sm-3 col-form-label">Insertar Imagen</label>
+                <div class="col-sm-9">
+                  <input
+                    type="file"
+                    class="form-control"
+                    formControlName="imagen"
+                    [ngClass]="{
+                     'is-invalid': formProyect.get('imagen')?.invalid && formProyect.get('imagen')?.touched 
+                    }"
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="formProyect.get('imagen')?.invalid && formProyect.get('imagen')?.touched"
+                  >
+                    Debes insertar una imagen.
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-sm-12 text-center mt-4">
+                  <button type="submit" class="btn btn-primary" [disabled]="formProyect.invalid">
+                    Agregar
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
