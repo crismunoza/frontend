@@ -2,7 +2,7 @@
    <div class="d-flex  ">
      <div class="p-2 flex-grow-1"><a class="navbar-brand" style="color:#012970"><h3>Junt<i class="bi bi-arrow-up-left-circle-fill"></i> a UnClick</h3></a></div>
      <div class="p-2 flex-grow-1"></div>
-     <div class="ms-auto p-2 "><button class="btn btn-outline-danger" [routerLink]="['']"><i class="bi bi-box-arrow-right"></i> Atrás</button></div>                
+     <div class="ms-auto p-2 "><button class="btn btn-outline-danger" routerLink="/inicio-general"><i class="bi bi-box-arrow-right"></i> Atrás</button></div>                
    </div>
 </header>
 <main >
@@ -34,9 +34,14 @@
                                  <div *ngIf="login.controls['password'].errors?.['required']">(*) Campo Obligatorio!</div>
                               </div>
                             </div>
-                            <div class="col-12">
-                               <div class="form-check"> <input class="form-check-input" type="checkbox" name="rememberMe" formControlName="rememberMe"  id="rememberMe"> <label class="form-check-label" for="rememberMe">Recordar</label></div>
-                            </div>
+                              
+                           <div class="col-12 d-flex  form-check form-switch align-items-center">
+                              <div class="col-4 mx-2"><label class="form-check-label">Representante</label></div>
+                              <input class="col-4 mx-2 form-check-input" type="checkbox" role="switch" formControlName="rol_us">
+                              <label class="col-4 mx-2 form-check-label" for="rol_us">Vecino</label>
+                           </div>
+                               <!-- <input class="form-check-input" type="checkbox" name="rememberMe" formControlName="rememberMe"  id="rememberMe"> <label class="form-check-label" for="rememberMe">Recordar</label> -->
+                           
                             <div class="col-12"> <button class="btn btn-primary w-100" type="submit" (click)="onSubmit()">Iniciar</button></div>
                             <div class="col-12">
                               <p class="small mb-0">No tienes cuenta? <a href="registro/vecinos/reg-vecino" style="text-decoration: underline; color: blue;">Crear cuenta</a></p>

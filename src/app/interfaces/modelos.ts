@@ -82,7 +82,8 @@ export interface Proyect {
 };
 export interface Login{
   rut: string,
-  contrasenia: string
+  contrasenia: string,
+  tipo_user: boolean
 };
 export interface User {
   id: String,

@@ -17,11 +17,9 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut(){
-    localStorage.clear();
-    //localStorage.removeItem('access_token');
-    const e = localStorage.getItem('access_token');
-    console.log('q queda en access token ',e)
-    this.auth.logout;
+    localStorage.setItem('access_token','');
+    sessionStorage.clear();
+    this.auth.logout();
   }
   sidebarToggle()
   {
