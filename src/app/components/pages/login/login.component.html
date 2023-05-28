@@ -16,20 +16,20 @@
                       <div class="card-body">
                          <div class="pt-4 pb-2" >
                             <h5 class="card-title text-center pb-0 fs-4">Inicia Sesión</h5>
-                            <p class="text-center small">Ingresa Correo y Contraseña</p>
+                            <p class="text-center small">Ingresa Rut y Contraseña</p>
                          </div>
                          <form class="row g-3" [formGroup]="login" >
                             <div class="col-12">
-                               <label for="yourUsername" class="form-label">Usuario</label>
+                               <label for="yourUsername" class="form-label">Rut</label>
                                <div class="input-group has-validation">
-                                  <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-person-circle"></i></span> <input type="text" formControlName="username" class="form-control" id="Username" [ngClass]="{ 'is-invalid': submit && login.controls['username'].errors }">
+                                  <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-person-circle"></i></span> <input type="text" formControlName="username" class="form-control" id="Username" [ngClass]="{ 'is-invalid': submit && login.controls['username'].errors }" placeholder="Ingrese Rut" (input)="formatearRut($event)">
                                   <div *ngIf="submit || login.controls['username'].errors" class="invalid-feedback">
                                     <div *ngIf="login.controls['username'].errors?.['required']">(*) Campo Obligatorio!</div>
                                   </div>
                                </div>
                             </div>
                             <div class="col-12">
-                               <label for="yourPassword" class="form-label">Contraseña</label> <input type="password" formControlName="password" class="form-control" id="Password" [ngClass]="{ 'is-invalid': submit && login.controls['password'].errors }">
+                               <label for="yourPassword" class="form-label">Contraseña</label> <input type="password" formControlName="password" class="form-control" id="Password" [ngClass]="{ 'is-invalid': submit && login.controls['password'].errors }" placeholder="Ingrese Contraseña">
                                <div *ngIf="submit || login.controls['password'].errors" class="invalid-feedback">
                                  <div *ngIf="login.controls['password'].errors?.['required']">(*) Campo Obligatorio!</div>
                               </div>
