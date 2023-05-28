@@ -13,6 +13,8 @@ export class EditmiembroComponent implements OnInit {
   listVecinos: Vecino[] = [];
   // Rut del vecino seleccionado
   rutSeleccionado: string = '';
+  idJuntaVec: string | null;
+  fk_id_junta_vecinal!: string;
   // Creando el miembro seleccionado
   vecinoSeleccionado: Vecino2 = {
     rut_vecino: '',
@@ -30,19 +32,33 @@ export class EditmiembroComponent implements OnInit {
     private ComunaService: ComunaService,
     private deleteVecino: PostService,
     private updateVecino: PostService
-  ) { }
+  ) { this.idJuntaVec = sessionStorage.getItem('user_dataID');}
 
   ngOnInit(): void {
     this.listarMiembros();
     console.log(this.listVecinos);
   }
 
+  // listarMiembros() {
+  //   this.ComunaService.getvecinos().subscribe(data => {
+  //     this.listVecinos = data.listVecinos;
+  //   }, error => {
+  //     console.log(error);
+  //   });
+  // }
+
   listarMiembros() {
-    this.ComunaService.getvecinos().subscribe(data => {
-      this.listVecinos = data.listVecinos;
-    }, error => {
-      console.log(error);
-    });
+    const idJuntaVec = parseInt(sessionStorage.getItem('user_dataID') || '0', 10); // Parsea a número y asigna 0 si es nulo
+  
+    this.ComunaService.getvecinos().subscribe(
+      data => {
+        console.log("data", data);
+        this.listVecinos = data.listVecinos.filter(({ fk_id_junta_vecinal}) => fk_id_junta_vecinal === idJuntaVec );
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   editarVecino(vecino: Vecino2) {
