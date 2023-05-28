@@ -23,22 +23,23 @@ export class AuthService {
     return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}/users/ingresar`, log)
     .pipe(
       tap((res:any) => {
-        console.log('ingresa aqui en el auth????')
-        localStorage.setItem('access_token', res.alo[1]);
-        localStorage.setItem('rol',res.alo[2]);
-       // const rol = res.rut;
-        console.log('rol que entrega en auth',res.alo[2])
-        this.getUserProfile(res.alo[0],res.alo[2]).subscribe((res) => {
-          console.log('respuesta del getProfile',res)
-          this.saveUserData(res.datos); // Guardar datos del usuario en el localStorage
-        });      
+        if(res.respuesta === 'ok'){
+          localStorage.setItem('access_token', res.alo[1]);
+          localStorage.setItem('rol',res.alo[2]);
+          this.getUserProfile(res.alo[0],res.alo[2]).subscribe((res) => {
+            this.saveUserData(res.datos); // Guardar datos del usuario en el localStorage
+          }); 
+          var respuesta = res.alo[2];
+         return respuesta; 
+        }
+            
          
       })
     );
 }
 
 saveUserData(user:any): void {
-  
+  //todavia sigo trabajandoen esto ... debo encriptar 
   const datos: User ={
     id: user[0],    
     rut: user[1],
@@ -63,15 +64,13 @@ saveUserData(user:any): void {
    sessionStorage.setItem('user_datarut' ,datosSesion2 );
 }
 
-  logout(): void {
-    
-    if (localStorage.removeItem('access_token') == null) {
-      this.router.navigate(['/login']);
+  logout() : void {
+    if (localStorage.getItem('access_token') === '') {
+      this.router.navigate(['login']);
     }
   }
 
   getUserProfile(id:any,rol:any): Observable<any> {
-    console.log('que entregamos a get User id',id,' rol',rol)
     return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/users/profile?id=${id}&rol=${rol}`);
   }
 

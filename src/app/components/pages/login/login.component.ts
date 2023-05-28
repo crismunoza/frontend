@@ -2,7 +2,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
 //import { Login } from 'src/app/interfaces/modelos';
-//import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 import { Login } from 'src/app/interfaces/modelos';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     this.login = this.fb.group({
       username: ["", [Validators.required]],
       password: ["", [Validators.required]],
-      rememberMe: false
+      rol_us: false
     });
     
   }
@@ -36,30 +36,57 @@ export class LoginComponent implements OnInit {
       //const c = this.login.controls['rememberMe'].value;
       const datos: Login ={
         rut: this.login.controls['username'].value,
-        contrasenia: this.login.controls['password'].value
+        contrasenia: this.login.controls['password'].value,
+        tipo_user: this.login.controls['rol_us'].value
       }
 
       console.log('lo q enviamos',datos)
       try {
           this.loggin.login(datos).subscribe( res =>{
-            //respuesta y modal de sweetAlert
-            console.log(res)
-            // if(res.alo[0] === 'representante'){
-            //   //Set.localStorage
-            //   //this.router.navigate(['inicio']);
-            //   Swal.fire({
-            //     position: 'center',
-            //     icon: 'success',
-            //     title: 'Ingreso Exitoso!!',
-            //     showConfirmButton: false,
-            //     timer: 1500
-            //   }).then(() => {
-            //     /* Read more about isConfirmed, isDenied below */
-            //     //this.router.navigate(['inicio']);
-            })
-            //}
+
+            if(res.status === 500 ){
+              Swal.fire({
+                icon: 'error',
+                text: res.respuesta
+              })
+            }
+            else if(res.status === 404){
+              Swal.fire({
+                icon: 'error',
+                text: res.respuesta
+              })
+            }
+            else{
+              if(res.alo[2] === 'admin'){
+                console.log('va a redireccionar hacia admin ')
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Ingreso Exitoso!!',
+                  showConfirmButton: false,
+                  timer: 1500
+                }).then(() => {
+                  /* Read more about isConfirmed, isDenied below */
+                  this.router.navigate(['inicio']);
+              })
+              }
+              else if(res.alo[2] === 'vecino'){
+                console.log('va a redireccionar hacia vecino ')
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Ingreso Exitoso!!',
+                  showConfirmButton: false,
+                  timer: 1500
+                }).then(() => {
+                  /* Read more about isConfirmed, isDenied below */
+                  this.router.navigate(['inicio']);
+              })
+
+              }
+            }
           
-        // });
+        });
       }catch (error) {
         console.error('Error al parsear la respuesta JSON:', error);
       }  
