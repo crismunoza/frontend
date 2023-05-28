@@ -64,11 +64,15 @@ saveUserData(user:any): void {
    sessionStorage.setItem('user_datarut' ,datosSesion2 );
 }
 
-  logout() : void {
-    if (localStorage.getItem('access_token') === '') {
-      this.router.navigate(['login']);
-    }
-  }
+logout(): void {
+  // Limpiar token y rol
+  localStorage.removeItem('access_token');
+  localStorage.removeItem('rol');
+
+  // Redireccionar al login
+  this.router.navigate(['login']);
+}
+
 
   getUserProfile(id:any,rol:any): Observable<any> {
     return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/users/profile?id=${id}&rol=${rol}`);

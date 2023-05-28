@@ -1,6 +1,7 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { RutService } from 'rut-chileno';
 //import { Login } from 'src/app/interfaces/modelos';
 import Swal from 'sweetalert2';
 import { Login } from 'src/app/interfaces/modelos';
@@ -13,10 +14,16 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   login!:FormGroup; //formulario distinto de null
-
+  parentForm!: FormGroup;
   submit: boolean = false; 
-  constructor(private router:Router,private fb:FormBuilder, private loggin: AuthService
-   , ) { }
+  constructor(private router:Router,private fb:FormBuilder, private loggin: AuthService, private rutService: RutService,
+    ) { }
+
+    formatearRut(event: Event): void {
+      let username = this.rutService.getRutChileForm(1, (event.target as HTMLInputElement).value)
+      if (username)
+        this.login.controls['username'].patchValue(username, { emitEvent: false });
+    }
 
   ngOnInit(): void {
     this.login = this.fb.group({
