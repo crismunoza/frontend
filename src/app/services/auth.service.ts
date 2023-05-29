@@ -6,6 +6,7 @@ import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Login, User } from '../interfaces/modelos';
 import { Router } from '@angular/router';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable({
   providedIn: 'root'
@@ -48,16 +49,20 @@ saveUserData(user:any): void {
     avatar: user[4],
     id_junta_vec: user[5]
   }
+  //encriptaremos datos 
   const datosSesion1 = datos.id.toString();
   const datosSesion2 = datos.rut.toString();
   const datosSesion3 = datos.name.toString();
   const datoSesion4 = datos.avatar.toString();
   const datoSesion5 = datos.name.toString();
   const datoSesion6 = datos.apellido.toString();
-   console.log('que envio de datos en user',datosSesion1,datosSesion2,datosSesion3)
-// this.saveJuntaId(res);
-//   const encryptedData = datosSesion1.toString('base64');
-//   sessionStorage.setItem('data_user',encryptedData)
+  const dataString = JSON.stringify(datos);
+  const key = 'CHINGADOS';
+  var ciphertext = CryptoJS.AES.encrypt(dataString, key).toString();
+ 
+   console.log('esto queda en data ',ciphertext)
+
+   sessionStorage.setItem('data',ciphertext);
   sessionStorage.setItem('user_avatar',datoSesion4);
   sessionStorage.setItem('nombre_us',datoSesion5+' '+datoSesion6);
    sessionStorage.setItem('user_dataID' ,datosSesion1 );
