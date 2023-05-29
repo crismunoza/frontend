@@ -27,7 +27,7 @@ const routes: Routes = [
 
   {path: 'pages-error404', component: PagesError404Component},
   {path: 'perfil', component: PerfilComponent},
-  {path: 'inicio-general', component: InicioGeneralComponent},
+  {path: 'inicio-general', component: InicioGeneralComponent,canActivate:[RoleGuard],data:{role:''} },
   {path: '', redirectTo: 'inicio-general'},// cambiar por el componente de inicio
 
 ];

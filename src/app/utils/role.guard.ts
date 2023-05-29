@@ -21,7 +21,7 @@ export class RoleGuard implements CanActivate {
         return true; // Permitir el acceso a la ruta
       } else {
         // Redireccionar a una página 404 de notfound
-        this.router.navigate(['/login']); 
+        this.router.navigate(['/pages-error404']); 
         return false;        
       }
     } else {
