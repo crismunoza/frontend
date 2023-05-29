@@ -25,7 +25,7 @@ export class AuthService {
       tap((res:any) => {
         if(res.respuesta === 'ok'){
           localStorage.setItem('access_token', res.alo[1]);
-          localStorage.setItem('rol',res.alo[2]);
+          sessionStorage.setItem('rol',res.alo[2]);
           this.getUserProfile(res.alo[0],res.alo[2]).subscribe((res) => {
             this.saveUserData(res.datos); // Guardar datos del usuario en el localStorage
           }); 
@@ -67,7 +67,6 @@ saveUserData(user:any): void {
 logout(): void {
   // Limpiar token y rol
   localStorage.removeItem('access_token');
-  localStorage.removeItem('rol');
 
   // Redireccionar al login
   this.router.navigate(['login']);

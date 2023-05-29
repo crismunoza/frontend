@@ -15,10 +15,12 @@ export class PagesError404Component implements OnInit {
   navegar(){
     console.log('entra por el boton')
     const toke = localStorage.getItem('access_token');
-    if(toke !== ''){
+    //necesitamos epecificar que tiene que venir algo en session para redireccionarlo al inicio de user
+    const rol = sessionStorage.getItem('rol');
+    if(toke !== '' && rol !== null){
       this.r.navigate(['inicio']);
     }
-    else{
+    else {
       this.r.navigate(['inicio-general']);
     }
   }

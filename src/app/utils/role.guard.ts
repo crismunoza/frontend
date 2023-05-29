@@ -11,13 +11,14 @@ export class RoleGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> | boolean {
     const expectedRole = route.data['role']; // Obtener el rol esperado por data del route
-    const userRole = localStorage.getItem('rol');
+    const userRole = sessionStorage.getItem('rol');
     if (userRole !== undefined) {
       console.log('esta ingresando a q no viene vacio el userRole')
       // Verificar si el rol del usuario coincide con el rol esperado
       if (userRole == expectedRole) {
         return true; // Permitir el acceso a la ruta
-      } else {
+      } 
+      else {
         // Redireccionar a una página 404 de notfound
         this.router.navigate(['/pages-error404']); 
         return false;        
