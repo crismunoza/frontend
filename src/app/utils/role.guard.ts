@@ -11,9 +11,7 @@ export class RoleGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> | boolean {
     const expectedRole = route.data['role']; // Obtener el rol esperado por data del route
-    console.log('que rol espera la ruta',expectedRole)
     const userRole = localStorage.getItem('rol');
-    console.log('que hay en rol de localStorage',userRole)
     if (userRole !== undefined) {
       console.log('esta ingresando a q no viene vacio el userRole')
       // Verificar si el rol del usuario coincide con el rol esperado
