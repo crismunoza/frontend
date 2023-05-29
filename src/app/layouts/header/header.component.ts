@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  rol:any= localStorage.getItem('rol');
+  rol:any= sessionStorage.getItem('rol');
   avatar:any=sessionStorage.getItem('user_avatar');
   nombre:any=sessionStorage.getItem('nombre_us');
   constructor(@Inject(DOCUMENT) private document: Document, private auth:AuthService) { }
