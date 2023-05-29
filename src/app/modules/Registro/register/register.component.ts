@@ -5,6 +5,7 @@ import { comuna, JuntaVecinal2, Vecino } from '../../../interfaces/modelos';
 import { ComunaService } from '../../../services/servi.service';
 import { PostService } from '../../../services/postService.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -138,10 +139,25 @@ export class RegisterComponent implements OnInit {
           if (v.msg == 'Se inserto correctamente') {
             console.log("estamos dentro de V", v);
           }
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Registro Correctamente!!',
+            showConfirmButton: false,
+            timer: 1000
+          }).then(() => {
           this.router.navigate(['/login']);
+          });
         },
         error: (error) => {
           console.log("pasamos el this.vecino", error);
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Error al registrarse',
+            showConfirmButton: false,
+            timer: 1000
+          });
         }
       });
     };
