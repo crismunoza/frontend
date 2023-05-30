@@ -11,21 +11,18 @@ import * as CryptoJS from 'crypto-js';
 export class HeaderComponent implements OnInit {
   rol:any= sessionStorage.getItem('rol');
   //avatar:any= avatar1;
-  nombre:any=sessionStorage.getItem('nombre_us');
+  //nombre:any=sessionStorage.getItem('nombre_us');
   //aqui empleareos las variables que se llamaran mientra se crea la pag
   data:any =sessionStorage.getItem('data');
-  
-  bytes:any  = CryptoJS.AES.decrypt(this.data, 'CHINGADOS') ;
+  constructor(@Inject(DOCUMENT) private document: Document, private auth:AuthService) {     
+  }
+  //desencryptar la data
+  bytes:any  = CryptoJS.AES.decrypt(this.data, this.auth.getKey()) ;
   org:any  = this.bytes.toString(CryptoJS.enc.Utf8);
   obj = JSON.parse(this.org);
+  //se la entregamos a las ocntantes que las va a usar este componente
   avatar1:string  = this.obj.avatar;
-
-  constructor(@Inject(DOCUMENT) private document: Document, private auth:AuthService) { 
-    console.log('que viene en data ',this.data)
-    console.log('como queda desencriptado ',this.org)
-    
-  }
-
+  nombre:string = this.obj.name+' '+this.obj.apellido;  
   ngOnInit(): void {
   }
 

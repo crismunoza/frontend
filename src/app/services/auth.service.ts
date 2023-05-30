@@ -57,7 +57,7 @@ saveUserData(user:any): void {
   const datoSesion5 = datos.name.toString();
   const datoSesion6 = datos.apellido.toString();
   const dataString = JSON.stringify(datos);
-  const key = 'CHINGADOS';
+  const key = this.getKey();
   var ciphertext = CryptoJS.AES.encrypt(dataString, key).toString();
  
    console.log('esto queda en data ',ciphertext)
@@ -79,6 +79,11 @@ logout(): void {
 
   getUserProfile(id:any,rol:any): Observable<any> {
     return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/users/profile?id=${id}&rol=${rol}`);
+  }
+
+  getKey(){
+    const llave : string = 'CHINGADOS';
+    return llave;
   }
 
 }

@@ -106,12 +106,9 @@ export class RegisterRepComponent implements OnInit {
       this.junta.insertJuntaVecinal(junta)
       .subscribe(response => {
         // Maneja la respuesta de la solicitud aquí
-        console.log(response);
-
         try {
           // Si el mensaje tiene un 'ok', realizaremos una inserción del representante
           if (response.msg === 'ok') {
-            console.log('entra a crear repre')
             const RepOne: RepresentanteVecinal = {
               rut_representante: this.parentForm.controls['run_rep'].value,
               primer_nombre: this.parentForm.controls['p_nomb_rep'].value,
@@ -131,10 +128,8 @@ export class RegisterRepComponent implements OnInit {
             };
         
             this.junta.inserRep(RepOne).subscribe(response => {
-              console.log('QQQQQQQ',response)
               if (response.msg === 'yes') {
                 this.router.navigate(['login']);
-                //this.router.navigateByUrl('login');
               }
               else{
                 this.parentForm.reset();
