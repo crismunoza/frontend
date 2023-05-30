@@ -7,6 +7,7 @@ import { PostService } from 'src/app/services/postService.service';
 import { ComunaService } from 'src/app/services/servi.service';
 import {JuntaVecinal} from 'src/app/interfaces/modelos';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register-rep',
@@ -110,6 +111,7 @@ export class RegisterRepComponent implements OnInit {
         try {
           // Si el mensaje tiene un 'ok', realizaremos una inserción del representante
           if (response.msg === 'ok') {
+            console.log('entra a crear repre')
             const RepOne: RepresentanteVecinal = {
               rut_representante: this.parentForm.controls['run_rep'].value,
               primer_nombre: this.parentForm.controls['p_nomb_rep'].value,
@@ -129,9 +131,17 @@ export class RegisterRepComponent implements OnInit {
             };
         
             this.junta.inserRep(RepOne).subscribe(response => {
+              console.log('QQQQQQQ',response)
               if (response.msg === 'yes') {
                 this.router.navigate(['login']);
                 //this.router.navigateByUrl('login');
+              }
+              else{
+                this.parentForm.reset();
+                Swal.fire({
+                  icon: 'error',
+                  title: response.msg
+                });
               }
             });
           }

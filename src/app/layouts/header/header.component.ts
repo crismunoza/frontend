@@ -15,10 +15,10 @@ export class HeaderComponent implements OnInit {
   //aqui empleareos las variables que se llamaran mientra se crea la pag
   data:any =sessionStorage.getItem('data');
   
-    bytes:any  = CryptoJS.AES.decrypt(this.data, 'CHINGADOS');
-    org:any = this.bytes.toString(CryptoJS.enc.Utf8);
-    obj = JSON.parse(this.org);
-    avatar1:string  = this.obj.avatar;
+  bytes:any  = CryptoJS.AES.decrypt(this.data, 'CHINGADOS') ;
+  org:any  = this.bytes.toString(CryptoJS.enc.Utf8);
+  obj = JSON.parse(this.org);
+  avatar1:string  = this.obj.avatar;
 
   constructor(@Inject(DOCUMENT) private document: Document, private auth:AuthService) { 
     console.log('que viene en data ',this.data)
