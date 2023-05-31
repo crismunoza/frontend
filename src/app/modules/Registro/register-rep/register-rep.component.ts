@@ -110,36 +110,54 @@ export class RegisterRepComponent implements OnInit {
         try {
           // Si el mensaje tiene un 'ok', realizaremos una inserción del representante
           if (response.msg === 'ok') {
-            const RepOne: RepresentanteVecinal = {
-              rut_representante: this.parentForm.controls['run_rep'].value,
-              primer_nombre: this.parentForm.controls['p_nomb_rep'].value,
-              segundo_nombre: this.parentForm.controls['s_nomb_rep'].value,
-              primer_apellido: this.parentForm.controls['ap_pat_rep'].value,
-              segundo_apellido: this.parentForm.controls['ap_mat_rep'].value,
-              direccion_rep: this.parentForm.controls['calle_rep'].value,
-              numero_rep: this.parentForm.controls['num_calle_rep'].value,
-              correo_electronico: this.parentForm.controls['correo_rep'].value,
-              telefono: this.parentForm.controls['contacto_Rep'].value,
-              contrasenia: this.parentForm.controls['clave_rep'].value,
-              comuna_rep: this.parentForm.controls['comuna_rep'].value,
-              avatar: this.parentForm.controls['selectedAvatar'].value,
-              ruta_evidencia: 'hola.txt',
-              ruta_firma: 'hola2.txt',
-              id_junta_vecinal: response.id
-            };
-        
-            this.junta.inserRep(RepOne).subscribe(response => {
-              if (response.msg === 'yes') {
-                this.router.navigate(['login']);
-              }
-              else{
-                this.parentForm.reset();
-                Swal.fire({
-                  icon: 'error',
-                  title: response.msg
+            
+            const fileInput = document.getElementById('evidencia') as HTMLInputElement;
+            const file = fileInput.files?.[0];  
+
+            if (file) {
+              //FileReader permite almacenar ficheros de datos de forma asyncrona desde el navegador (img, videos, etc.)
+              const reader = new FileReader();            
+              //cuando esta en cargado ya en el navegador
+              reader.onload = () => {
+                //convertimos la imagen o el reader a un string 
+                const base64Image = reader.result as string;
+
+                const RepOne: RepresentanteVecinal = {
+                  rut_representante: this.parentForm.controls['run_rep'].value,
+                  primer_nombre: this.parentForm.controls['p_nomb_rep'].value,
+                  segundo_nombre: this.parentForm.controls['s_nomb_rep'].value,
+                  primer_apellido: this.parentForm.controls['ap_pat_rep'].value,
+                  segundo_apellido: this.parentForm.controls['ap_mat_rep'].value,
+                  direccion_rep: this.parentForm.controls['calle_rep'].value,
+                  numero_rep: this.parentForm.controls['num_calle_rep'].value,
+                  correo_electronico: this.parentForm.controls['correo_rep'].value,
+                  telefono: this.parentForm.controls['contacto_Rep'].value,
+                  contrasenia: this.parentForm.controls['clave_rep'].value,
+                  comuna_rep: this.parentForm.controls['comuna_rep'].value,
+                  avatar: this.parentForm.controls['selectedAvatar'].value,
+                  ruta_evidencia: 'hola.txt',
+                  ruta_firma: base64Image,
+                  id_junta_vecinal: response.id
+                };
+
+                this.junta.inserRep(RepOne).subscribe(response => {
+                  if (response.msg === 'yes') {
+                    this.router.navigate(['login']);
+                  }
+                  else{
+                    this.parentForm.reset();
+                    Swal.fire({
+                      icon: 'error',
+                      title: response.msg
+                    });
+                  }
                 });
-              }
-            });
+              };
+
+              //esta da por finalizada la carga del archivo al navgador y la lista como DONE la tarea
+              reader.readAsDataURL(file);
+            }          
+            
           }
           else{
             Swal.fire({

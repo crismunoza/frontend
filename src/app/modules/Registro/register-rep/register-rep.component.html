@@ -172,10 +172,10 @@
         <div class="col-md-12">
           <p>Debe adjuntar una imagen de su firma, en la cual aparezca Claramente. Esta sera usada para la emision de certificados</p>
           <div class="col-md-4 ">
-            <input class="form-control" type="file" accept=".jpg" id="evidencia" formControlName="evidencia" >
-            <!-- <div *ngIf="submitted && parentForm.controls['evidencia'].errors" class="invalid-feedback">
+            <input class="form-control" type="file" accept=".jpg" id="evidencia" formControlName="evidencia" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['evidencia'].errors }">
+            <div *ngIf="submitted && parentForm.controls['evidencia'].errors" class="invalid-feedback">
               <div *ngIf="parentForm.controls['evidencia'].errors?.['required']">Evidencia Obligatorio!</div>
-            </div> -->
+            </div>
           </div>    
         </div> 
         <div class="col-md-2 mt-1"></div> 
