@@ -38,15 +38,6 @@ export class EditmiembroComponent implements OnInit {
     this.listarMiembros();
     console.log(this.listVecinos);
   }
-
-  // listarMiembros() {
-  //   this.ComunaService.getvecinos().subscribe(data => {
-  //     this.listVecinos = data.listVecinos;
-  //   }, error => {
-  //     console.log(error);
-  //   });
-  // }
-
   listarMiembros() {
     const idJuntaVec = parseInt(sessionStorage.getItem('user_dataID') || '0', 10); // Parsea a número y asigna 0 si es nulo
   
