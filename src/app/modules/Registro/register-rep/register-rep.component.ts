@@ -63,7 +63,8 @@ export class RegisterRepComponent implements OnInit {
       correo_rep: ["", [Validators.required,Validators.email]],
       clave_rep: ["", [Validators.required]],
       clave_rep_conf: ["", [Validators.required]],
-      selectedAvatar: new FormControl(null)
+      selectedAvatar: new FormControl(null),
+      evidencia:["", [Validators.required]]
     });
 
     //consumir el servicio listar comunas
@@ -140,13 +141,21 @@ export class RegisterRepComponent implements OnInit {
               }
             });
           }
-        } catch (error) {
-          console.error('Error al parsear la respuesta JSON:', error);
+          else{
+            Swal.fire({
+              icon: 'error',
+               title: 'La junta vecinal ya se encuentra registrada.'
+             });
+          }
+        } catch  (error){
+           Swal.fire({
+           icon: 'error',
+            title: 'La junta vecinal ya se encuentra registrada.'
+          });
         }
-      }, error => {
-        // Maneja el error en caso de que ocurra
-        console.error(error);
-      });
+ 
+         });
+       
 
     }
   }
