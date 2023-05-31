@@ -118,36 +118,59 @@ export class NewproyectComponent implements OnInit {
   
     return null;
   }
+
   addProyect() {
     if (this.formProyect.valid) {
-      const formData: Proyect = {
-        ...this.formProyect.value,
-        fk_id_junta_vecinal: 1
-      };
-      this.proyectoService.insertProyect(formData).then(message => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Agregado',
-          text: message.resp,
-        }).then(() => {
-          this.router.navigate(['editproyec']);
-        });
-      }).catch(error => {
-        let messageAlert;
-        
-        messageAlert = error.errorType === 0 ? messageAlert = error.messageError: messageAlert = error.messageError;
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: messageAlert,
-        });
-        // console.log(error)
-      });
+      //obtención rut usuario.
+      const accessToken = localStorage.getItem('access_token');
+      let rut = '';
+      if (accessToken) {
+        const payload = accessToken.split('.')[1];
+        const decodedPayload = atob(payload);
+        const userData = JSON.parse(decodedPayload);
+        rut = userData.rut_user;
+        console.log(userData.rut_user);
+      } else {
+        console.log('No se encontró el token');
+      }
+      //obtención de la imagen como cadena Base64
+      const inputElement = document.getElementById('imageInput') as HTMLInputElement;
+      const file = inputElement.files && inputElement.files[0];
+  
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const base64String = reader.result as string;
+  
+          //agregar la imagen a los datos del formulario
+          let formData: Proyect = {
+            ...this.formProyect.value,
+            rut_user: rut,
+            image: base64String
+          };
+  
+          this.proyectoService.insertProyect(formData).then(message => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Agregado',
+              text: message.resp,
+            }).then(() => {
+              this.router.navigate(['admin/representante/edit-proyec']);
+            });
+          }).catch(error => {
+            let messageAlert;
+            messageAlert = error.errorType === 0 ? messageAlert = error.messageError: messageAlert = error.messageError;
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: messageAlert,
+            });
+          });
+        };
+        reader.readAsDataURL(file);
+      } 
     }
   }
   ngOnInit() { }
-
-  
-
   
 }
