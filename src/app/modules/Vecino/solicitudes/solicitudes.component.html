@@ -21,16 +21,20 @@
                         <table class="table datatable">
                            <thead>
                               <tr>
+                                 <th scope="col">Fecha</th>
                                  <th scope="col">Titulo</th>
                                  <th scope="col">Asunto</th>
                                  <th scope="col">Estado</th>
+                                 <th scope="col">Respuesta</th>
                               </tr>
                            </thead>
                            <tbody>
-                              <tr>
-                                 <td>colecta ayuda</td>
-                                 <td>Publicacion</td>
-                                 <td>Aprobada</td>
+                              <tr *ngFor="let solicitud of listsolicitud">
+                                 <td>{{ solicitud.createdAt}}</td>
+                                 <td>{{ solicitud.titulo_solicitud }}</td>
+                                 <td>{{ solicitud.asunto_solicitud }}</td>
+                                 <td>{{ solicitud.estado_solicitud }}</td>
+                                 <td>{{ solicitud.respuesta }}</td>
                               </tr>
                            </tbody>
                         </table>

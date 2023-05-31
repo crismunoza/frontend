@@ -11,6 +11,7 @@ export class CertificadoService {
     private myApiUrl = 'api/certificados/generate-pdf';
     private myApiUrlUpdate = 'api/certificados/update-subtitle';
     private myApiUrlUParagraph = 'api/certificados/obtener-parrafo';
+    private myApiUrlSenRut = 'api/certificados/obtener-rut';
 
   constructor(private http: HttpClient) { }
   /**promesa que obtiene el certificado desde backend.*/
@@ -37,7 +38,6 @@ export class CertificadoService {
       this.http.post(`${this.myAppUrl}${this.myApiUrlUpdate}`, payload)
         .subscribe(
           () => {
-            // resolve('Subtítulo actualizado con éxito en el backend');
             resolve('');
           },
           (error) => {
@@ -59,4 +59,18 @@ export class CertificadoService {
         });
     });
   }
+
+  sendRut(rutVecino: string) {
+    return new Promise((resolve, reject) => {
+      this.http.post(`${this.myAppUrl}${this.myApiUrlSenRut}`, { rutVecino })
+      .subscribe(
+        response => {
+          resolve(response);
+        },
+         error => {
+          reject(error);
+        }
+      )
+    })
+  };
 }  
