@@ -14,6 +14,13 @@ export class CertificadoComponent implements OnInit {
   paragraph: string = '';
   paragraphOne: string = '';
   paragraphThree: string = '';
+  goodbye: string = '';
+  representante: string = '';
+  juntaVecinal: string = '';
+  nameNeighbor: string = '';
+  addressNeighbor: string = '';
+  rutNeighbor: string = '';
+  
 
   public listItems: string[] = [
     '[Nombre del representante de la Junta Vecinal]',
@@ -53,19 +60,42 @@ export class CertificadoComponent implements OnInit {
     });
   
   }
-    
+  rutUser(): string{
+    const accessToken = localStorage.getItem('access_token');
+      let rut = '';
+      if (accessToken) {
+        const payload = accessToken.split('.')[1];
+        const decodedPayload = atob(payload);
+        const userData = JSON.parse(decodedPayload);
+        rut = userData.rut_user;
+        // console.log(userData.rut_user);
+        return userData.rut_user;
+        
+      } else {
+        console.log('No se encontró el token');
+        return '';
+      }
+  };  
   ngOnInit() {
     this.certificadoService.getParagraph()
     .then((response: any) => {
       this.tittle = response.certified.title;
       this.header = response.certified.header;
       this.paragraph = response.certified.paragraph1;
-      this.paragraphOne = response.certified.paragraph2
-      this.paragraphThree = response.certified.paragraph3
+      this.paragraphOne = response.certified.paragraph2;
+      this.paragraphThree = response.certified.paragraph3;
+      this.goodbye = response.certified.goodbye;
+      this.representante = response.certified.representante;
+      this.juntaVecinal = response.certified.juntaV;
+      this.nameNeighbor = response.certified.nombreVecino;
+      this.addressNeighbor = response.certified.direccionVecino;
+      this.rutNeighbor = response.certified.rutVecino;
     })
     .catch(error => {
       // console.error('Error al obtener el párrafo:', error);
     });
+    this.certificadoService.sendRut(this.rutUser());
+    this.rutUser();
   }
 
 }

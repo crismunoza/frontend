@@ -71,13 +71,15 @@ export interface Vecino2 {
 
 export interface Proyect {
 
-  nombreProyecto : string;
+  idProyecto : number;
+  nombre: string;
   cupoMinimo : number;
   cupoMaximo : number;
   descripcion : string;
-  fecha : string;
+  fecha_proyecto : string;
   imagen : string;
-  resp?: string;
+  estado: string;
+  resp?: any;
 
 };
 export interface Login{
