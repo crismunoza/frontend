@@ -7,8 +7,8 @@
       <div class="col-lg-6">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">General Form Elements</h5>
-            <form [formGroup]="formProyect" (ngSubmit)="addProyect()">
+            <h5 class="card-title">Ingresa el nuevo proyecto</h5>
+            <form [formGroup]="formProyect" (ngSubmit)="addProyect()" enctype="multipart/form-data">
               <div class="row mb-3" >
                 <label for="nombreProyecto" class="col-sm-3 col-form-label">Nombre Proyecto</label>
                 <div class="col-sm-9">
@@ -125,6 +125,7 @@
                     type="file"
                     class="form-control"
                     formControlName="imagen"
+                    id="imageInput"
                     [ngClass]="{
                      'is-invalid': formProyect.get('imagen')?.invalid && formProyect.get('imagen')?.touched 
                     }"

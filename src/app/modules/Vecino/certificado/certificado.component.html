@@ -10,64 +10,69 @@
        </nav>
     </div>
     <section class="section">
-       <div class="row align-items-top">
-            <div class="col-lg-12">
-                <div class="card text-center">
-                    <div class="card-header">
-                        <ul class="nav nav-pills card-header-pills">
-                            <li class="nav-item ">
-                                <a class="btn btn-link mb-3" (click)="updateCardTitle('Fines generales')">
-                                    Fines generales
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="btn btn-link mb-3" (click)="updateCardTitle('Educación')">
-                                    Educación
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="btn btn-link mb-3" (click)="updateCardTitle('Laboral')">
-                                    Laboral
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <div class="col-lg-12">
-                            <div class="card-body text-center certificado" >
-                                <h1 class="card-sub-title" >{{ tittle }}</h1>
-                                <strong class="sub-title">Fines generales</strong>
-                                <p> {{ header }} </p>
-                                <ul >
-                                  <li >
-                                    <strong>NOMBRE:</strong> <span id="nombre"></span>
-                                  </li>
-                                  <li >
-                                    <strong>RUT:</strong> <span id="rut"></span>
-                                  </li>
-                                  <li >
-                                    <strong>DIRECCIÓN:</strong> <span id="direccion"></span>
-                                  </li>
-                                </ul>
-                                <p> {{ paragraph }} </p>
-                                <p> {{ paragraphOne }} </p>
-                                <p> {{ paragraphThree }} </p>
-                                <ul>
-                                    <li *ngFor="let item of this.listItems">
-                                    <strong>{{ item }}</strong>
-                                    </li>
-                                </ul>
-                            </div>    
-                        </div>
-                        <hr>
-                        <div class="d-flex justify-content-between">
-                            <a  class="btn btn-secondary float-right" (click)="downloadPDF()">Descargar  <i class="ri-download-2-line"></i></a>
-                            <a  class="btn btn-success float-left">Enviar  <i class="ri-mail-send-line"></i></a>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
+       <div class="container">
+           <div class="row align-items-center">
+               <div class="col-lg-12">
+                   <div class="card text-center">
+                       <div class="card-header">
+                           <ul class="nav nav-pills card-header-pills">
+                               <li class="nav-item">
+                                   <a class="btn btn-link mb-3" (click)="updateCardTitle('Fines generales')">
+                                       Fines generales
+                                   </a>
+                               </li>
+                               <li class="nav-item">
+                                   <a class="btn btn-link mb-3" (click)="updateCardTitle('Educación')">
+                                       Educación
+                                   </a>
+                               </li>
+                               <li class="nav-item">
+                                   <a class="btn btn-link mb-3" (click)="updateCardTitle('Laboral')">
+                                       Laboral
+                                   </a>
+                               </li>
+                           </ul>
+                       </div>
+                       <div class="card-body text-center certificado">
+                           <h1 class="card-sub-title">{{ tittle }}</h1>
+                           <strong class="sub-title">Fines generales</strong>
+                           <p>{{ header }}</p>
+                           <ul class="center-data">
+                               <li>
+                                   <strong>NOMBRE:</strong> <strong id="nombre"> {{ nameNeighbor }}</strong>
+                               </li>
+                               <li>
+                                   <strong>RUT: </strong> <strong id="rut"> {{ rutNeighbor }}</strong>
+                               </li>
+                               <li>
+                                   <strong>DIRECCIÓN:</strong> <strong id="direccion"> {{ addressNeighbor }}</strong>
+                               </li>
+                           </ul>
+                           <p>{{ paragraph }}</p>
+                           <p>{{ paragraphOne }}</p>
+                           <p>{{ paragraphThree }}</p>
+                           <p>{{ goodbye }}</p>
+                           <ul class="list-unstyled">
+                                <li>
+                                    <strong> {{ representante }} </strong>
+                                </li>
+                                <li>
+                                    <strong> {{ juntaVecinal }} </strong>
+                                </li>
+                           </ul>
+                       </div>
+                       <hr>
+                       <div class="row">
+                           <div class="col-lg-6 text-lg-right mb-3 mb-lg-0">
+                               <a class="btn btn-secondary" (click)="downloadPDF()">Descargar <i class="ri-download-2-line"></i></a>
+                           </div>
+                           <div class="col-lg-6 text-lg-left">
+                               <a class="btn btn-success">Enviar <i class="ri-mail-send-line"></i></a>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
        </div>
     </section>
  </main>
