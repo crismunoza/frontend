@@ -5,7 +5,7 @@
           <ol class="breadcrumb">
              <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
              <li class="breadcrumb-item active">Menú</li>
-             <li class="breadcrumb-item"><a routerLink="/solicitudes">Solicitudes</a></li>
+             <li class="breadcrumb-item"><a routerLink="/Vecino/accion/solicitudes">Solicitudes</a></li>
              <li class="breadcrumb-item active">Nueva Solicitud</li>
           </ol>
        </nav>
@@ -16,30 +16,41 @@
              <div class="card">
                 <div class="card-body">
                    <h5 class="card-title">Nueva Solicitud</h5>
-                   <form>
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">Seleccionar Asunto</label>
-                        <div class="col-sm-10">
-                           <select class="form-select" aria-label="Default select example">
-                              <option selected>Seleccionar Asunto</option>
-                              <option value="1">One</option>
-                              <option value="2">Two</option>
-                              <option value="3">Three</option>
-                           </select>
+                   <form [formGroup]="parentForm">
+                     <div class="row mb-3">
+                        <label for="titulo" class="col-sm-2 col-form-label">Titulo</label>
+                        <div class="col-sm-10"> 
+                        <input type="text" class="form-control" id="titulo" formControlName="titulo" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['titulo'].errors }">
+                        <div *ngIf="submitted && parentForm.controls['titulo'].errors" class="invalid-feedback">
+                           <div *ngIf="parentForm.controls['titulo'].errors?.['required']">(*) Campo Obligatorio!</div>
+                           <div *ngIf="parentForm.controls['titulo'].errors?.['pattern']">Solo letras</div>
+                         </div>
                         </div>
                      </div>
                       <div class="row mb-3">
-                         <label for="inputText" class="col-sm-2 col-form-label">Titulo</label>
-                         <div class="col-sm-10"> <input type="text" class="form-control"></div>
+                         <label for="asunto" class="col-sm-2 col-form-label">Asunto</label>
+                         <div class="col-sm-10">
+                         <input  type="text" class="form-control" id="asunto" formControlName="asunto" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['asunto'].errors }">
+                         <div *ngIf="submitted && parentForm.controls['asunto'].errors" class="invalid-feedback">
+                           <div *ngIf="parentForm.controls['asunto'].errors?.['required']">(*) Campo Obligatorio!</div>
+                           <div *ngIf="parentForm.controls['asunto'].errors?.['pattern']">Solo letras</div>
+                         </div>
+                        </div>
                       </div>
                       <div class="row mb-3">
-                         <label for="inputPassword" class="col-sm-2 col-form-label">Descripcion</label>
-                         <div class="col-sm-10"><textarea class="form-control" style="height: 100px"></textarea></div>
+                         <label for="descripcion" class="col-sm-2 col-form-label">Descripcion</label>
+                         <div class="col-sm-10">
+                         <textarea class="form-control" style="height: 100px" type="text" class="form-control" id="descripcion" formControlName="descripcion" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['descripcion'].errors }"></textarea>
+                         <div *ngIf="submitted && parentForm.controls['descripcion'].errors" class="invalid-feedback">
+                           <div *ngIf="parentForm.controls['descripcion'].errors?.['required']">(*) Campo Obligatorio!</div>
+                           <div *ngIf="parentForm.controls['descripcion'].errors?.['pattern']">Debe tener alguna Descripcion</div>
+                         </div>
+                         </div>
                       </div>
                       <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Enviar Solicitud</label>
                         <div class="col-sm-10 text-end">
-                          <button type="submit" class="btn btn-primary"><i class="ri-send-plane-2-fill"></i></button>
+                          <button type="submit" class="btn btn-primary" (click)="onSubmit()"><i class="ri-send-plane-2-fill"></i></button>
                         </div>
                       </div>
                       

@@ -55,6 +55,16 @@ export class PostService {
     
       return this.http.post(url, data);
     }
+
+    //metodo de insercion de la solicitud
+    newsolicitud(newsolicitud: any): Observable<any> {
+      return this.http.post(`${this.myAppUrl}${this.myApiUrl}/solicitudes`, newsolicitud);
+    }
+
+    //metodo de update de la solicitud por parte del representante
+    updateSolicitud(id_solicitud:number, solicitud: any): Observable<any> {
+      return this.http.put(`${this.myAppUrl}${this.myApiUrl}/solicitudes/update/${id_solicitud}`, solicitud);
+    }
     
 }
 

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import {Vecino, comuna} from '../interfaces/modelos';
+import {Vecino, comuna, Solicitud, Solicitud3} from '../interfaces/modelos';
 import {JuntaVecinal2} from '../interfaces/modelos';
 
 @Injectable({
@@ -43,9 +43,16 @@ export class ComunaService {
     
       return this.http.get<{ listVecinos: Vecino[] }>(url);
     }
-    
-
+    // trae la lista de todas las solicitudes 
+    getsolicitudes(): Observable<{ listsolicitud: Solicitud[] }> {
+      return this.http.get<{ listsolicitud: Solicitud[] }>(`${this.myAppUrl}${this.myApiUrl}/solicitudes/listsolicitud`);
+    }
+    // trae la lista de todas las solicitudes para responder 
+    versolicitudes(): Observable<{ data: Solicitud[] }> {
+      return this.http.get<{ data: Solicitud[] }>(`${this.myAppUrl}${this.myApiUrl}/solicitudes/versolicitudes`);
+    }
 }
+
 
 
 
