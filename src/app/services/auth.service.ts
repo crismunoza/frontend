@@ -67,8 +67,6 @@ saveUserData(user:any): void {
 logout(): void {
   // Limpiar token y rol
   localStorage.removeItem('access_token');
-
-
   // Redireccionar al login
   this.router.navigate(['login']);
 }

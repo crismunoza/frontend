@@ -93,3 +93,41 @@ export interface User {
   avatar: string,
   id_junta_vec: number
 };
+
+export interface Solicitud {
+  titulo_solicitud: string,
+  asunto_solicitud: string,
+  descripcion: string,
+  estado_solicitud: string,
+  fk_id_vecino: number
+};
+
+export interface Solicitud2 {
+  createdAt: Date,
+  titulo_solicitud: string,
+  asunto_solicitud: string,
+  descripcion: string,
+  estado_solicitud: string,
+  respuesta: string,
+  fk_id_vecino: number
+};
+
+export interface Solicitud3 {
+  id_solicitud: number,
+  titulo_solicitud: string,
+  asunto_solicitud: string,
+  descripcion: string,
+  estado_solicitud: string,
+  createdAt: Date,
+  primer_nombre: string,
+  primer_apellido: string,
+  respuesta: string,
+  fk_id_vecino: number,
+  fk_id_junta_vecinal: number
+};
+
+export interface Solicitud4 {
+  id_solicitud: number,
+  estado_solicitud: string,
+  respuesta: string
+};
