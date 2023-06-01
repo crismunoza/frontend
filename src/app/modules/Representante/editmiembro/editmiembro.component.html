@@ -19,10 +19,10 @@
                   <table class="table table-bordered">
                       <thead>     
                           <tr>
-                              <th scope="col">Rut</th>
-                              <th scope="col">Nombre</th>
-                              <th scope="col">Apellido Paterno</th>
-                              <th scope="col">Apellido Materno</th>
+                              <th scope="col">Correo</th>
+                              <th scope="col">Nombres</th>
+                              <th scope="col">Apellidos</th>
+                              <th scope="col">Celular</th>
                               <th scope="col">Domicilio</th>
                               <th scope="col">Accion</th>
                               
@@ -30,10 +30,10 @@
                       </thead>
                       <tbody>
                           <tr *ngFor="let vecino of listVecinos">
-                              <td>{{ vecino.rut_vecino }}</td>
-                              <td>{{ vecino.primer_nombre }}</td>
-                              <td>{{ vecino.primer_apellido }}</td>
-                              <td>{{ vecino.segundo_apellido }}</td>
+                              <td>{{ vecino.correo_electronico }}</td>
+                              <td>{{ vecino.primer_nombre }} {{vecino.segundo_nombre}}</td>
+                              <td>{{ vecino.primer_apellido }} {{ vecino.segundo_apellido }}</td>
+                              <td>{{ vecino.telefono }}</td>
                               <td>{{ vecino.direccion }}</td>
                               <td>
                                   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#disablebackdrop" (click)="seleccionarVecino(vecino.rut_vecino)">
@@ -68,13 +68,13 @@
                                                 <input type="text" class="form-control" placeholder="Telefono" [(ngModel)]="vecinoSeleccionado.telefono">
                                               </div>
                                               <div class="col-md-12">
-                                                <input type="text" class="form-control" placeholder="Correo" [(ngModel)]="vecinoSeleccionado.correo_electronico">
+                                                <input type="email" class="form-control" placeholder="Correo" [(ngModel)]="vecinoSeleccionado.correo_electronico">
                                               </div>
                                               <div class="col-md-6">
-                                                <input type="text" class="form-control" placeholder="Contraseña" [(ngModel)]="vecinoSeleccionado.contrasenia">
+                                                <input type="password" class="form-control" placeholder="Contraseña" [(ngModel)]="vecinoSeleccionado.contrasenia">
                                               </div>
                                               <div class="col-md-6">
-                                                <input type="text" class="form-control" placeholder="Repetir Contraseña">
+                                                <input type="password" class="form-control" placeholder="Repetir Contraseña">
                                               </div>
                                               <div class="modal-footer"> 
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button> 

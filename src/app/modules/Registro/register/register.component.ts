@@ -39,18 +39,18 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.parentForm = this.fb.group({
       rut_vecino: ["", [Validators.required, this.rutService.validaRutForm]],
-      p_nomb_veci: ["", [Validators.required, Validators.pattern("^[a-zA-Z]+$")]],
-      s_nomb_veci: ["", [Validators.required, Validators.pattern("^[a-zA-Z]+$")]],
-      ap_pat_veci: ["", [Validators.required, Validators.pattern("^[a-zA-Z]+$")]],
-      ap_mat_veci: ["", [Validators.required, Validators.pattern("^[a-zA-Z]+$")]],
-      comuna_junta: [""],
-      dirreccion_veci: ["", [Validators.required, Validators.pattern("^[a-zA-Z ]+$")]],
-      telefono: ["", [Validators.required, Validators.pattern("^[0-9]{8}$")]],
-      correo_veci: ["", [Validators.required, Validators.email]],
+      p_nomb_veci: ["", [Validators.required, Validators.pattern("^[a-zA-ZñÑ ]+$")]],
+      s_nomb_veci: ["", [Validators.required, Validators.pattern("^[a-zA-ZñÑ ]+$")]],
+      ap_pat_veci: ["", [Validators.required, Validators.pattern("^[a-zA-ZñÑ ]+$")]],
+      ap_mat_veci: ["", [Validators.required, Validators.pattern("^[a-zA-ZñÑ ]+$")]],
+      comuna_junta: new FormControl(null),
+      dirreccion_veci: ["", [Validators.required, Validators.pattern("^[a-zA-ZñÑ0-9 ]+$")]],
+      telefono: ["", [Validators.required, Validators.pattern("^[+0-9]{11}$")]],
+      correo_veci: ["", [Validators.required, Validators.email,Validators.pattern(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/)]],
       clave_veci: ["", [Validators.required]],
       clave_veci_conf: ["", [Validators.required]],
       selectedAvatar: new FormControl(null),
-      evidencia: [""]
+      evidencia: ["", [Validators.required]]
     });
 
     this.comunaService.getComunas().subscribe(
