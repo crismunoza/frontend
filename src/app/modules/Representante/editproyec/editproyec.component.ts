@@ -124,6 +124,9 @@ export class EditproyecComponent implements OnInit {
             title: 'Modificado',
             text: message.resp,
           })
+          .then(() => {
+            window.location.reload();
+          })
         })
         .catch(error => {
           let messageAlert;
@@ -155,7 +158,9 @@ export class EditproyecComponent implements OnInit {
               icon: 'warning',
               title: 'Eliminado',
               text: message.resp,
-            });
+            }).then(() => {
+              window.location.reload();
+            })
           })
           .catch(error => {
             let messageAlert;
