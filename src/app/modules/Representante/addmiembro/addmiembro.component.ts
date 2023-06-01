@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Vecino,User} from 'src/app/interfaces/modelos';
 import { ComunaService } from 'src/app/services/servi.service';
 import { PostService } from 'src/app/services/postService.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-addmiembro',
@@ -62,10 +63,31 @@ export class AddmiembroComponent implements OnInit {
     // Realizar la llamada al backend para modificar el estado
     this.modificarEstado.modificarEstado(rut_vecino, estado).subscribe(
       data => {
-        console.log(data); // Maneja la respuesta del backend según tus necesidades
-        this.listarADD(); // Actualiza la lista de miembros después de la modificación
+        Swal.fire({
+          title: '¿Desea aceptar al vecino?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: 'Aceptar',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire(
+              'Aceptado',
+              'El vecino ha sido aceptado',
+              'success'
+            )
+            this.listarADD();
+          }
+        })
       },
       error => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'No se pudo aceptar el vecino'
+        })
         console.log("Error al modificar el estado:", error);
       }
     );

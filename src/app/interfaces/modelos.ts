@@ -25,35 +25,35 @@ export interface JuntaVecinal2 {
 export interface RepresentanteVecinal {
   rut_representante: string,
   primer_nombre: string,
-  segundo_nombre: String,
-  primer_apellido: String,
-  segundo_apellido: String,
-  direccion_rep: String,
-  numero_rep: Number,
-  correo_electronico: String,
-  telefono: Number;
-  contrasenia: String,
-  comuna_rep: Number,
+  segundo_nombre: string,
+  primer_apellido: string,
+  segundo_apellido: string,
+  direccion_rep: string,
+  numero_rep: number,
+  correo_electronico: string,
+  telefono: number;
+  contrasenia: string,
+  comuna_rep: number,
   avatar:string,
   ruta_evidencia: string,
   ruta_firma: string,
-  id_junta_vecinal: Number
+  id_junta_vecinal: number
 };
 
 export interface Vecino {
   rut_vecino: string,
   primer_nombre: string,
-  segundo_nombre: String,
-  primer_apellido: String,
-  segundo_apellido: String,
-  direccion: String,
-  correo_electronico: String,
-  telefono: Number;
-  contrasenia: String,
+  segundo_nombre: string,
+  primer_apellido: string,
+  segundo_apellido: string,
+  direccion: string,
+  correo_electronico: string,
+  telefono: number;
+  contrasenia: string,
   avatar:string,
   ruta_evidencia: string,
-  estado: Number,
-  fk_id_junta_vecinal: Number,
+  estado: number,
+  fk_id_junta_vecinal: number,
 };
 
 export interface Vecino2 {
@@ -88,10 +88,10 @@ export interface Login{
   tipo_user: boolean
 };
 export interface User {
-  id: String,
-  name: String,
+  id: string,
+  name: string,
   apellido: string,
-  rut: String,
+  rut: string,
   avatar: string,
   id_junta_vec: number
 };
