@@ -133,3 +133,20 @@ export interface Solicitud4 {
   estado_solicitud: string,
   respuesta: string
 };
+
+export interface Vecino4 {
+  rut_vecino: string,
+  primer_nombre: string,
+  segundo_nombre: string,
+  primer_apellido: string,
+  segundo_apellido: string,
+  direccion: string,
+  correo_electronico: string,
+  telefono: number;
+  contrasenia: string,
+  avatar: string,
+  ruta_evidencia: string,
+  estado: number,
+  fk_id_junta_vecinal: number,
+  imageUrl?: string, // Nueva propiedad imageUrl de tipo string opcional
+}

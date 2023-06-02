@@ -32,7 +32,7 @@
                                 <td>{{ vecino.primer_nombre }}</td>
                                 <td>{{vecino.primer_apellido}} {{vecino.segundo_apellido}}</td>
                                 <td>{{ vecino.direccion }}</td>
-                                <td>{{ vecino.ruta_evidencia }}</td>
+                                <td><a [href]="vecino.imageUrl" [download]="vecino.rut_vecino + '.jpg'">Descargar imagen</a></td>
                                 <td>
                                 <button type="submit" class="btn btn-success" (click)="enviarRut(vecino.rut_vecino)"><i class="ri-user-follow-line"></i></button>
                                 <button type="button" class="btn btn-danger" (click)="Rechazo(vecino.rut_vecino)"><i class="ri-user-unfollow-line"></i></button> 
