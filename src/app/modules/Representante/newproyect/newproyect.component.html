@@ -1,9 +1,17 @@
 <main id="main" class="main">
   <div class="pagetitle">
-    <h1>Nuevo Proyecto</h1>
+    <h1>Nuevo Proyectos</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+        <li class="breadcrumb-item">Administar</li>
+        <li class="breadcrumb-item active"><a routerLink="/admin/representante/edit-proyec">Proyectos</a></li>
+        <li class="breadcrumb-item active">Nuevo Proyectos</li>
+      </ol>
+    </nav>
   </div>
   <section class="section">
-    <div class="row justify-content-center">
+  <div class="row justify-content-center">
       <div class="col-lg-6">
         <div class="card">
           <div class="card-body">
@@ -126,6 +134,7 @@
                     class="form-control"
                     formControlName="imagen"
                     id="imageInput"
+                    accept=".jpg"
                     [ngClass]="{
                      'is-invalid': formProyect.get('imagen')?.invalid && formProyect.get('imagen')?.touched 
                     }"
@@ -150,5 +159,6 @@
         </div>
       </div>
     </div>
+    
   </section>
 </main>
