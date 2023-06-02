@@ -29,7 +29,7 @@ const routes: Routes = [
   {path: 'perfil', component: PerfilComponent},
   {path: 'inicio-general', component: InicioGeneralComponent},
   {path: '', redirectTo: 'inicio-general'},// cambiar por el componente de inicio
-
+  {path: '**', redirectTo: 'pages-error404'},
 ];
 
 @NgModule({

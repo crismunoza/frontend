@@ -51,6 +51,11 @@ export class ComunaService {
     versolicitudes(): Observable<{ data: Solicitud[] }> {
       return this.http.get<{ data: Solicitud[] }>(`${this.myAppUrl}${this.myApiUrl}/solicitudes/versolicitudes`);
     }
+
+    obtenerEstrellas(id:any):Observable<any>{
+      console.log('que envio en el servicio ',id)
+      return this.http.get<any[]>(`${this.myAppUrl}${this.myApiUrl}/valoraciones/obtenerStar/${id}`);
+    }
 }
 
 

@@ -142,7 +142,16 @@ export class RegisterRepComponent implements OnInit {
 
                 this.junta.inserRep(RepOne).subscribe(response => {
                   if (response.msg === 'yes') {
-                    this.router.navigate(['login']);
+                    Swal.fire({
+                      position: 'center',
+                      icon: 'success',
+                      title: 'Generada con exito, Ahora puedes ingresar',
+                      showConfirmButton: false,
+                      timer: 2000
+                    }).then(() => {
+                      this.router.navigate(['login']);
+                    });
+
                   }
                   else{
                     this.parentForm.reset();
