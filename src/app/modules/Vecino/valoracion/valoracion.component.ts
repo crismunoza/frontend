@@ -13,8 +13,7 @@ import { Valoracion } from 'src/app/interfaces/modelos';
 })
 export class ValoracionComponent implements OnInit {
   solicitud!:FormGroup;  
-  data:any = sessionStorage.getItem('data');
-  
+  data:any = sessionStorage.getItem('data');  
 
   constructor(private auth:AuthService,private fb:FormBuilder,private post:PostService) { 
   }
