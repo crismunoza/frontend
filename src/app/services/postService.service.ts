@@ -1,4 +1,4 @@
-import { JuntaVecinal, RepresentanteVecinal, Vecino } from './../interfaces/modelos';
+import { JuntaVecinal, RepresentanteVecinal, Valoracion, Vecino } from './../interfaces/modelos';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -64,6 +64,11 @@ export class PostService {
     //metodo de update de la solicitud por parte del representante
     updateSolicitud(id_solicitud:number, solicitud: any): Observable<any> {
       return this.http.put(`${this.myAppUrl}${this.myApiUrl}/solicitudes/update/${id_solicitud}`, solicitud);
+    }
+
+    
+    enviarSol(val :Valoracion):Observable<any>{
+      return this.http.post(`${this.myAppUrl}${this.myApiUrl}/valoraciones/enviar`,val);
     }
     
 }

@@ -1,0 +1,18 @@
+.rating {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+    text-align: left;
+  }
+  
+  .rating > span {
+    font-size: 24px;
+    color: gold;
+    transition: color 0.3s;
+  }
+  
+  .rating > span.bi-star-fill,
+.rating > span.bi-star-fill:hover {
+  color: silver;
+}
+  
+  
