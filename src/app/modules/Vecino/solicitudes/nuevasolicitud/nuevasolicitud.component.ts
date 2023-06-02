@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import * as CryptoJS from 'crypto-js';
+import { AuthService } from 'src/app/services/auth.service';
 import { Solicitud } from '../../../../interfaces/modelos';
 import { PostService } from '../../../../services/postService.service';
 import { Router } from '@angular/router';
@@ -13,14 +15,20 @@ import Swal from 'sweetalert2';
 export class NuevasolicitudComponent implements OnInit {
   parentForm!: FormGroup;
   submitted = false;
-  id_vecino: string | null;
+  data:any = sessionStorage.getItem('data');
   fk_id_vecino!: string;
 
   constructor(
     private fb: FormBuilder,
     private newsolicitud: PostService,
-    private router: Router
-  ) { this.id_vecino = sessionStorage.getItem('user_dataID');}
+    private router: Router,
+    private auth:AuthService,
+  ) { }
+  bytes:any = CryptoJS.AES.decrypt(this.data, this.auth.getKey()) ;
+  org:any  = this.bytes.toString(CryptoJS.enc.Utf8);
+  obj:any = JSON.parse(this.org);
+
+  id_vecino:string = this.obj.id;
 
   ngOnInit(): void {
     this.parentForm = this.fb.group({
@@ -42,7 +50,7 @@ export class NuevasolicitudComponent implements OnInit {
         asunto_solicitud: this.parentForm.controls['asunto'].value,
         descripcion: this.parentForm.controls['descripcion'].value,
         estado_solicitud: "En espera",
-        fk_id_vecino: parseInt(this.id_vecino!)
+        fk_id_vecino: parseInt(this.id_vecino)
       };
       console.log("solicitud:", solicitud);
 

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Vecino, Vecino2 } from 'src/app/interfaces/modelos';
+import * as CryptoJS from 'crypto-js';
 import { ComunaService } from 'src/app/services/servi.service';
 import { PostService } from 'src/app/services/postService.service';
+import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
 
@@ -11,12 +13,12 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./editmiembro.component.css']
 })
 export class EditmiembroComponent implements OnInit {
+  data:any = sessionStorage.getItem('data');
   formularioVecino!: NgForm;
   // Creando la lista de miembros
   listVecinos: Vecino[] = [];
   // Rut del vecino seleccionado
   rutSeleccionado: string = '';
-  idJuntaVec: string | null;
   fk_id_junta_vecinal!: string;
   // Creando el miembro seleccionado
   vecinoSeleccionado: Vecino2 = {
@@ -32,11 +34,17 @@ export class EditmiembroComponent implements OnInit {
   };
 
   constructor(
+    private auth:AuthService,
     private ComunaService: ComunaService,
     private deleteVecino: PostService,
     private updateVecino: PostService
-  ) { this.idJuntaVec = sessionStorage.getItem('user_dataID');}
+  ) {}
 
+  bytes:any = CryptoJS.AES.decrypt(this.data, this.auth.getKey()) ;
+  org:any  = this.bytes.toString(CryptoJS.enc.Utf8);
+  obj:any = JSON.parse(this.org);
+
+  id_Junta:string = this.obj.id_junta_vec;
   ngOnInit(): void {
     this.listarMiembros();
     console.log(this.listVecinos);
@@ -44,7 +52,7 @@ export class EditmiembroComponent implements OnInit {
 
 
   listarMiembros() {
-    const idJuntaVec = parseInt(sessionStorage.getItem('user_dataID') || '0', 10); // Parsea a número y asigna 0 si es nulo
+    const idJuntaVec = parseInt(this.id_Junta); // Parsea a número y asigna 0 si es nulo
   
     this.ComunaService.getvecinos().subscribe(
       data => {

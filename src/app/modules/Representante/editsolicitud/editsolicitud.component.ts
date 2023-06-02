@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import * as CryptoJS from 'crypto-js';
 import { Solicitud3,Solicitud4 } from '../../../interfaces/modelos';
 import { ComunaService } from 'src/app/services/servi.service';
 import {PostService} from '../../../services/postService.service';
-import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-editsolicitud',
@@ -18,19 +19,23 @@ export class EditsolicitudComponent implements OnInit {
   selectedSolicitudId!: number;
   selectedSolicitud!: Solicitud3 | undefined;
   listsolicitud: Solicitud3[] = [];
-  idJuntaVec: string | null;
+  data:any = sessionStorage.getItem('data');
   fk_id_junta_vecinal!: string;
   parentForm!: FormGroup;
   submitted = false;
 
 
   constructor(
+    private auth:AuthService,
     private fb: FormBuilder,
     private RespondSolicitud: PostService,
     private solicitudeslist: ComunaService,
-  ) {this.idJuntaVec = sessionStorage.getItem('user_dataID');
+  ) {}
+  bytes:any = CryptoJS.AES.decrypt(this.data, this.auth.getKey()) ;
+  org:any  = this.bytes.toString(CryptoJS.enc.Utf8);
+  obj:any = JSON.parse(this.org);
 
-  }
+  id_Junta:string = this.obj.id_junta_vec;
 
   ngOnInit(): void {
     this.parentForm = this.fb.group({
@@ -73,7 +78,7 @@ updateSolicitud(): void {
   }
 
   solicitudes() {
-    const idJuntaVec = parseInt(sessionStorage.getItem('user_dataID') || '0', 10);
+    const idJuntaVec = parseInt(this.id_Junta);
     console.log("id_junta_vecinal", idJuntaVec);
     this.solicitudeslist.versolicitudes().subscribe(
       (response: any) => {

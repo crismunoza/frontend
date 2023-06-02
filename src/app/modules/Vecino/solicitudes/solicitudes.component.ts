@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import * as CryptoJS from 'crypto-js';
+import { AuthService } from 'src/app/services/auth.service';
 import { Solicitud2 } from '../../../interfaces/modelos';
 import { ComunaService } from 'src/app/services/servi.service';
 import { Router } from '@angular/router';
@@ -12,14 +14,18 @@ import Swal from 'sweetalert2';
 })
 export class SolicitudesComponent implements OnInit {
   listsolicitud: Solicitud2[] = [];
-  id_vecino: string | null;
+  data:any = sessionStorage.getItem('data');
   fk_id_vecino!: string;
 
   constructor(
     private solicitudeslist: ComunaService,
-  ) {
-    this.id_vecino = sessionStorage.getItem('user_dataID');
-  }
+    private auth:AuthService,
+  ) {}
+  bytes:any = CryptoJS.AES.decrypt(this.data, this.auth.getKey()) ;
+  org:any  = this.bytes.toString(CryptoJS.enc.Utf8);
+  obj:any = JSON.parse(this.org);
+
+  id_vecino:string = this.obj.id;
 
   ngOnInit(): void {
     this.listarsolicitudes();
@@ -27,7 +33,7 @@ export class SolicitudesComponent implements OnInit {
   }
 
   listarsolicitudes() {
-    const id_vecino = parseInt(sessionStorage.getItem('user_dataID') || '0', 10);
+    const id_vecino = parseInt(this.id_vecino);
   
     this.solicitudeslist.getsolicitudes().subscribe(
       (response: any) => {
