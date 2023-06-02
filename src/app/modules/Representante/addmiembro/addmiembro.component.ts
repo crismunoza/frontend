@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Vecino4,User} from 'src/app/interfaces/modelos';
+import * as CryptoJS from 'crypto-js';
 import { ComunaService } from 'src/app/services/servi.service';
 import { PostService } from 'src/app/services/postService.service';
 
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-addmiembro',
@@ -11,8 +13,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./addmiembro.component.css']
 })
 export class AddmiembroComponent implements OnInit {
+  data:any = sessionStorage.getItem('data'); 
   listVecinos: Vecino4[] = [];
-  idJuntaVec: string | null;
   fk_id_junta_vecinal!: string;
   imageUrl: string | undefined;
 
@@ -22,10 +24,15 @@ export class AddmiembroComponent implements OnInit {
   
 
   constructor(
+    private auth:AuthService,
     private ComunaService: ComunaService,
     private deleteVecino: PostService,
     private modificarEstado: PostService,
-  ) { this.idJuntaVec = sessionStorage.getItem('user_dataID');}
+  ) { }
+
+  bytes:any = CryptoJS.AES.decrypt(this.data, this.auth.getKey()) ;
+  org:any  = this.bytes.toString(CryptoJS.enc.Utf8);
+  obj:any = JSON.parse(this.org);
   
   ngOnInit(): void {
     this.listarADD();
@@ -67,10 +74,10 @@ export class AddmiembroComponent implements OnInit {
 
 
 
-
+  id_Junta:string = this.obj.id_junta_vec;
  //listar vecinos
  listarADD() {
-  const idJuntaVec = parseInt(sessionStorage.getItem('user_dataID') || '0', 10); // Parsea a número y asigna 0 si es nulo
+  const idJuntaVec = parseInt(this.id_Junta); // Parsea a número y asigna 0 si es nulo
 
   this.ComunaService.listarADD().subscribe(
     data => {
