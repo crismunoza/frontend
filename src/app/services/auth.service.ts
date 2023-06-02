@@ -50,23 +50,13 @@ saveUserData(user:any): void {
     id_junta_vec: user[5]
   }
   //encriptaremos datos 
-  const datosSesion1 = datos.id.toString();
-  const datosSesion2 = datos.rut.toString();
-  const datosSesion3 = datos.name.toString();
-  const datoSesion4 = datos.avatar.toString();
-  const datoSesion5 = datos.name.toString();
-  const datoSesion6 = datos.apellido.toString();
   const dataString = JSON.stringify(datos);
   const key = this.getKey();
   var ciphertext = CryptoJS.AES.encrypt(dataString, key).toString();
  
    console.log('esto queda en data ',ciphertext)
-
+  //almacenamos en la session la data encriptada
    sessionStorage.setItem('data',ciphertext);
-  sessionStorage.setItem('user_avatar',datoSesion4);
-  sessionStorage.setItem('nombre_us',datoSesion5+' '+datoSesion6);
-   sessionStorage.setItem('user_dataID' ,datosSesion1 );
-   sessionStorage.setItem('user_datarut' ,datosSesion2 );
 }
 
 logout(): void {

@@ -133,3 +133,8 @@ export interface Solicitud4 {
   estado_solicitud: string,
   respuesta: string
 };
+export interface Valoracion {
+  opinion: string,
+  estrellas: number,
+  id_v:number
+} 
