@@ -48,7 +48,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                           </div>
                                           <div class="modal-body"> 
-                                            <form class="row g-3" (ngSubmit)="updateVecinos(vecinoSeleccionado)">
+                                            <form class="row g-3" >
                                               <div class="col-md-6">
                                                 <input type="text" class="form-control" placeholder="Primer Nombre" [(ngModel)]="vecinoSeleccionado.primer_nombre">
                                               </div>
@@ -77,10 +77,10 @@
                                                 <input type="password" class="form-control" placeholder="Repetir Contraseña">
                                               </div>
                                               <div class="modal-footer"> 
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button> 
-                                                <button type="submit" class="btn btn-primary">Editar</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"(click)="salir()">Salir</button> 
+                                                <button type="submit" class="btn btn-primary" (click)="updateVecinos(vecinoSeleccionado)">Editar</button>
                                               </div>
-                                            </form>
+                                            </form > 
                                           </div>
                                         </div>
                                       </div>

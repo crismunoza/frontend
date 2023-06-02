@@ -3,6 +3,7 @@ import { Vecino, Vecino2 } from 'src/app/interfaces/modelos';
 import { ComunaService } from 'src/app/services/servi.service';
 import { PostService } from 'src/app/services/postService.service';
 import Swal from 'sweetalert2';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-editmiembro',
@@ -10,6 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./editmiembro.component.css']
 })
 export class EditmiembroComponent implements OnInit {
+  formularioVecino!: NgForm;
   // Creando la lista de miembros
   listVecinos: Vecino[] = [];
   // Rut del vecino seleccionado
@@ -62,6 +64,12 @@ export class EditmiembroComponent implements OnInit {
   seleccionarVecino(rut: string) {
     this.rutSeleccionado = rut;
     console.log("vecino seleccionado en el modal", this.rutSeleccionado);
+  }
+
+  salir() {
+    setTimeout(function() {
+      window.location.reload();
+    }, 1000);
   }
 
   eliminarVecino(rut_vecino: string) {
@@ -130,48 +138,64 @@ export class EditmiembroComponent implements OnInit {
   
     // Fusionar los valores modificados con los valores actuales
     const updatedVecino: Vecino2 = { ...this.vecinoSeleccionado, ...vecino };
-  
-    this.updateVecino.updatevecino(vecino.rut_vecino, updatedVecino).subscribe(
-      data => {
-        Swal.fire({
-          title: '¿Esta Seguro?',
-          text: "Actualizara los datos del vecino",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#d33',
-          cancelButtonColor: '#3085d6',
-          confirmButtonText: 'Aceptar',
-          cancelButtonText: 'Cancelar'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire(
-              'Aceptado',
-              'vecino actualizado',
-              'success'
-            )
-            console.log(data); // Maneja la respuesta del backend según tus necesidades
-            this.listarMiembros();// Actualiza la lista de miembros después de la actualización
-            setTimeout(function() {
-              window.location.reload();
-            }, 1000); // 2000 milisegundos (2 segundos)
+
+    Swal.fire({
+      title: '¿Esta Seguro?',
+      text: "Actualizara los datos del vecino",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Aceptado',
+          'vecino actualizado',
+          'success'
+        )
+        this.updateVecino.updatevecino(vecino.rut_vecino, updatedVecino).subscribe(
+          data => {
+                console.log(data); // Maneja la respuesta del backend según tus necesidades
+                this.listarMiembros();// Actualiza la lista de miembros después de la actualización
+                setTimeout(function() {
+                  window.location.reload();
+                }, 1000); // 2000 milisegundos (2 segundos) para recargar la página
+            // Cerrar el modal después de la actualización
+            const modal = document.getElementById('disablebackdrop');
+            if (modal) {
+              modal.classList.remove('show');
+              modal.style.display = 'none';
+              modal.setAttribute('aria-hidden', 'true');
+            }
             
+          },
+          error => {
+            console.log("el error del update", error);
           }
-        })
-        // Cerrar el modal después de la actualización
+        );
+          
+      }else{
+        Swal.fire(
+          'Cancelado',
+          'vecino no actualizado',
+          'error'
+        )
+        setTimeout(function() {
+          window.location.reload();
+        }, 1000);
         const modal = document.getElementById('disablebackdrop');
         if (modal) {
           modal.classList.remove('show');
           modal.style.display = 'none';
           modal.setAttribute('aria-hidden', 'true');
         }
-        
-      },
-      error => {
-        console.log("el error del update", error);
       }
-    );
+    })
   }
-  
-  
-  
 }
+  
+  
+  
+
