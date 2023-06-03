@@ -17,7 +17,7 @@
                   <h5 class="card-title">Miembros</h5>
                   <p>Aqui se podra Editar <i class="ri-user-settings-line"></i> y Eliminar <i class="ri-user-unfollow-line"></i> a los Miembros de la junta vecinal.</p>
                   <table class="table table-bordered">
-                      <thead>     
+                      <thead>
                           <tr>
                               <th scope="col">Correo</th>
                               <th scope="col">Nombres</th>
@@ -25,7 +25,7 @@
                               <th scope="col">Celular</th>
                               <th scope="col">Domicilio</th>
                               <th scope="col">Accion</th>
-                              
+
                           </tr>
                       </thead>
                       <tbody>
@@ -39,7 +39,7 @@
                                   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#disablebackdrop" (click)="seleccionarVecino(vecino.rut_vecino)">
                                       <i class="ri-user-settings-line"></i>
                                     </button>
-                                    
+
                                     <div class="modal fade" id="disablebackdrop" tabindex="-1" data-bs-backdrop="false">
                                       <div class="modal-dialog">
                                         <div class="modal-content">
@@ -47,7 +47,7 @@
                                             <h5 class="modal-title">Editar Miembro</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                           </div>
-                                          <div class="modal-body"> 
+                                          <div class="modal-body">
                                             <form class="row g-3" >
                                               <div class="col-md-6">
                                                 <input type="text" class="form-control" placeholder="Primer Nombre" [(ngModel)]="vecinoSeleccionado.primer_nombre">
@@ -76,20 +76,20 @@
                                               <div class="col-md-6">
                                                 <input type="password" class="form-control" placeholder="Repetir Contraseña">
                                               </div>
-                                              <div class="modal-footer"> 
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"(click)="salir()">Salir</button> 
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"(click)="salir()">Salir</button>
                                                 <button type="submit" class="btn btn-primary" (click)="updateVecinos(vecinoSeleccionado)">Editar</button>
                                               </div>
-                                            </form > 
+                                            </form >
                                           </div>
                                         </div>
                                       </div>
-                                    </div>                                      
+                                    </div>
                                   <button type="button" class="btn btn-danger" (click)="eliminarVecino(vecino.rut_vecino)"><i class="ri-user-unfollow-line"></i></button>
                               </td>
                           </tr>
                       </tbody>
-                  </table>                    
+                  </table>
                   </div>
               </div>
           </div>

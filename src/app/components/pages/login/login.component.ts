@@ -15,7 +15,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
   login!:FormGroup; //formulario distinto de null
   parentForm!: FormGroup;
-  submit: boolean = false; 
+  submit: boolean = false;
   constructor(private router:Router,private fb:FormBuilder, private loggin: AuthService, private rutService: RutService,
     ) { }
 
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       password: ["", [Validators.required]],
       rol_us: false
     });
-    
+
   }
   onSubmit(){
     this.submit = true;
@@ -46,8 +46,6 @@ export class LoginComponent implements OnInit {
         contrasenia: this.login.controls['password'].value,
         tipo_user: this.login.controls['rol_us'].value
       }
-
-      console.log('lo q enviamos',datos)
       try {
           this.loggin.login(datos).subscribe( res =>{
 
@@ -65,7 +63,6 @@ export class LoginComponent implements OnInit {
             }
             else{
               if(res.alo[2] === 'admin'){
-                console.log('va a redireccionar hacia admin ')
                 Swal.fire({
                   position: 'center',
                   icon: 'success',
@@ -78,7 +75,6 @@ export class LoginComponent implements OnInit {
               })
               }
               else if(res.alo[2] === 'vecino'){
-                console.log('va a redireccionar hacia vecino ')
                 Swal.fire({
                   position: 'center',
                   icon: 'success',
@@ -92,17 +88,17 @@ export class LoginComponent implements OnInit {
 
               }
             }
-          
+
         });
       }catch (error) {
         console.error('Error al parsear la respuesta JSON:', error);
-      }  
-      
+      }
+
     }
   }
 
   //aqui indicamos la funcion de navigate la cual recibe una ruta y nos direcciona
-  navigate(ruta:any){ 
+  navigate(ruta:any){
     this.router.navigateByUrl(ruta);
   }
 }

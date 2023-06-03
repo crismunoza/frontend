@@ -138,7 +138,7 @@ export interface Valoracion {
   opinion: string,
   estrellas: number,
   id_v:number
-} 
+}
 export interface Vecino4 {
   rut_vecino: string,
   primer_nombre: string,
@@ -155,4 +155,8 @@ export interface Vecino4 {
   fk_id_junta_vecinal: number,
   imageUrl?: string, // Nueva propiedad imageUrl de tipo string opcional
 }
-
+export interface listValor {
+  vecino: string,
+  estrellas: number,
+  comentario: string
+}

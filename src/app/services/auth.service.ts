@@ -29,32 +29,31 @@ export class AuthService {
           sessionStorage.setItem('rol',res.alo[2]);
           this.getUserProfile(res.alo[0],res.alo[2]).subscribe((res) => {
             this.saveUserData(res.datos); // Guardar datos del usuario en el localStorage
-          }); 
+          });
           var respuesta = res.alo[2];
-         return respuesta; 
+         return respuesta;
         }
-            
-         
+
+
       })
     );
 }
 
 saveUserData(user:any): void {
-  //todavia sigo trabajandoen esto ... debo encriptar 
+  //todavia sigo trabajandoen esto ... debo encriptar
   const datos: User ={
-    id: user[0],    
+    id: user[0],
     rut: user[1],
     name: user[2],
     apellido: user[3],
     avatar: user[4],
     id_junta_vec: user[5]
   }
-  //encriptaremos datos 
+  //encriptaremos datos
   const dataString = JSON.stringify(datos);
   const key = this.getKey();
   var ciphertext = CryptoJS.AES.encrypt(dataString, key).toString();
- 
-   console.log('esto queda en data ',ciphertext)
+
   //almacenamos en la session la data encriptada
    sessionStorage.setItem('data',ciphertext);
 }
@@ -77,4 +76,3 @@ logout(): void {
   }
 
 }
- 
