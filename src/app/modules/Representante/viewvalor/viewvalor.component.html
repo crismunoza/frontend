@@ -16,31 +16,45 @@
                 <div class="card-body">
                    <h5 class="card-title">Estadisticas</h5>
 
-                   <div class="d-flex justify-content-center" style="width: 400px;"><canvas id="oilChart"></canvas></div>
-                   <!-- <div class="table-responsive">
-                      <table class="table datatable">
-                         <thead>
-                            <tr>
-                               <th scope="col">Fecha</th>
-                               <th scope="col">Titulo</th>
-                               <th scope="col">Asunto</th>
-                               <th scope="col">Estado</th>
-                               <th scope="col">Respuesta</th>
-                            </tr>
-                         </thead>
-                         <tbody>
-                            <!-- <tr *ngFor="let solicitud of listsolicitud">
-                               <td>{{ solicitud.createdAt}}</td>
-                               <td>{{ solicitud.titulo_solicitud }}</td>
-                               <td>{{ solicitud.asunto_solicitud }}</td>
-                               <td>{{ solicitud.estado_solicitud }}</td>
-                               <td>{{ solicitud.respuesta }}</td>
-                            </tr>
-                         </tbody>
-                      </table>
-                   </div> -->
+                   <div class="chart-container" style="position:static; height:40vh; width:80vw"><canvas id="oilChart"></canvas></div>
+
+                          <!-- Modal -->
+                  <div class="modal fade" id="mod_valoraciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog modal-lg" role="document">
+                     <div class="modal-content">
+                        <div class="modal-header">
+                           <h5 class="modal-title" id="exampleModalLabel" style="color: #012970;">Valoraciones de tus Vecinos</h5>
+                        </div>
+                        <div class="modal-body">
+                              <div class="table-responsive mx-1">
+                                 <table class="table table-bordered">
+                                    <thead style="background-color: #012970;">
+                                       <tr style="color: #ffffff;">
+                                          <th scope="col">Vecino</th>
+                                          <th scope="col">Estrellas</th>
+                                          <th scope="col">Comentario</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                       <tr *ngFor="let valoracion of listValoraciones">
+                                          <td>{{ valoracion.vecino}}</td>
+                                          <td>{{ valoracion.estrellas  }}</td>
+                                          <td>{{ valoracion.comentario }}</td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-outline-danger"  (click)="closemodal()">Cerrar</button>
+                        </div>
+                     </div>
+                     </div>
+                  </div>
+
+
                    <div class="d-flex justify-content-end mt-3">
-                      <button type="button" class="btn btn-success" routerLink="/Vecino/accion/nuevasolicitud">
+                      <button type="button" class="btn btn-success" (click)="open_modal()">
                          Ver comentarios
                       </button>
                    </div>
@@ -48,5 +62,7 @@
              </div>
           </div>
        </div>
+
     </section>
+
  </main>

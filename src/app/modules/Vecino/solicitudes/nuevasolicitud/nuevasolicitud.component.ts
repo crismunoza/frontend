@@ -52,13 +52,10 @@ export class NuevasolicitudComponent implements OnInit {
         estado_solicitud: "En espera",
         fk_id_vecino: parseInt(this.id_vecino)
       };
-      console.log("solicitud:", solicitud);
 
       this.newsolicitud.newsolicitud(solicitud).subscribe({
         next: (v) => {
-          console.log("Estamos en el next", v);
           if (v.msg == 'Se envio la solicitud') {
-            console.log("estamos dentro de V", v);
           }
           Swal.fire({
             position: 'center',

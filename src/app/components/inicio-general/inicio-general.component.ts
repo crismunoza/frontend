@@ -7,13 +7,15 @@ import { Route, Router } from '@angular/router';
   styleUrls: ['./inicio-general.component.scss']
 })
 export class InicioGeneralComponent implements OnInit {
+  document: any;
 
   constructor(private router:Router) { }
 
   ngOnInit(): void {
   }
   navigate(ruta:any){
-    console.log(ruta);    
+    console.log(ruta);
     this.router.navigateByUrl(ruta);
   }
+
 }
