@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CertificadoService} from '../../../services/certificado.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-certificado',
@@ -52,11 +53,21 @@ export class CertificadoComponent implements OnInit {
   /**se captura el valor retornado por la promesa del service. */
   downloadPDF(): void {
     this.certificadoService.downloadPDF()
-    .then(() => {
-      // console.log('pdf descargado exitosamente');
+    .then( message => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Descargado',
+        text: 'Certificado descargado exitosamente',
+      })
     })
     .catch(error => {
-      console.log(error);
+      let messageAlert;
+      messageAlert = error.errorType === 0 ? messageAlert = error.messageError: messageAlert = error.messageError;
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: messageAlert,
+      });
     });
   
   }
@@ -75,8 +86,29 @@ export class CertificadoComponent implements OnInit {
         console.log('No se encontró el token');
         return '';
       }
-  };  
+  };
+  
+  enviarCorreo(): void {
+    this.certificadoService.sendEmail()
+      .then( message => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Enviado',
+          text: message.resp,
+        })
+      })
+      .catch(error => {
+        let messageAlert;
+        messageAlert = error.errorType === 0 ? messageAlert = error.messageError: messageAlert = error.messageError;
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: messageAlert,
+        });
+      });
+  }
   ngOnInit() {
+    
     this.certificadoService.getParagraph()
     .then((response: any) => {
       this.tittle = response.certified.title;

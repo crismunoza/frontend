@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Proyect } from '../interfaces/modelos';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class ProyectoService {
   private myApiUrlGetProyectsWithFilters = 'api/proyectos/obtener-proyectos-filtros';
   private myApiUrlUpdateProyect = 'api/proyectos/modificar-proyecto/';
   private myApiUrlDeleteProyect = 'api/proyectos/eliminar-proyecto/';
-  constructor(private http: HttpClient) { }
+  private myApiUrlImagen = 'images/proyectos/';
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
 
   insertProyect(dataProyect: any) {
     return new Promise<Proyect>((resolve, reject) => {
@@ -109,4 +111,12 @@ export class ProyectoService {
       );
     });
   };
+
+  getImagen(rutaImagen: string): Observable<SafeUrl> {
+    return this.http.get(`${this.myAppUrl}${this.myApiUrlImagen}${rutaImagen}`, { responseType: 'blob' })
+      .pipe(
+        map((blob: Blob) => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob)))
+      );
+  };
+
 }
