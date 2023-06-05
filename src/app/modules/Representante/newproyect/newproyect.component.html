@@ -53,8 +53,13 @@
               <div class="row mb-3">
                 <label for="cupoMaximo" class="col-sm-3 col-form-label">Cupo Máximo</label>
                 <div class="col-sm-9">
-                  <input type="number" class="form-control" formControlName="cupoMaximo"
-                    (keydown)="cancelNumberInput($event)" min="1"
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="cupoMaximo"
+                    (keydown)="cancelNumberInput($event)"
+                    min="1"
+                    inputmode="numeric"
                     [value]="formProyect.get('cupoMinimo')?.value !== null ? (formProyect.get('cupoMinimo')?.value + 1) : null"
                     [ngClass]="{
                      'is-invalid': formProyect.get('cupoMaximo')?.invalid && formProyect.get('cupoMaximo')?.touched 
@@ -93,7 +98,12 @@
               <div class="row mb-3">
                 <label for="imagen" class="col-sm-3 col-form-label">Insertar Imagen</label>
                 <div class="col-sm-9">
-                  <input type="file" class="form-control" formControlName="imagen" id="imageInput" accept=".jpg"
+                  <input
+                    type="file"
+                    class="form-control"
+                    formControlName="imagen"
+                    id="imageInput"
+                    accept=".jpg, .jpeg, .png, .gif"
                     [ngClass]="{
                      'is-invalid': formProyect.get('imagen')?.invalid && formProyect.get('imagen')?.touched 
                     }" />

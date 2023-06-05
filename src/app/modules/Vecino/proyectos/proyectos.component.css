@@ -1,0 +1,14 @@
+.imagen-proyecto {
+    width: 300px; 
+    height: 180px;
+    
+    @media (max-width: 576px) {
+      width: 100%; 
+    }
+  }
+  .fecha-proyecto {
+    @media (max-width: 576px) {
+      position: static; 
+      margin-top: 1rem; 
+    }
+  }  

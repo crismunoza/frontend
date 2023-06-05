@@ -12,6 +12,7 @@ export class CertificadoService {
     private myApiUrlUpdate = 'api/certificados/update-subtitle';
     private myApiUrlUParagraph = 'api/certificados/obtener-parrafo';
     private myApiUrlSenRut = 'api/certificados/obtener-rut';
+    private myApiUrlSendEmail = 'api/certificados/enviar-correo';
 
   constructor(private http: HttpClient) { }
   /**promesa que obtiene el certificado desde backend.*/
@@ -72,5 +73,10 @@ export class CertificadoService {
         }
       )
     })
+  };
+
+  sendEmail(): Promise<any> {
+
+    return this.http.post(`${this.myAppUrl}${this.myApiUrlSendEmail}`, {}).toPromise();
   };
 }  
