@@ -1,21 +1,22 @@
 <main id="main" class="main">
     <div class="pagetitle">
-       <h1>Solicitudes</h1>
-       <nav>
-          <ol class="breadcrumb">
-             <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
-             <li class="breadcrumb-item">Administar</li>
-             <li class="breadcrumb-item active">Solicitudes</li>
-          </ol>
-       </nav>
+        <h1>Solicitudes</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+                <li class="breadcrumb-item">Administar</li>
+                <li class="breadcrumb-item active">Solicitudes</li>
+            </ol>
+        </nav>
     </div>
     <section class="section">
-       <div class="row">
-          <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Solicitudes</h5>
                         <p>Aqui se muestran todas las Solicitudes de los vecinos.</p>
+                        <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -24,7 +25,7 @@
                                     <th scope="col">Asunto</th>
                                     <th scope="col">Estado solicitud</th>
                                     <th scope="col">Accion</th>
-                                    
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,79 +35,116 @@
                                     <td>{{solicitud.asunto_solicitud}}</td>
                                     <td>{{solicitud.estado_solicitud}}</td>
                                     <td>
-                                     <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Respuesta" (click)="openModal(solicitud.id_solicitud)">Responder <i class="ri-auction-fill"></i></button>
-                                     <div class="modal fade" id="Respuesta" tabindex="-1">
-                                        <div class="modal-dialog modal-fullscreen">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                <h5 class="modal-title">Resolver Solicitud</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body"> 
-                                                    <div class="col-lg-12">
-                                                        <div class="card">
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">Descipcion de la solicitud</h5>
-                                                                <p>Aqui se responderan todas las solicitudes del vecino.</p>
-                                                                <table class="table table-bordered">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th scope="col">Descripcion</th>
-                                                                            <th scope="col">Respuesta</th>
-                                                                            
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr *ngIf="selectedSolicitud"> 
-                                                                            <td>{{selectedSolicitud.descripcion}}</td>
-                                                                            <td>{{selectedSolicitud.respuesta}}</td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                                <div class="col-lg-12">
-                                                                    <div class="card">
-                                                                       <div class="card-body">
-                                                                          <h5 class="card-title">Respuesta a Solicitud</h5>
-                                                                          <form [formGroup]="parentForm">
-                                                                            <div class="row mb-3">
-                                                                                <label class="col-sm-2 col-form-label">Seleccionar Estado</label>
-                                                                                <div class="col-sm-10">
-                                                                                    <select class="form-select"  aria-label="Default select example" id="estado_solicitud" formControlName="estado_solicitud">
-                                                                                      <option [value]="null" disabled selected>Selecciona un estado de solicitud</option>
-                                                                                      <option *ngFor="let estado of estadosSolicitud" [value]="estado.id">{{ estado.nombre }}</option>
-                                                                                    </select>
-                                                                                  </div>
-                                                                                  
-                                                                             </div>
-                                                                             <div class="row mb-3">
-                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">Responder</label>
-                                                                                <div class="col-sm-10"><textarea class="form-control" style="height: 100px"id="respuesta" formControlName="respuesta"></textarea></div>
-                                                                             </div>
-                                                                             <div class="row mb-3">
-                                                                                <label class="col-sm-2 col-form-label">Submit Button</label>
-                                                                                <div class="col-sm-10"> <button type="submit" class="btn btn-primary" (click)="updateSolicitud()">Responder <i class="ri-auction-fill"></i></button></div>
-                                                                             </div>
-                                                                          </form>
-                                                                       </div>
+                                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                            data-bs-target="#Respuesta"
+                                            (click)="openModal(solicitud.id_solicitud)">Responder <i
+                                                class="ri-auction-fill"></i></button>
+                                        <div class="modal fade" id="Respuesta" tabindex="-1">
+                                            <div class="modal-dialog modal-fullscreen">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Resolver Solicitud</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="col-lg-12">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title">Descipcion de la solicitud
+                                                                    </h5>
+                                                                    <p>Aqui se responderan todas las solicitudes del
+                                                                        vecino.</p>
+                                                                    <table class="table table-bordered">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th scope="col">Descripcion</th>
+                                                                                <th scope="col">Respuesta</th>
+
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr *ngIf="selectedSolicitud">
+                                                                                <td>{{selectedSolicitud.descripcion}}
+                                                                                </td>
+                                                                                <td>{{selectedSolicitud.respuesta}}</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <div class="col-lg-12">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title">Respuesta a
+                                                                                    Solicitud</h5>
+                                                                                <form [formGroup]="parentForm">
+                                                                                    <div class="row mb-3">
+                                                                                        <label
+                                                                                            class="col-sm-2 col-form-label">Seleccionar
+                                                                                            Estado</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <select class="form-select"
+                                                                                                aria-label="Default select example"
+                                                                                                id="estado_solicitud"
+                                                                                                formControlName="estado_solicitud">
+                                                                                                <option [value]="null"
+                                                                                                    disabled selected>
+                                                                                                    Selecciona un estado
+                                                                                                    de solicitud
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    *ngFor="let estado of estadosSolicitud"
+                                                                                                    [value]="estado.id">
+                                                                                                    {{ estado.nombre }}
+                                                                                                </option>
+                                                                                            </select>
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                    <div class="row mb-3">
+                                                                                        <label for="inputPassword"
+                                                                                            class="col-sm-2 col-form-label">Responder</label>
+                                                                                        <div class="col-sm-10"><textarea
+                                                                                                class="form-control"
+                                                                                                style="height: 100px"
+                                                                                                id="respuesta"
+                                                                                                formControlName="respuesta"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row mb-3">
+                                                                                        <label
+                                                                                            class="col-sm-2 col-form-label">Submit
+                                                                                            Button</label>
+                                                                                        <div class="col-sm-10"> <button
+                                                                                                type="submit"
+                                                                                                class="btn btn-primary"
+                                                                                                (click)="updateSolicitud()">Responder
+                                                                                                <i
+                                                                                                    class="ri-auction-fill"></i></button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                 </div>
-                                                            <div class="modal-footer"> 
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button> 
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Salir</button>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                       </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                     </div>
-                                    </td>   
+                                    </td>
                                 </tr>
                             </tbody>
-                        </table>                    
+                        </table>
+                    </div>
                     </div>
                 </div>
             </div>
-       </div>
+        </div>
     </section>
- </main>
+</main>

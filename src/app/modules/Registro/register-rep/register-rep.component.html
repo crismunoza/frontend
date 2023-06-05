@@ -1,191 +1,214 @@
 <header id="header" class="header fixed-top align-items-center ">
   <div class="d-flex  ">
-    <div class="p-2 flex-grow-1"><a class="navbar-brand" style="color:#012970"><h3>Junt<i class="bi bi-arrow-up-left-circle-fill"></i> a UnClick</h3></a></div>
+    <div class="p-2 flex-grow-1"><a class="navbar-brand" style="color:#012970">
+        <h3>Junt<i class="bi bi-arrow-up-left-circle-fill"></i> a UnClick</h3>
+      </a></div>
     <div class="p-2 flex-grow-1"></div>
-    <div class="ms-auto p-2 "><button class="btn btn-outline-danger" [routerLink]="['']"><i class="bi bi-box-arrow-right"></i> Atrás</button></div>                
+    <div class="ms-auto p-2 "><button class="btn btn-outline-danger" [routerLink]="['']"><i
+          class="bi bi-box-arrow-right"></i> Atrás</button></div>
   </div>
 </header>
 <section class="section mt-4 mx-3">
   <div class="container">
-    
-  <div class="card " style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; margin-top: 80px;">
 
-    <div class="card-body " >
-      <div class="card-header text-center">
-        <div class="text-light" style="font-size: 5em ;"><i class="bi bi-file-earmark-medical"></i></div>
-      </div>
-      <h5 class="card-title text-center">Bienvenido!!. Registra tu junta vecinal</h5>
-        <p class="card-text text-center">Recuerda debes ser un representante de la misma y poseer evidencia de ello. Comencemos:</p>
-    <form class="row my-2" [formGroup]="parentForm" >
-        <div class="col-md-4">
-          <label for="nomb_junta" class="form-label">Razon Social:</label>
-          <input type="text" class="form-control" id="nomb_junta" formControlName="nomb_junta" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['nomb_junta'].errors }">
-          <div *ngIf="submitted || parentForm.controls['nomb_junta'].errors" class="invalid-feedback">
-            <div *ngIf="parentForm.controls['nomb_junta'].errors?.['required']">(*) Campo Obligatorio!</div>
-          </div>
+    <div class="card " style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; margin-top: 80px;">
+
+      <div class="card-body ">
+        <div class="card-header text-center">
+          <div class="text-light" style="font-size: 5em ;"><i class="bi bi-file-earmark-medical"></i></div>
         </div>
-        <div class="col-md-4">
-          <label for="rut_junta" class="form-label">Rut:</label>
-          <input type="text" class="form-control" id="rut_junta" formControlName= "rut_junta"  (input)="formatearRut($event)" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['rut_junta'].errors }">
-          <div *ngIf="submitted || parentForm.controls['rut_junta'].errors" class="invalid-feedback">
-            <div *ngIf="parentForm.controls['rut_junta'].errors?.['required']">(*) Campo Obligatorio!</div>
-            <div *ngIf="parentForm.controls['rut_junta'].errors?.['rutnovalido']">Rut invalido</div>
+        <h5 class="card-title text-center">Bienvenido!!. Registra tu junta vecinal</h5>
+        <p class="card-text text-center">Recuerda debes ser un representante de la misma y poseer evidencia de ello.
+          Comencemos:</p>
+        <form class="row my-2" [formGroup]="parentForm">
+          <div class="col-md-4">
+            <label for="nomb_junta" class="form-label">Razon Social:</label>
+            <input type="text" class="form-control" id="nomb_junta" formControlName="nomb_junta"
+              [ngClass]="{ 'is-invalid': submitted && parentForm.controls['nomb_junta'].errors }">
+            <div *ngIf="submitted || parentForm.controls['nomb_junta'].errors" class="invalid-feedback">
+              <div *ngIf="parentForm.controls['nomb_junta'].errors?.['required']">(*) Campo Obligatorio!</div>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <label for="comuna_junta" class="form-label">Comuna:</label>
+          <div class="col-md-4">
+            <label for="rut_junta" class="form-label">Rut:</label>
+            <input type="text" class="form-control" id="rut_junta" formControlName="rut_junta"
+              (input)="formatearRut($event)"
+              [ngClass]="{ 'is-invalid': submitted && parentForm.controls['rut_junta'].errors }">
+            <div *ngIf="submitted || parentForm.controls['rut_junta'].errors" class="invalid-feedback">
+              <div *ngIf="parentForm.controls['rut_junta'].errors?.['required']">(*) Campo Obligatorio!</div>
+              <div *ngIf="parentForm.controls['rut_junta'].errors?.['rutnovalido']">Rut invalido</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="comuna_junta" class="form-label">Comuna:</label>
             <select class="form-select" id="comuna_junta" formControlName="comuna_junta">
               <option *ngFor="let comuna of listcomunas" [value]="comuna.id_comuna">{{comuna.nombre}}</option>
             </select>
             <div class="invalid-feedback">
-              (*) Camplo Obligatorio  
+              (*) Camplo Obligatorio
             </div>
-        </div>
-        <div class="col-md-4">
-          <label for="calle_junta" class="form-label">Calle</label>
-          <input type="text" class="form-control" id="calle_junta" formControlName="calle_junta" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['calle_junta'].errors }">
-          <div *ngIf="submitted || parentForm.controls['calle_junta'].errors" class="invalid-feedback">
-            <div *ngIf="parentForm.controls['calle_junta'].errors?.['required']">(*) Campo Obligatorio!</div>
-            <div *ngIf="parentForm.controls['calle_junta'].errors?.['pattern']">Solo letras y espacio</div>
           </div>
-        </div>
-        <div class="col-md-2">
-          <label for="num_calle_junta" class="form-label">Número</label>                  
-          <input type="number" class="form-control" id="num_calle_junta" formControlName="num_calle_junta" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['num_calle_junta'].errors }">
-          <div *ngIf="submitted || parentForm.controls['calle_junta'].errors" class="invalid-feedback">
-            <div *ngIf="parentForm.controls['num_calle_junta'].errors?.['required']">(*) Campo Obligatorio!</div>
-            <div *ngIf="parentForm.controls['num_calle_junta'].errors?.['pattern']">solo números enteros positivos</div>
+          <div class="col-md-4">
+            <label for="calle_junta" class="form-label">Calle</label>
+            <input type="text" class="form-control" id="calle_junta" formControlName="calle_junta"
+              [ngClass]="{ 'is-invalid': submitted && parentForm.controls['calle_junta'].errors }">
+            <div *ngIf="submitted || parentForm.controls['calle_junta'].errors" class="invalid-feedback">
+              <div *ngIf="parentForm.controls['calle_junta'].errors?.['required']">(*) Campo Obligatorio!</div>
+              <div *ngIf="parentForm.controls['calle_junta'].errors?.['pattern']">Solo letras y espacio</div>
+            </div>
           </div>
-        </div>
-        <hr class="mt-3">
-       <p class="mb-2">Datos del Representante:</p>
-        <div class="col-md-4">
-          <label for="run_rep" class="form-label">Run:</label>
-          <input type="text" class="form-control" id="run_rep" formControlName="run_rep" (input)="formatearRut2($event)" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['run_rep'].errors }">
-          <div *ngIf="submitted && parentForm.controls['run_rep'].errors" class="invalid-feedback">
-            <div *ngIf="parentForm.controls['run_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
-            <div *ngIf="parentForm.controls['run_rep'].errors?.['rutnovalido']">Rut invalido</div>
+          <div class="col-md-2">
+            <label for="num_calle_junta" class="form-label">Número</label>
+            <input type="number" class="form-control" id="num_calle_junta" formControlName="num_calle_junta"
+              [ngClass]="{ 'is-invalid': submitted && parentForm.controls['num_calle_junta'].errors }">
+            <div *ngIf="submitted || parentForm.controls['calle_junta'].errors" class="invalid-feedback">
+              <div *ngIf="parentForm.controls['num_calle_junta'].errors?.['required']">(*) Campo Obligatorio!</div>
+              <div *ngIf="parentForm.controls['num_calle_junta'].errors?.['pattern']">solo números enteros positivos
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <label for="p_nomb_rep" class="form-label">1er Nombre:</label>
-          <input type="text" class="form-control" id="p_nomb_rep"  formControlName="p_nomb_rep" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['p_nomb_rep'].errors }">
-          <div *ngIf="submitted && parentForm.controls['p_nomb_rep'].errors" class="invalid-feedback">
-            <div *ngIf="parentForm.controls['p_nomb_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
-            <div *ngIf="parentForm.controls['p_nomb_rep'].errors?.['pattern']">Solo letras</div>
+          <hr class="mt-3">
+          <p class="mb-2">Datos del Representante:</p>
+          <div class="col-md-4">
+            <label for="run_rep" class="form-label">Run:</label>
+            <input type="text" class="form-control" id="run_rep" formControlName="run_rep"
+              (input)="formatearRut2($event)"
+              [ngClass]="{ 'is-invalid': submitted && parentForm.controls['run_rep'].errors }">
+            <div *ngIf="submitted && parentForm.controls['run_rep'].errors" class="invalid-feedback">
+              <div *ngIf="parentForm.controls['run_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+              <div *ngIf="parentForm.controls['run_rep'].errors?.['rutnovalido']">Rut invalido</div>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <label for="s_nomb_rep" class="form-label">2do Nombre:</label>
-          <input type="text" class="form-control" id="s_nomb_rep"  formControlName="s_nomb_rep" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['s_nomb_rep'].errors }">
-          <div *ngIf="submitted && parentForm.controls['s_nomb_rep'].errors" class="invalid-feedback">
-            <div *ngIf="parentForm.controls['s_nomb_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
-            <div *ngIf="parentForm.controls['s_nomb_rep'].errors?.['pattern']">Solo letras</div>
+          <div class="col-md-4">
+            <label for="p_nomb_rep" class="form-label">1er Nombre:</label>
+            <input type="text" class="form-control" id="p_nomb_rep" formControlName="p_nomb_rep"
+              [ngClass]="{ 'is-invalid': submitted && parentForm.controls['p_nomb_rep'].errors }">
+            <div *ngIf="submitted && parentForm.controls['p_nomb_rep'].errors" class="invalid-feedback">
+              <div *ngIf="parentForm.controls['p_nomb_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+              <div *ngIf="parentForm.controls['p_nomb_rep'].errors?.['pattern']">Solo letras</div>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4 mt-1">
-          <label for="ap_pat_rep" class="form-label">Apellido Paterno:</label>
-          <input type="text" class="form-control" id="ap_pat_rep" formControlName="ap_pat_rep" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['ap_pat_rep'].errors }">
-          <div *ngIf="submitted && parentForm.controls['p_nomb_rep'].errors" class="invalid-feedback">
-            <div *ngIf="parentForm.controls['ap_pat_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
-            <div *ngIf="parentForm.controls['ap_pat_rep'].errors?.['pattern']">Solo letras</div>
+          <div class="col-md-4">
+            <label for="s_nomb_rep" class="form-label">2do Nombre:</label>
+            <input type="text" class="form-control" id="s_nomb_rep" formControlName="s_nomb_rep"
+              [ngClass]="{ 'is-invalid': submitted && parentForm.controls['s_nomb_rep'].errors }">
+            <div *ngIf="submitted && parentForm.controls['s_nomb_rep'].errors" class="invalid-feedback">
+              <div *ngIf="parentForm.controls['s_nomb_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+              <div *ngIf="parentForm.controls['s_nomb_rep'].errors?.['pattern']">Solo letras</div>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4 mt-1">
-          <label for="ap_mat_rep" class="form-label">Apellido Materno:</label>
-          <input type="text" class="form-control" id="ap_mat_rep"  formControlName="ap_mat_rep" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['ap_mat_rep'].errors }">
-          <div *ngIf="submitted && parentForm.controls['ap_mat_rep'].errors" class="invalid-feedback">
-            <div *ngIf="parentForm.controls['ap_mat_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
-            <div *ngIf="parentForm.controls['ap_mat_rep'].errors?.['pattern']">Solo letras</div>
+          <div class="col-md-4 mt-1">
+            <label for="ap_pat_rep" class="form-label">Apellido Paterno:</label>
+            <input type="text" class="form-control" id="ap_pat_rep" formControlName="ap_pat_rep"
+              [ngClass]="{ 'is-invalid': submitted && parentForm.controls['ap_pat_rep'].errors }">
+            <div *ngIf="submitted && parentForm.controls['p_nomb_rep'].errors" class="invalid-feedback">
+              <div *ngIf="parentForm.controls['ap_pat_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+              <div *ngIf="parentForm.controls['ap_pat_rep'].errors?.['pattern']">Solo letras</div>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4 mt-1">
-          <label for="comuna_rep" class="form-label">Comuna:</label>
+          <div class="col-md-4 mt-1">
+            <label for="ap_mat_rep" class="form-label">Apellido Materno:</label>
+            <input type="text" class="form-control" id="ap_mat_rep" formControlName="ap_mat_rep"
+              [ngClass]="{ 'is-invalid': submitted && parentForm.controls['ap_mat_rep'].errors }">
+            <div *ngIf="submitted && parentForm.controls['ap_mat_rep'].errors" class="invalid-feedback">
+              <div *ngIf="parentForm.controls['ap_mat_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+              <div *ngIf="parentForm.controls['ap_mat_rep'].errors?.['pattern']">Solo letras</div>
+            </div>
+          </div>
+          <div class="col-md-4 mt-1">
+            <label for="comuna_rep" class="form-label">Comuna:</label>
             <select class="form-select" id="comuna_rep" formControlName="comuna_rep">
               <option *ngFor="let comuna of listcomunas" [value]="comuna.id_comuna">{{comuna.nombre}}</option>
             </select>
             <div class="invalid-feedback">
-              (*) Camplo Obligatorio  
-            </div>
-        </div>
-        <div class="col-md-4 mt-1">
-          <label for="calle_rep" class="form-label">calle</label>
-          <input type="text" class="form-control" id="calle_rep" formControlName="calle_rep" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['calle_rep'].errors }">
-          <div *ngIf="submitted && parentForm.controls['calle_rep'].errors" class="invalid-feedback">
-            <div *ngIf="parentForm.controls['calle_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
-            <div *ngIf="parentForm.controls['calle_rep'].errors?.['pattern']">Solo letras y espacio</div>
-          </div>
-        </div>
-        <div class="col-md-2 mt-1">
-          <label for="num_calle_rep" class="form-label">Número</label>                  
-          <input type="number" class="form-control" id="num_calle_rep"  formControlName="num_calle_rep" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['num_calle_rep'].errors }">
-          <div *ngIf="submitted && parentForm.controls['num_calle_rep'].errors" class="invalid-feedback">
-            <div *ngIf="parentForm.controls['num_calle_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
-            <div *ngIf="parentForm.controls['num_calle_rep'].errors?.['pattern']">solo números enteros positivos</div>
-          </div>
-        </div>
-        <hr class="mt-4 mb-2">
-        <div class="col-md-4 mt-1">
-          <label for="contacto_Rep" class="form-label">Celular</label>
-          <div class="input-group">
-            <span class="input-group-text" id="basic-addon2">+569</span>                  
-            <input type="number" class="form-control" id="contacto_Rep"  formControlName="contacto_Rep" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['contacto_Rep'].errors }">
-            <div *ngIf="submitted && parentForm.controls['contacto_Rep'].errors" class="invalid-feedback">
-              <div *ngIf="parentForm.controls['contacto_Rep'].errors?.['required']">(*) Campo Obligatorio!</div>
-              <div *ngIf="parentForm.controls['contacto_Rep'].errors?.['pattern']">n° celular invalido</div>
+              (*) Camplo Obligatorio
             </div>
           </div>
-        </div>
-        <div class="col-md-4 mt-1">
-          <label for="correo_rep" class="form-label">Correo</label>                 
-          <input type="text" class="form-control" id="correo_rep"  formControlName="correo_rep" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['correo_rep'].errors }">
-          <div *ngIf="submitted && parentForm.controls['correo_rep'].errors" class="invalid-feedback">
-            <div *ngIf="parentForm.controls['correo_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
-            <div *ngIf="parentForm.controls['correo_rep'].errors?.['email']">Correo invalido</div>
-          </div>
-        </div>
-        <hr class="mt-4 mb-2">
-        <div class="col-md-1 mt-1">
-          <label for="avatar" class="form-label">Avatar</label>   
-          <select   class="form-control" formControlName="selectedAvatar" (change)="onChangeAvatar()">
-            <option *ngFor="let avatar of avatars" [value]="avatar" >{{ avatar }}</option>
-          </select>
-        </div>
-        <div *ngIf="parentForm.controls['selectedAvatar'].value" class="col-md-2 mt-1 mr-3">
-          <img [src]="'/assets/img/avatars/'+selectedAvatar" alt="Avatar" class="avatar-image">
-        </div>
-        <div class="col-md-3 mt-1">
-          <label for="clave_rep" class="form-label">Clave</label> 
-          <input type="text" id="clave_rep" class="form-control" formControlName="clave_rep" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['clave_rep'].errors }">
-          <div *ngIf="submitted && parentForm.controls['clave_rep'].errors" class="invalid-feedback">
-            <div *ngIf="parentForm.controls['clave_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
-          </div>  
-        </div>
-        <div class="col-md-3 mt-1">
-          <label for="clave_rep_conf" class="form-label">Confirmar Clave</label> 
-          <input type="text" id="clave_rep_conf" class="form-control" formControlName="clave_rep_conf" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['clave_rep_conf'].errors }">
-          <div *ngIf="submitted && parentForm.controls['clave_rep_conf'].errors" class="invalid-feedback">
-            <div *ngIf="parentForm.controls['clave_rep_conf'].errors?.['required']">(*) Campo Obligatorio!</div>
-          </div>  
-        </div>
-        <hr class="mt-3">
-        <div class="col-md-12">
-          <p>Debe adjuntar una imagen de su firma, en la cual aparezca Claramente. Esta sera usada para la emision de certificados</p>
-          <div class="col-md-4 ">
-            <input class="form-control" type="file" accept=".jpg" id="evidencia" formControlName="evidencia" [ngClass]="{ 'is-invalid': submitted && parentForm.controls['evidencia'].errors }">
-            <div *ngIf="submitted && parentForm.controls['evidencia'].errors" class="invalid-feedback">
-              <div *ngIf="parentForm.controls['evidencia'].errors?.['required']">Evidencia Obligatorio!</div>
+          <div class="col-md-4 mt-1">
+            <label for="calle_rep" class="form-label">calle</label>
+            <input type="text" class="form-control" id="calle_rep" formControlName="calle_rep"
+              [ngClass]="{ 'is-invalid': submitted && parentForm.controls['calle_rep'].errors }">
+            <div *ngIf="submitted && parentForm.controls['calle_rep'].errors" class="invalid-feedback">
+              <div *ngIf="parentForm.controls['calle_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+              <div *ngIf="parentForm.controls['calle_rep'].errors?.['pattern']">Solo letras y espacio</div>
             </div>
-          </div>    
-        </div> 
-        <div class="col-md-2 mt-1"></div> 
-        <div class="col-12 my-4 mr-0" >
-          <button class="btn btn-primary" type="submit" (click)="onSubmit()">Crear Junta</button>
-          
-        </div>
-      </form>
+          </div>
+          <div class="col-md-2 mt-1">
+            <label for="num_calle_rep" class="form-label">Número</label>
+            <input type="number" class="form-control" id="num_calle_rep" formControlName="num_calle_rep"
+              [ngClass]="{ 'is-invalid': submitted && parentForm.controls['num_calle_rep'].errors }">
+            <div *ngIf="submitted && parentForm.controls['num_calle_rep'].errors" class="invalid-feedback">
+              <div *ngIf="parentForm.controls['num_calle_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+              <div *ngIf="parentForm.controls['num_calle_rep'].errors?.['pattern']">solo números enteros positivos</div>
+            </div>
+          </div>
+          <hr class="mt-4 mb-2">
+          <div class="col-md-4 mt-1">
+            <label for="contacto_Rep" class="form-label">Celular</label>
+            <div class="input-group">
+              <span class="input-group-text" id="basic-addon2">+569</span>
+              <input type="number" class="form-control" id="contacto_Rep" formControlName="contacto_Rep"
+                [ngClass]="{ 'is-invalid': submitted && parentForm.controls['contacto_Rep'].errors }">
+              <div *ngIf="submitted && parentForm.controls['contacto_Rep'].errors" class="invalid-feedback">
+                <div *ngIf="parentForm.controls['contacto_Rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+                <div *ngIf="parentForm.controls['contacto_Rep'].errors?.['pattern']">n° celular invalido</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mt-1">
+            <label for="correo_rep" class="form-label">Correo</label>
+            <input type="text" class="form-control" id="correo_rep" formControlName="correo_rep"
+              [ngClass]="{ 'is-invalid': submitted && parentForm.controls['correo_rep'].errors }">
+            <div *ngIf="submitted && parentForm.controls['correo_rep'].errors" class="invalid-feedback">
+              <div *ngIf="parentForm.controls['correo_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+              <div *ngIf="parentForm.controls['correo_rep'].errors?.['email']">Correo invalido</div>
+            </div>
+          </div>
+          <hr class="mt-4 mb-2">
+          <div class="col-md-1 mt-1">
+            <label for="avatar" class="form-label">Avatar</label>
+            <select class="form-control" formControlName="selectedAvatar" (change)="onChangeAvatar()">
+              <option *ngFor="let avatar of avatars" [value]="avatar">{{ avatar }}</option>
+            </select>
+          </div>
+          <div *ngIf="parentForm.controls['selectedAvatar'].value" class="col-md-2 mt-1 mr-3">
+            <img [src]="'/assets/img/avatars/'+selectedAvatar" alt="Avatar" class="avatar-image">
+          </div>
+          <div class="col-md-3 mt-1">
+            <label for="clave_rep" class="form-label">Clave</label>
+            <input type="text" id="clave_rep" class="form-control" formControlName="clave_rep"
+              [ngClass]="{ 'is-invalid': submitted && parentForm.controls['clave_rep'].errors }">
+            <div *ngIf="submitted && parentForm.controls['clave_rep'].errors" class="invalid-feedback">
+              <div *ngIf="parentForm.controls['clave_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+            </div>
+          </div>
+          <div class="col-md-3 mt-1">
+            <label for="clave_rep_conf" class="form-label">Confirmar Clave</label>
+            <input type="text" id="clave_rep_conf" class="form-control" formControlName="clave_rep_conf"
+              [ngClass]="{ 'is-invalid': submitted && parentForm.controls['clave_rep_conf'].errors }">
+            <div *ngIf="submitted && parentForm.controls['clave_rep_conf'].errors" class="invalid-feedback">
+              <div *ngIf="parentForm.controls['clave_rep_conf'].errors?.['required']">(*) Campo Obligatorio!</div>
+            </div>
+          </div>
+          <hr class="mt-3">
+          <div class="col-md-12">
+            <p>Debe adjuntar una imagen de su firma, en la cual aparezca Claramente. Esta sera usada para la emision de
+              certificados</p>
+            <div class="col-md-4 ">
+              <input class="form-control" type="file" accept=".jpg" id="evidencia" formControlName="evidencia"
+                [ngClass]="{ 'is-invalid': submitted && parentForm.controls['evidencia'].errors }">
+              <div *ngIf="submitted && parentForm.controls['evidencia'].errors" class="invalid-feedback">
+                <div *ngIf="parentForm.controls['evidencia'].errors?.['required']">Evidencia Obligatorio!</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 mt-1"></div>
+          <div class="col-12 my-4 mr-0">
+            <button class="btn btn-primary" type="submit" (click)="onSubmit()">Crear Junta</button>
+
+          </div>
+        </form>
+      </div>
     </div>
-</div>
   </div>
 </section>
-

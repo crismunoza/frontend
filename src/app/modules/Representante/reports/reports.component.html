@@ -1,15 +1,46 @@
 <main id="main" class="main">
-    <div class="pagetitle">
-      <h1>Reportes</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
-          <li class="breadcrumb-item">Administar</li>
-          <li class="breadcrumb-item active">Reportes</li>
-        </ol>
-      </nav>
+  <div class="pagetitle">
+    <h1>Reportes</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+        <li class="breadcrumb-item">Administar</li>
+        <li class="breadcrumb-item active">Reportes</li>
+      </ol>
+    </nav>
+  </div>
+  <section class="section">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Tabla Reportes</h5>
+        <p>Aqui veras las personas que estan añadidas a un proyecto y crear un excel con los datos de todos los miembros .</p>
+        <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Rut Miembros</th>
+              <th scope="col">Nombre Miembros</th>
+              <th scope="col">Proyecto</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let reporte of listreportes">
+              <th scope="row">{{reporte.rut_vecino}}</th>
+              <td>{{reporte.primer_nombre}} {{reporte.segundo_nombre}} {{reporte.primer_apellido}}</td>
+              <td>{{reporte.nombre}}</td>
+              <td>{{reporte.estado}}</td>
+              <td>{{reporte.fecha_proyecto}}</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+      </div>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-outline-success" (click)="generarReporte()"><i class="ri-file-excel-2-fill"></i></button>
+     </div>
     </div>
-    <section class="section">
-    </section>
-  </main>
-  
+  </section>
+</main>
