@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import {Vecino, comuna, Solicitud, Solicitud3} from '../interfaces/modelos';
+import {Vecino, comuna, Solicitud, reportes} from '../interfaces/modelos';
 import {JuntaVecinal2} from '../interfaces/modelos';
 
 @Injectable({
@@ -56,6 +56,18 @@ export class ComunaService {
       console.log('que envio en el servicio ',id)
       return this.http.get<any[]>(`${this.myAppUrl}${this.myApiUrl}/valoraciones/obtenerStar/${id}`);
     }
+
+
+    // mostrar lista de reportes 
+    verreporte(): Observable<{ listreportes: reportes[] }> {
+      return this.http.get<{ listreportes: reportes[] }>(`${this.myAppUrl}${this.myApiUrl}/reporte/verreporte`);
+    }
+
+    // mostrar lista de reportes
+    generarReporte(id_junta_vecinal: number): Observable<Blob> {
+      return this.http.get(`${this.myAppUrl}${this.myApiUrl}/reporte/CrearReport/${id_junta_vecinal}`, { responseType: 'blob' });
+    }
+
 }
 
 

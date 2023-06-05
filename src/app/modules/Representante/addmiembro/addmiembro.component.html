@@ -1,50 +1,56 @@
 <main id="main" class="main">
     <div class="pagetitle">
-       <h1>Miembros Nuevos</h1>
-       <nav>
-          <ol class="breadcrumb">
-             <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
-             <li class="breadcrumb-item">Administar</li>
-             <li class="breadcrumb-item active">Miembros Nuevos</li>
-          </ol>
-       </nav>
+        <h1>Miembros Nuevos</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+                <li class="breadcrumb-item">Administar</li>
+                <li class="breadcrumb-item active">Miembros Nuevos</li>
+            </ol>
+        </nav>
     </div>
     <section class="section">
-       <div class="row">
-          <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                    <h5 class="card-title">Nuevos Miembros</h5>
-                    <p>Aqui se podra Aceptar <i class="ri-user-follow-line"></i> y Denegar  <i class="ri-user-unfollow-line"></i>  los  Nuevos Miembros.</p>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">apellido</th>
-                                    <th scope="col">Domicilio</th>
-                                    <th scope="col">Evidencia</th>
-                                    <th scope="col">Accion</th>
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let vecino of listVecinos">
-                                    <td>{{ vecino.primer_nombre }}</td>
-                                    <td>{{vecino.primer_apellido}} {{vecino.segundo_apellido}}</td>
-                                    <td>{{ vecino.direccion }}</td>
-                                    <td><a [href]="vecino.imageUrl" [download]="vecino.rut_vecino + '.jpg'">Descargar imagen</a></td>
-                                    <td>
-                                    <button type="submit" class="btn btn-success" (click)="enviarRut(vecino.rut_vecino)"><i class="ri-user-follow-line"></i></button>
-                                    <button type="button" class="btn btn-danger" (click)="Rechazo(vecino.rut_vecino)"><i class="ri-user-unfollow-line"></i></button> 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>   
-                    </div>                 
+                        <h5 class="card-title">Nuevos Miembros</h5>
+                        <p>Aqui se podra Aceptar <i class="ri-user-follow-line"></i> y Denegar <i
+                                class="ri-user-unfollow-line"></i> los Nuevos Miembros.</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">apellido</th>
+                                        <th scope="col">Domicilio</th>
+                                        <th scope="col">Evidencia</th>
+                                        <th scope="col">Accion</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let vecino of listVecinos">
+                                        <td>{{ vecino.primer_nombre }}</td>
+                                        <td>{{vecino.primer_apellido}} {{vecino.segundo_apellido}}</td>
+                                        <td>{{ vecino.direccion }}</td>
+                                        <td><a [href]="vecino.imageUrl"
+                                                [download]="vecino.rut_vecino + '.jpg'">Descargar imagen</a></td>
+                                        <td>
+                                            <button type="submit" class="btn btn-success"
+                                                (click)="enviarRut(vecino.rut_vecino)"><i
+                                                    class="ri-user-follow-line"></i></button>
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="Rechazo(vecino.rut_vecino)"><i
+                                                    class="ri-user-unfollow-line"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-       </div>
+        </div>
     </section>
- </main>
+</main>

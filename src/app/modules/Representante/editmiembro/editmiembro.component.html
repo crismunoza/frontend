@@ -15,80 +15,93 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Miembros</h5>
-            <p>Aquí se podrá Editar <i class="ri-user-settings-line"></i> y Eliminar <i class="ri-user-unfollow-line"></i> a los Miembros de la junta vecinal.</p>
+            <p>Aquí se podrá Editar <i class="ri-user-settings-line"></i> y Eliminar <i
+                class="ri-user-unfollow-line"></i> a los Miembros de la junta vecinal.</p>
             <div class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th scope="col">Correo</th>
-                  <th scope="col">Nombres</th>
-                  <th scope="col">Apellidos</th>
-                  <th scope="col">Celular</th>
-                  <th scope="col">Domicilio</th>
-                  <th scope="col">Acción</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let vecino of listVecinos">
-                  <td>{{ vecino.correo_electronico }}</td>
-                  <td>{{ vecino.primer_nombre }} {{ vecino.segundo_nombre }}</td>
-                  <td>{{ vecino.primer_apellido }} {{ vecino.segundo_apellido }}</td>
-                  <td>{{ vecino.telefono }}</td>
-                  <td>{{ vecino.direccion }}</td>
-                  <td>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered" (click)="seleccionarVecino(vecino.rut_vecino)">
-                      <i class="ri-user-settings-line"></i>
-                    </button>
-                    <div class="modal fade" id="verticalycentered" tabindex="-1" #modal>
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title">Editar Miembro</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <form class="row g-3" [formGroup]="formularioVecino">
-                              <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Primer Nombre" formControlName="primer_nombre">
-                              </div>
-                              <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Segundo Nombre" formControlName="segundo_nombre">
-                              </div>
-                              <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Primer Apellido" formControlName="primer_apellido">
-                              </div>
-                              <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Segundo Apellido" formControlName="segundo_apellido">
-                              </div>
-                              <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Dirección" formControlName="direccion">
-                              </div>
-                              <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Teléfono" formControlName="telefono">
-                              </div>
-                              <div class="col-md-12">
-                                <input type="email" class="form-control" placeholder="Correo" formControlName="correo_electronico">
-                              </div>
-                              <div class="col-md-12">
-                                <input type="password" class="form-control" placeholder="Contraseña" formControlName="contrasenia">
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="salir()">Salir</button>
-                                <button type="submit" class="btn btn-primary" (click)="updateVecinos()">Editar</button>
-                              </div>
-                            </form>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Celular</th>
+                    <th scope="col">Domicilio</th>
+                    <th scope="col">Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let vecino of listVecinos">
+                    <td>{{ vecino.correo_electronico }}</td>
+                    <td>{{ vecino.primer_nombre }} {{ vecino.segundo_nombre }}</td>
+                    <td>{{ vecino.primer_apellido }} {{ vecino.segundo_apellido }}</td>
+                    <td>{{ vecino.telefono }}</td>
+                    <td>{{ vecino.direccion }}</td>
+                    <td>
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#verticalycentered" (click)="seleccionarVecino(vecino.rut_vecino)">
+                        <i class="ri-user-settings-line"></i>
+                      </button>
+                      <div class="modal fade" id="verticalycentered" tabindex="-1" #modal>
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Editar Miembro</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <form class="row g-3" [formGroup]="formularioVecino">
+                                <div class="col-md-6">
+                                  <input type="text" class="form-control" placeholder="Primer Nombre"
+                                    formControlName="primer_nombre">
+                                </div>
+                                <div class="col-md-6">
+                                  <input type="text" class="form-control" placeholder="Segundo Nombre"
+                                    formControlName="segundo_nombre">
+                                </div>
+                                <div class="col-md-6">
+                                  <input type="text" class="form-control" placeholder="Primer Apellido"
+                                    formControlName="primer_apellido">
+                                </div>
+                                <div class="col-md-6">
+                                  <input type="text" class="form-control" placeholder="Segundo Apellido"
+                                    formControlName="segundo_apellido">
+                                </div>
+                                <div class="col-md-6">
+                                  <input type="text" class="form-control" placeholder="Dirección"
+                                    formControlName="direccion">
+                                </div>
+                                <div class="col-md-6">
+                                  <input type="text" class="form-control" placeholder="Teléfono"
+                                    formControlName="telefono">
+                                </div>
+                                <div class="col-md-12">
+                                  <input type="email" class="form-control" placeholder="Correo"
+                                    formControlName="correo_electronico">
+                                </div>
+                                <div class="col-md-12">
+                                  <input type="password" class="form-control" placeholder="Contraseña"
+                                    formControlName="contrasenia">
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                    (click)="salir()">Salir</button>
+                                  <button type="submit" class="btn btn-primary"
+                                    (click)="updateVecinos()">Editar</button>
+                                </div>
+                              </form>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <button type="button" class="btn btn-danger" (click)="eliminarVecino(vecino.rut_vecino)">
-                      <i class="ri-user-unfollow-line"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                      <button type="button" class="btn btn-danger" (click)="eliminarVecino(vecino.rut_vecino)">
+                        <i class="ri-user-unfollow-line"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

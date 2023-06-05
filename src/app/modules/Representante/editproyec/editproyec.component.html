@@ -15,14 +15,16 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Proyectos</h5>
-            <p>Aqui se podrá Editar <i class="ri-edit-2-line"></i> y Eliminar <i class="ri-delete-bin-2-line"></i> los distintos Proyectos.</p>
+            <p>Aqui se podrá Editar <i class="ri-edit-2-line"></i> y Eliminar <i class="ri-delete-bin-2-line"></i> los
+              distintos Proyectos.</p>
             <div class="table-filter ">
               <div class="container d-flex justify-content-end">
                 <div class="row mb-4">
-                  <div class="col-md-12"> 
+                  <div class="col-md-12">
                     <div class="form-group">
                       <label for="filter-status">Estado</label>
-                      <select class="form-select" id="filter-status" [(ngModel)]="selectedStatus" (ngModelChange)="filterProyects(selectedStatus)">
+                      <select class="form-select" id="filter-status" [(ngModel)]="selectedStatus"
+                        (ngModelChange)="filterProyects(selectedStatus)">
                         <option *ngFor="let status of status" value="{{ status }}">{{ status }}</option>
                       </select>
                     </div>
@@ -51,7 +53,8 @@
                     <td class="d-none">{{ proyect.descripcion }}</td>
                     <td>
                       <div class="action-buttons d-flex flex-wrap">
-                        <button class="btn btn-warning btn-sm edit-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="loadProyectDetails(proyect)">
+                        <button class="btn btn-warning btn-sm edit-btn" data-bs-toggle="modal"
+                          data-bs-target="#exampleModal" (click)="loadProyectDetails(proyect)">
                           <i class="ri-edit-2-line"></i>
                         </button>
                         <button class="btn btn-danger btn-sm delete-btn" (click)="deleteProyect(proyect)">
@@ -62,40 +65,33 @@
                   </tr>
                 </tbody>
               </table>
-              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Proyecto</h1>
-                      
+
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                       <form [formGroup]="formProyect" (ngSubmit)="submitProyect()" #formRef="ngForm">
-                        <div class="row mb-3" >
+                        <div class="row mb-3">
                           <label for="nombreProyecto" class="col-sm-3 col-form-label">Nombre Proyecto</label>
                           <div class="col-sm-9">
-                            <input
-                              type="text"
-                              class="form-control"
-                              formControlName="nombreProyecto"
-                              [ngClass]="{
+                            <input type="text" class="form-control" formControlName="nombreProyecto" [ngClass]="{
                                 'is-invalid': formProyect.get('nombreProyecto')?.invalid && formProyect.get('nombreProyecto')?.touched 
-                              }"
-                            />
+                              }" />
                             <div class="invalid-feedback"
-                            *ngIf="formProyect.get('nombreProyecto')?.errors?.['nameWhitoutNUMBERS']"
-                            >
+                              *ngIf="formProyect.get('nombreProyecto')?.errors?.['nameWhitoutNUMBERS']">
                               El nombre no puede contener números.
                             </div>
-                            <div class="invalid-feedback" 
-                            *ngIf="formProyect.get('nombreProyecto')?.invalid && formProyect.get('nombreProyecto')?.errors?.['minlength']"
-                            >
+                            <div class="invalid-feedback"
+                              *ngIf="formProyect.get('nombreProyecto')?.invalid && formProyect.get('nombreProyecto')?.errors?.['minlength']">
                               El nombre debe tener al menos 10 caracteres.
                             </div>
-                            <div class="invalid-feedback" 
-                            *ngIf="formProyect.get('nombreProyecto')?.invalid && formProyect.get('nombreProyecto')?.errors?.['required']"
-                            >
+                            <div class="invalid-feedback"
+                              *ngIf="formProyect.get('nombreProyecto')?.invalid && formProyect.get('nombreProyecto')?.errors?.['required']">
                               Debes ingresar un nombre de proyecto.
                             </div>
                           </div>
@@ -103,20 +99,12 @@
                         <div class="row mb-3">
                           <label for="cupoMinimo" class="col-sm-3 col-form-label">Cupo Mínimo</label>
                           <div class="col-sm-9">
-                            <input
-                              type="number"
-                              class="form-control"
-                              formControlName="cupoMinimo"
-                              (keydown)="cancelNumberInputMin($event)"
-                              min="1"
-                              [ngClass]="{
+                            <input type="number" class="form-control" formControlName="cupoMinimo"
+                              (keydown)="cancelNumberInputMin($event)" min="1" [ngClass]="{
                                 'is-invalid': formProyect.get('cupoMaximo')?.invalid && formProyect.get('cupoMaximo')?.touched                    
-                              }"
-                            />
-                            <div
-                              class="invalid-feedback"
-                              *ngIf="formProyect.get('cupoMinimo')?.invalid && formProyect.get('cupoMinimo')?.touched"
-                            >
+                              }" />
+                            <div class="invalid-feedback"
+                              *ngIf="formProyect.get('cupoMinimo')?.invalid && formProyect.get('cupoMinimo')?.touched">
                               Debes ingresar un cupo mínimo.
                             </div>
                           </div>
@@ -124,22 +112,15 @@
                         <div class="row mb-3">
                           <label for="cupoMaximo" class="col-sm-3 col-form-label">Cupo Máximo</label>
                           <div class="col-sm-9">
-                            <input
-                              type="number"
-                              class="form-control"
-                              formControlName="cupoMaximo"
-                              (keydown)="cancelNumberInput($event)"
-                              min="1"
+                            <input type="number" class="form-control" formControlName="cupoMaximo"
+                              (keydown)="cancelNumberInput($event)" min="1"
                               [value]="formProyect.get('cupoMinimo')?.value !== null ? (formProyect.get('cupoMinimo')?.value + 1) : null"
                               [ngClass]="{
                                'is-invalid': formProyect.get('cupoMaximo')?.invalid && formProyect.get('cupoMaximo')?.touched 
                               }"
-                              [class.invalid]="formProyect.hasError('cupoMaximoInvalido') && formProyect.get('cupoMinimo')?.value < formProyect.get('cupoMaximo')?.value"
-                            />
-                            <div
-                              class="invalid-feedback"
-                              *ngIf="formProyect.get('cupoMaximo')?.errors?.['cupoMaximoInvalido'] && formProyect.get('cupoMaximo')?.touched && formProyect.get('cupoMinimo')?.value <= formProyect.get('cupoMaximo')?.value"
-                            >
+                              [class.invalid]="formProyect.hasError('cupoMaximoInvalido') && formProyect.get('cupoMinimo')?.value < formProyect.get('cupoMaximo')?.value" />
+                            <div class="invalid-feedback"
+                              *ngIf="formProyect.get('cupoMaximo')?.errors?.['cupoMaximoInvalido'] && formProyect.get('cupoMaximo')?.touched && formProyect.get('cupoMinimo')?.value <= formProyect.get('cupoMaximo')?.value">
                               El cupo máximo es inválido.
                             </div>
                           </div>
@@ -147,51 +128,38 @@
                         <div class="row mb-3">
                           <label for="descripcion" class="col-sm-3 col-form-label">Descripción</label>
                           <div class="col-sm-9">
-                            <textarea
-                              class="form-control"
-                              formControlName="descripcion"
-                              [ngClass]="{
+                            <textarea class="form-control" formControlName="descripcion" [ngClass]="{
                                'is-invalid': formProyect.get('descripcion')?.invalid && formProyect.get('descripcion')?.touched 
-                              }"
-                            ></textarea>
-                            <div
-                              class="invalid-feedback"
-                              *ngIf="formProyect.get('descripcion')?.invalid && formProyect.get('descripcion')?.touched"
-                            >
+                              }"></textarea>
+                            <div class="invalid-feedback"
+                              *ngIf="formProyect.get('descripcion')?.invalid && formProyect.get('descripcion')?.touched">
                               Descripción inválida.
                             </div>
                           </div>
                         </div>
-                        <div class="row mb-3" >
+                        <div class="row mb-3">
                           <label for="nombreProyecto" class="col-sm-3 col-form-label">Estado</label>
                           <div class="col-sm-9">
-                            <input
-                              type="text"
-                              class="form-control"
-                              formControlName="estado"
-                              [ngClass]="{
+                            <input type="text" class="form-control" formControlName="estado" [ngClass]="{
                                 'is-invalid': formProyect.get('estado')?.invalid && formProyect.get('estado')?.touched 
-                              }"
-                            />
+                              }" />
                             <div class="invalid-feedback"
-                            *ngIf="formProyect.get('estado')?.errors?.['nameWhitoutNUMBERS']"
-                            >
+                              *ngIf="formProyect.get('estado')?.errors?.['nameWhitoutNUMBERS']">
                               El estado no puede contener números.
                             </div>
-                            <div class="invalid-feedback" 
-                            *ngIf="formProyect.get('estado')?.invalid && formProyect.get('estado')?.errors?.['minlength']"
-                            >
+                            <div class="invalid-feedback"
+                              *ngIf="formProyect.get('estado')?.invalid && formProyect.get('estado')?.errors?.['minlength']">
                               Estado inválido.
                             </div>
-                            <div class="invalid-feedback" 
-                            *ngIf="formProyect.get('nombreProyecto')?.invalid && formProyect.get('nombreProyecto')?.errors?.['required']"
-                            >
+                            <div class="invalid-feedback"
+                              *ngIf="formProyect.get('nombreProyecto')?.invalid && formProyect.get('nombreProyecto')?.errors?.['required']">
                               Debes ingresar un nombre de proyecto.
                             </div>
                           </div>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-primary" (click)="submitProyect()" [disabled]="formProyect.invalid">Modificar</button>
+                          <button type="button" class="btn btn-primary" (click)="submitProyect()"
+                            [disabled]="formProyect.invalid">Modificar</button>
                           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                         </div>
                       </form>
@@ -252,7 +220,7 @@
       </div>
     </div>
   </section>
-  
-  
-  
+
+
+
 </main>

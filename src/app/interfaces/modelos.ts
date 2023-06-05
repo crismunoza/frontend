@@ -156,3 +156,20 @@ export interface Vecino4 {
   imageUrl?: string, // Nueva propiedad imageUrl de tipo string opcional
 }
 
+export interface reportes {
+  id_junta_vecinal : number,
+  rut_junta : string,
+  razon_social : string,
+  rut_vecino : string,
+  primer_nombre : string,
+  segundo_nombre : string,
+  primer_apellido : string,
+  segundo_apellido : string,
+  direccion : string,
+  nombre : string,
+  descripcion : string,
+  estado : string,
+  fecha_proyecto : string,
+  cupo_min : number,
+  cupo_max : number,
+}
