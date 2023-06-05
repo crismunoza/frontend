@@ -59,6 +59,7 @@ export class ComunaService {
     listaVecValoraciones(id_junta:number):Observable<{data : listValor[]}>{
       return this.http.get<{data: listValor[]}>(`${this.myAppUrl}${this.myApiUrl}/valoraciones/listarValoraciones/${id_junta}`);
     }
+
 }
 
 

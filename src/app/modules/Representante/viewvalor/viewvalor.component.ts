@@ -83,10 +83,12 @@ export class ViewvalorComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-
+    const a = parseInt(this.id_Junta);
+    this.env.listaVecValoraciones(a).subscribe((resp) =>{
+      this.listValoraciones = resp.data;
+     });
   }
   open_modal(){
-    const a = parseInt(this.id_Junta);
     //asiganmos el id del modal a una constatante (lo tratara como elementoHTML)
     const mod = document.getElementById('mod_valoraciones');
     //si es que se enecuntra
@@ -96,9 +98,6 @@ export class ViewvalorComponent implements OnInit, AfterViewInit {
       mod.style.display = 'block';
       mod.setAttribute('aria-hidden', 'false');
     }
-    this.env.listaVecValoraciones(a).subscribe((data) =>{
-     console.log(data)
-    });
 
   }
   closemodal(){
