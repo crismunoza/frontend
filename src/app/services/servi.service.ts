@@ -60,8 +60,8 @@ export class ComunaService {
     listaVecValoraciones(id_junta:number):Observable<{data : listValor[]}>{
       return this.http.get<{data: listValor[]}>(`${this.myAppUrl}${this.myApiUrl}/valoraciones/listarValoraciones/${id_junta}`);
 
-    }  
-    // mostrar lista de reportes 
+    }
+    // mostrar lista de reportes
     verreporte(): Observable<{ listreportes: reportes[] }> {
       return this.http.get<{ listreportes: reportes[] }>(`${this.myAppUrl}${this.myApiUrl}/reporte/verreporte`);
     }
@@ -69,9 +69,11 @@ export class ComunaService {
     // mostrar lista de reportes
     generarReporte(id_junta_vecinal: number): Observable<Blob> {
       return this.http.get(`${this.myAppUrl}${this.myApiUrl}/reporte/CrearReport/${id_junta_vecinal}`, { responseType: 'blob' });
-
     }
 
+    getUserData(id:any,rol:any,id_junta:any):Observable<any>{
+      return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/users/data?id=${id}&rol=${rol}&junta=${id_junta}`);
+    }
 }
 
 
