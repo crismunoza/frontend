@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import { RutModule } from 'rut-chileno'; 
+import { RutModule } from 'rut-chileno';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layouts/header/header.component';
@@ -15,8 +15,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { InicioGeneralComponent } from './components/inicio-general/inicio-general.component';
 import { ResetpassComponent } from './components/pages/resetpass/resetpass.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +27,7 @@ import { ResetpassComponent } from './components/pages/resetpass/resetpass.compo
     InicioComponent,
     InicioGeneralComponent,
     ResetpassComponent,
- 
+
   ],
   imports: [
     BrowserModule,
@@ -43,20 +41,3 @@ import { ResetpassComponent } from './components/pages/resetpass/resetpass.compo
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-// import { EditiniComponent } from './components/admin/editini/editini.component';
-// import { EditproyecComponent } from './components/admin/editproyec/editproyec.component';
-// import { EditsolicitudComponent } from './components/admin/editsolicitud/editsolicitud.component';
-// import { EditmiembroComponent } from './components/admin/editmiembro/editmiembro.component';
-// import { AddmiembroComponent } from './components/admin/addmiembro/addmiembro.component';
-// import { ReportsComponent } from './components/admin/reports/reports.component';
-// import { ViewvalorComponent } from './components/admin/viewvalor/viewvalor.component';
-// import { NewproyectComponent } from './components/admin/newproyect/newproyect.component';
-
-    // EditiniComponent,
-    // EditproyecComponent,
-    // EditsolicitudComponent,
-    // EditmiembroComponent,
-    // AddmiembroComponent,
-    // ReportsComponent,
-    // NewproyectComponent,
-    //ViewvalorComponent,   

@@ -181,3 +181,8 @@ export interface reportes {
   cupo_max : number,
 }
 
+export interface ajustePerfil{
+  rol : string,
+  telefono: number,
+  correo: string
+}

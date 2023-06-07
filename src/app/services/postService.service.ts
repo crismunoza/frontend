@@ -11,8 +11,8 @@ export class PostService {
     //variables para la url del backend
     private myAppUrl: string;
     private myApiUrl: string;
-    
-  constructor(private http: HttpClient) { 
+
+  constructor(private http: HttpClient) {
     this.myAppUrl = environment.endpoint;
     this.myApiUrl = 'api';
   }
@@ -25,7 +25,7 @@ export class PostService {
     inserRep( Rep:RepresentanteVecinal): Observable <any>{
       return this.http.post(`${this.myAppUrl}${this.myApiUrl}/juntavecinal/insercion`, Rep);
     }
-    
+
     // registro de vecinos del modulo de registro de vecinos
     insertvecino(Vecino: Vecino): Observable<any> {
       return this.http.post(`${this.myAppUrl}${this.myApiUrl}/insertvecino`, Vecino);
@@ -46,13 +46,13 @@ export class PostService {
     // update del modulo de aceptar vecinos
     modificarEstado(rut_vecino: string, estado: number): Observable<any> {
       const url = `${this.myAppUrl}${this.myApiUrl}/insertvecino/modificarEstado`;
-    
+
       // Crea un objeto con los datos a enviar al backend
       const data = {
         rut_vecino: rut_vecino,
         estado: estado
       };
-    
+
       return this.http.post(url, data);
     }
 
@@ -66,11 +66,9 @@ export class PostService {
       return this.http.put(`${this.myAppUrl}${this.myApiUrl}/solicitudes/update/${id_solicitud}`, solicitud);
     }
 
-    
     enviarSol(val :Valoracion):Observable<any>{
       return this.http.post(`${this.myAppUrl}${this.myApiUrl}/valoraciones/enviar`,val);
     }
-
    // servicio de restablecer contraseña
     cambiarContrasena(rut: string, contrasenia: string): Observable<any> {
       const url = `${this.myAppUrl}${this.myApiUrl}/reset/cambiarcontra`;
@@ -85,7 +83,7 @@ export class PostService {
     }
     
 
-    
+
 }
 
 
