@@ -13,14 +13,15 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Tabla Reportes</h5>
-        <p>Aqui veras las personas que estan añadidas a un proyecto y crear un excel con los datos de todos los miembros .</p>
+        <p>Aqui podrás observar la interacción de los vecinos en los distintos proyectos y podrás descargar un excel con la información de cada proyecto.</p>
         <div class="table-responsive">
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th scope="col">Rut Miembros</th>
-              <th scope="col">Nombre Miembros</th>
+              <th scope="col">Rut Miembro</th>
+              <th scope="col">Nombre Miembro</th>
               <th scope="col">Proyecto</th>
+              <th scope="col">Inscrito</th>
               <th scope="col">Estado</th>
               <th scope="col">Fecha</th>
             </tr>
@@ -30,6 +31,7 @@
               <th scope="row">{{reporte.rut_vecino}}</th>
               <td>{{reporte.primer_nombre}} {{reporte.segundo_nombre}} {{reporte.primer_apellido}}</td>
               <td>{{reporte.nombre}}</td>
+              <td>{{reporte.inscrito}}</td>
               <td>{{reporte.estado}}</td>
               <td>{{reporte.fecha_proyecto}}</td>
             </tr>
@@ -38,8 +40,8 @@
         </table>
       </div>
       </div>
-      <div class="card-footer">
-        <button type="submit" class="btn btn-outline-success" (click)="generarReporte()"><i class="ri-file-excel-2-fill"></i></button>
+      <div class="card-footer text-center d-flex justify-content-center">
+        <button type="submit" class="btn btn-outline-success" (click)="generarReporte()">Descargar Reporte<i class="ri-file-excel-2-fill ri-lg estilo-button"></i></button>
      </div>
     </div>
   </section>

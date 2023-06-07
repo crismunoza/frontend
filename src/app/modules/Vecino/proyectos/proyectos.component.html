@@ -26,12 +26,13 @@
                                 <p class="card-text">{{proyecto.descripcion}}</p>
                                 <div class="mt-auto">
                                     <strong class="badge bg-primary me-4 mb-2">Cupos mínimos para aprobación: {{proyecto.cupo_min}}</strong>
-                                    <strong class="badge text-dark bg-warning">Cupos disponibles: {{proyecto.cupo_max}}</strong>
+                                    <strong class="badge text-dark bg-warning me-4 mb-2">Cupos disponibles: {{proyecto.cupo_max}}</strong>
+                                    <strong class="badge text-white bg-secondary ">Vecinos inscritos: {{proyecto.vecinosInscritos}}</strong>
                                 </div>
                             </div>
                             <div class="card-footer mt-auto d-flex justify-content-end">
-                                <a  class="btn btn-danger me-2">Rechazar</a> 
-                                <a  class="btn btn-success">Inscribirse</a>
+                                <button  class="btn btn-danger me-2" (click)="refuse(proyecto.id_proyecto)" [disabled]="proyecto.inscrito">Rechazar</button>
+                                <button  class="btn btn-success" (click)="register(proyecto.id_proyecto)" [disabled]="proyecto.inscrito">Inscribirse</button>
                             </div>
                         </div>
                     </div>

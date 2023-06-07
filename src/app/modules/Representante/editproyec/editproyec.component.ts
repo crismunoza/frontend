@@ -18,6 +18,8 @@ export class EditproyecComponent implements OnInit {
   formProyect: FormGroup;
   cupoMinimoControl: AbstractControl;
   cupoMaximoControl: AbstractControl;
+  statusValidate : string = 'CERRADO';
+  estados: string[] = []; 
   
   constructor(private proyectoService: ProyectoService, private formBuilder: FormBuilder) {
     this.formProyect = this.formBuilder.group({
@@ -89,11 +91,21 @@ export class EditproyecComponent implements OnInit {
     .subscribe(
       (response) => {
         this.proyectos = response;
+        this.loadVecinosInscritos();
       },
       (error) => {
         console.log(error);
       }
     )
+  };
+
+  loadVecinosInscritos() {
+    this.proyectos.forEach((proyecto) => {
+      this.proyectoService.getVecinosInscritos(proyecto.id_proyecto).subscribe((count) => {
+        // console.log(proyecto)
+        proyecto.inscritos = count;
+      });
+    });
   };
   
   loadProyectDetails(proyect: any) {
@@ -193,6 +205,7 @@ export class EditproyecComponent implements OnInit {
     this.proyectoService.filtrarProyectos(filtro).subscribe(
       response => {
         this.proyectos = response;
+        this.loadVecinosInscritos();
       },
       error => {
         console.error(error);
@@ -200,9 +213,25 @@ export class EditproyecComponent implements OnInit {
     );
   };
   
+  downloadExcel(id_proyecto: number, nombre_proyecto: string){
+    this.proyectoService.downloadExcel(id_proyecto, nombre_proyecto)
+  };
+  
+  getFiltersForMODIFY() {
+    this.proyectoService.getFiltersForModify().subscribe(
+      estados => {
+        this.estados = estados;
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  };
+
   ngOnInit() {
     this.getAllProyects();
     this.getFilters();
+    this.getFiltersForMODIFY()
   }
 
 }
