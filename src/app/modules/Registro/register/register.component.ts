@@ -99,13 +99,26 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    if (this.parentForm.invalid) {
+    if (this.parentForm.invalid || this.parentForm.controls['clave_veci'].invalid || this.parentForm.controls['clave_veci_conf'].invalid) {
+      return;
+    }
+    const clave_veci = this.parentForm.controls['clave_veci'].value;
+    const clave_veci_conf = this.parentForm.controls['clave_veci_conf'].value;
+
+    if (clave_veci !== clave_veci_conf) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Las contraseñas no coinciden',
+        showConfirmButton: false,
+        timer: 2000
+      });
       return;
     }
 
     const fileInput = document.getElementById('evidencia') as HTMLInputElement;
     const file = fileInput?.files?.[0];
-
+    
     if (!file) {
       console.log('No se ha seleccionado ningún archivo');
       // Manejar el caso en que no se seleccionó ningún archivo, como mostrar un mensaje de error o realizar alguna acción específica.
@@ -131,35 +144,58 @@ export class RegisterComponent implements OnInit {
         estado: 0,
         fk_id_junta_vecinal: this.selectedJuntaVecinalId || 0, // Utilizar el ID de la junta vecinal seleccionada
       };
+      let rut = this.parentForm.controls['rut_vecino'].value;
+      console.log("LO QUE MANDAMOS PARA VERIFICAR:", rut);
 
-      console.log("Vecino:", Vecino);
-
-      this.vecino.insertvecino(Vecino).subscribe({
-        next: (v) => {
-          if (v.msg == 'Se inserto correctamente') {
-            console.log("estamos dentro de V", v);
-          }
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Registro Correctamente!!',
-            showConfirmButton: false,
-            timer: 1000
-          }).then(() => {
-          this.router.navigate(['/login']);
-          });
-        },
-        error: (error) => {
-          console.log("pasamos el this.vecino", error);
+      this.comunaService.verificarsiexiste(rut).subscribe(res => {
+        if (res.msg === 'correo existe') {
           Swal.fire({
             position: 'center',
             icon: 'error',
-            title: 'Error al registrarse',
+            title: 'Rut Se Encuentra Registrado como Representante',
             showConfirmButton: false,
-            timer: 1000
+            timer: 2000
+          })
+        } else if(res.msg === 'no esta') {
+          // Aquí puedes manejar el mensaje recibido en el bloque else if
+          Swal.fire({
+            position: 'center',
+                  icon: 'success',
+                  title: 'Registro Correctamente!!',
+                  showConfirmButton: false,
+                  timer: 1000
+          }).then((result) => {
+            this.vecino.insertvecino(Vecino).subscribe({
+              next: (v) => {
+                if (v.msg == 'Se inserto correctamente') {
+                }
+                this.router.navigate(['/login']);
+              },
+              error: (error) => {
+                Swal.fire({
+                  position: 'center',
+                  icon: 'error',
+                  title: 'Error al registrarse',
+                  showConfirmButton: false,
+                  timer: 1000
+                });
+              }
+            });
           });
+          
         }
+      }, error => {
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'no se pudo verificar el rut',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        console.log('Error al obtener las juntas vecinales:', error);
       });
+
+      
     };
 
     reader.onerror = () => {

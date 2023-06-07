@@ -45,7 +45,7 @@ export class EditmiembroComponent implements OnInit {
       primer_apellido: ['', Validators.required],
       segundo_apellido: [''],
       direccion: ['', Validators.required],
-      correo_electronico: ['', [Validators.required, Validators.email]],
+      correo_electronico: ['', [Validators.required, Validators.email,Validators.pattern(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/)]],
       telefono: ['', Validators.required],
       contrasenia: ['', Validators.required]
     });

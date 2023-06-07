@@ -77,10 +77,15 @@ export class ComunaService {
       return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/reset/${rut}`);
     }
 
-  //  metodo para verificar si el rut ya esta registrado
+  //  metodo para verificar si el correo ya esta registrado
    verificarCorreo(correo_electronico: string): Observable<any> {
     return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/reset/vericorreo/${correo_electronico}`);
 
+   }
+   
+   // metodo para verificar si el rut ya esta registrado
+   verificarsiexiste (rut: string): Observable<any> {
+    return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/insertvecino/verificarsiexiste/${rut}`);
    }
 
       
