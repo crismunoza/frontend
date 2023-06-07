@@ -181,3 +181,7 @@ export interface reportes {
   cupo_max : number,
 }
 
+export interface resetpass {
+  rut : string,
+  contrasenia : string,
+}

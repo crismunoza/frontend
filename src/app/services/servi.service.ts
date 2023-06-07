@@ -1,5 +1,5 @@
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -72,6 +72,18 @@ export class ComunaService {
 
     }
 
+    // metodo para verificar si el rut ya esta registrado
+    verificarRut(rut: string): Observable<any> {
+      return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/reset/${rut}`);
+    }
+
+  //  metodo para verificar si el rut ya esta registrado
+   verificarCorreo(correo_electronico: string): Observable<any> {
+    return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/reset/vericorreo/${correo_electronico}`);
+
+   }
+
+      
 }
 
 

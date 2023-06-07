@@ -128,7 +128,7 @@ export class AddmiembroComponent implements OnInit {
           )
           console.log(error);
         });
-      } else {
+      } else if (result.isDismissed) {
         Swal.fire(
           'Cancelado!',
           'El vecino no ha sido aceptado.',

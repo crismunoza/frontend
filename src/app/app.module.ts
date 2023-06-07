@@ -13,6 +13,7 @@ import { PagesError404Component } from './components/pages/pages-error404/pages-
 import { InicioComponent } from './components/pages/inicio/inicio.component';
 import { HttpClientModule } from '@angular/common/http';
 import { InicioGeneralComponent } from './components/inicio-general/inicio-general.component';
+import { ResetpassComponent } from './components/pages/resetpass/resetpass.component';
 
 
 
@@ -27,6 +28,7 @@ import { InicioGeneralComponent } from './components/inicio-general/inicio-gener
     PagesError404Component,
     InicioComponent,
     InicioGeneralComponent,
+    ResetpassComponent,
  
   ],
   imports: [

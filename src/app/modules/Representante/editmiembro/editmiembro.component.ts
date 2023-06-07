@@ -87,43 +87,36 @@ export class EditmiembroComponent implements OnInit {
   }
 
   salir() {
-    if (this.modal) {
-      this.modal.nativeElement.classList.remove('show');
-      this.modal.nativeElement.style.display = 'none';
-      this.modal.nativeElement.setAttribute('aria-hidden', 'true');
-    }
     this.formularioVecino.reset();
   }
 
   eliminarVecino(rut_vecino: string) {
-    this.deleteVecino.deleteVecino(rut_vecino).subscribe(data => {
-      Swal.fire({
-        title: '¿Estás seguro?',
-        text: "No podrás revertir esta acción",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Eliminar',
-        cancelButtonText: 'Cancelar'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire(
-            'Eliminado',
-            'El vecino ha sido eliminado',
-            'success'
-          );
-          this.listarMiembros();
-        }
-      });
-    }, error => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'No se pudo eliminar el vecino'
-      });
-      console.log(error);
-    });
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "No podrás revertir esta acción",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+          if (result.isConfirmed) {
+            this.deleteVecino.deleteVecino(rut_vecino).subscribe(data => {
+            this.listarMiembros();
+              }, error => {
+              console.log(error);
+              });
+          }
+          else if (result.isDismissed) {
+            Swal.fire(
+              'Cancelado',
+              '...............',
+              'error'
+            )
+            console.log('Clicked No, File is safe!');
+          }
+        });
   }
 
   updateVecinos() {
@@ -188,12 +181,11 @@ export class EditmiembroComponent implements OnInit {
         this.updateVecino.updatevecino(updatedVecino.rut_vecino, updatedVecino).subscribe(
           data => {
             console.log(data); // Maneja la respuesta del backend según tus necesidades
-            if (this.modal) {
-              this.modal.nativeElement.classList.remove('show');
-              this.modal.nativeElement.style.display = 'none';
-              this.modal.nativeElement.setAttribute('aria-hidden', 'true');
-            }
             this.formularioVecino.reset();
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
+            
             // Resto del código...
           },
           error => {
@@ -206,6 +198,7 @@ export class EditmiembroComponent implements OnInit {
           'Vecino no actualizado',
           'error'
         );
+        this.formularioVecino.reset();
       }
     });
   }
