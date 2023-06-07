@@ -71,15 +71,16 @@ export interface Vecino2 {
 
 export interface Proyect {
 
-  idProyecto : number;
+  id_proyecto : number;
   nombre: string;
-  cupoMinimo : number;
-  cupoMaximo : number;
+  cupo_min : number;
+  cupo_max : number;
   descripcion : string;
   fecha_proyecto : string;
   imagen : string;
   estado: string;
   resp?: any;
+  inscritos?: number;
 
 };
 export interface Login{
@@ -179,6 +180,7 @@ export interface reportes {
   fecha_proyecto : string,
   cupo_min : number,
   cupo_max : number,
+  inscrito?: string,
 }
 
 export interface ajustePerfil{
