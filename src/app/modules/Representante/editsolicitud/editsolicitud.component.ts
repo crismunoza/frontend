@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as CryptoJS from 'crypto-js';
 import { Solicitud3,Solicitud4 } from '../../../interfaces/modelos';
@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./editsolicitud.component.css']
 })
 export class EditsolicitudComponent implements OnInit {
+  @ViewChild('verticalycentered') modal: ElementRef | undefined;
   estadosSolicitud = [
     { id: 'Aceptada', nombre: 'Aceptada' },
     { id: 'Rechazada', nombre: 'Rechazada' }
@@ -23,6 +24,8 @@ export class EditsolicitudComponent implements OnInit {
   fk_id_junta_vecinal!: string;
   parentForm!: FormGroup;
   submitted = false;
+  solicitudRespondida: boolean = false;
+
 
 
   constructor(
@@ -48,10 +51,26 @@ export class EditsolicitudComponent implements OnInit {
 
   openModal(idSolicitud: number): void {
     this.selectedSolicitud = this.listsolicitud.find(solicitud => solicitud.id_solicitud === idSolicitud);
+    this.solicitudRespondida = !!this.selectedSolicitud?.respuesta;
     console.log("idSolicitud", idSolicitud);
   }
 
+  salir() {
+    if (this.modal) {
+      this.modal.nativeElement.classList.remove('show');
+      this.modal.nativeElement.style.display = 'none';
+      this.modal.nativeElement.setAttribute('aria-hidden', 'true');
+    }
+    this.parentForm.reset();
+  }
+
+
+  
+
 updateSolicitud(): void {
+    if (this.parentForm.invalid) {
+      return;
+    }
     const solicitud:Solicitud4 = {
       id_solicitud: this.selectedSolicitud?.id_solicitud || 0,
       estado_solicitud: this.parentForm.controls['estado_solicitud'].value,
@@ -67,6 +86,7 @@ updateSolicitud(): void {
           showConfirmButton: false,
           timer: 1500
         }).then(() => {
+          this.parentForm.reset();
           window.location.reload();
         }
         );

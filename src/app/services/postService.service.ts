@@ -69,6 +69,19 @@ export class PostService {
     enviarSol(val :Valoracion):Observable<any>{
       return this.http.post(`${this.myAppUrl}${this.myApiUrl}/valoraciones/enviar`,val);
     }
+   // servicio de restablecer contraseña
+    cambiarContrasena(rut: string, contrasenia: string): Observable<any> {
+      const url = `${this.myAppUrl}${this.myApiUrl}/reset/cambiarcontra`;
+    
+      // Crea un objeto con los datos a enviar al backend
+      const data = {
+        rut: rut,
+        contrasenia: contrasenia
+      };
+    
+      return this.http.post(url, data);
+    }
+    
 
 
 }

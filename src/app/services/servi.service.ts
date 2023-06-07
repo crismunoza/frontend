@@ -1,5 +1,5 @@
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -70,6 +70,23 @@ export class ComunaService {
     generarReporte(id_junta_vecinal: number): Observable<Blob> {
       return this.http.get(`${this.myAppUrl}${this.myApiUrl}/reporte/CrearReport/${id_junta_vecinal}`, { responseType: 'blob' });
     }
+
+
+    // metodo para verificar si el rut ya esta registrado
+    verificarRut(rut: string): Observable<any> {
+      return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/reset/${rut}`);
+    }
+
+  //  metodo para verificar si el correo ya esta registrado
+   verificarCorreo(correo_electronico: string): Observable<any> {
+    return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/reset/vericorreo/${correo_electronico}`);
+
+   }
+   
+   // metodo para verificar si el rut ya esta registrado
+   verificarsiexiste (rut: string): Observable<any> {
+    return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/insertvecino/verificarsiexiste/${rut}`);
+   }
 
     getUserData(id:any,rol:any,id_junta:any):Observable<any>{
       return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/users/data?id=${id}&rol=${rol}&junta=${id_junta}`);
