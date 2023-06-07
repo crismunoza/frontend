@@ -152,7 +152,6 @@
                             <select class="form-control" formControlName="estado" [ngClass]="{
                               'is-invalid': formProyect.get('estado')?.invalid && formProyect.get('estado')?.touched 
                             }">
-                              <option value="">Seleccionar estado</option>
                               <option *ngFor="let estado of estados" [value]="estado">{{ estado }}</option>
                             </select>
                             <div class="invalid-feedback"
