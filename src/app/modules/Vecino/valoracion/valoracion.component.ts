@@ -31,8 +31,8 @@ export class ValoracionComponent implements OnInit {
   }
 
   stars: number[] = [1, 2, 3, 4, 5];
-  rating: number = 0;
-  hoverRating: number = 0;
+  rating: number = 1;
+  hoverRating: number = 1;
 
   rate(value: number) {
     this.rating = value;
@@ -46,6 +46,7 @@ export class ValoracionComponent implements OnInit {
   submit(){
     const opinion = this.solicitud.controls['opinion'].value;
     const estrellas = this.rating;
+
     const id_v = parseInt(this.id_vecino);
 
     const val : Valoracion = {
@@ -56,7 +57,7 @@ export class ValoracionComponent implements OnInit {
     this.post.enviarSol(val).subscribe(res =>{
       if(res.msg == 'ok'){
         this.solicitud.reset();
-        this.rating = 0;
+        this.rating = 1;
         Swal.fire({
           icon: 'success',
           text: 'Gracias por tu tiempo, hemos enviando tu Valorizacíon correctamente',

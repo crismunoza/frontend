@@ -155,17 +155,17 @@
                               </div>
                            </div>
                            <div class="col-md-6">
+
                               <div class="form-floating"> <input type="number" class="form-control" id="telefono"
                                     formControlName="telefono"
                                     [ngClass]="{ 'is-invalid': submitted && parentForm.controls['telefono'].errors }"
-                                    placeholder="Ingrese Numero Celular"> <label for="telefono">Ingrese Numero
-                                    Celular</label>
+                                    placeholder="Ingrese Numero Celular"><label for="telefono">Ingrese Numero
+                                    Celular <span>+569</span></label>
                                  <div *ngIf="submitted && parentForm.controls['telefono'].errors"
                                     class="invalid-feedback">
                                     <div *ngIf="parentForm.controls['telefono'].errors?.['required']">(*) Campo
                                        Obligatorio!</div>
-                                    <div *ngIf="parentForm.controls['telefono'].errors?.['pattern']">Debe Ingresar con
-                                       el +569</div>
+                                    <div *ngIf="parentForm.controls['telefono'].errors?.['pattern']">Ingrese un numero valido</div>
                                  </div>
                               </div>
                            </div>

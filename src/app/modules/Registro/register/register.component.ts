@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
       ap_mat_veci: ["", [Validators.required, Validators.pattern("^[a-zA-ZñÑ ]+$")]],
       comuna_junta: new FormControl(null),
       dirreccion_veci: ["", [Validators.required, Validators.pattern("^[a-zA-ZñÑ0-9 ]+$")]],
-      telefono: ["", [Validators.required, Validators.pattern("^[+0-9]{11}$")]],
+      telefono: ["", [Validators.required, Validators.pattern("^[0-9]{8}$")]],
       correo_veci: ["", [Validators.required, Validators.email,Validators.pattern(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/)]],
       clave_veci: ["", [Validators.required]],
       clave_veci_conf: ["", [Validators.required]],

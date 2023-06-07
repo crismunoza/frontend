@@ -50,16 +50,26 @@
                          </div>
                       </div>
                       <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-                         <form>
+                         <form [formGroup]="formData">
                             <div class="row mb-3">
                                <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Telefono</label>
-                               <div class="col-md-8 col-lg-9"> <input name="phone" type="text" class="form-control" id="Phone" value="{{telefono}}"></div>
+                               <div class="col-md-8 col-lg-9">
+                                 <input type="text" class="form-control" id="phonePerfil" name="phonePerfil" formControlName="phonePerfil" [ngClass]="{ 'is-invalid': formData.controls['phonePerfil'].errors }"></div>
+                                 <div *ngIf="formData.controls['phonePerfil'].errors" class="invalid-feedback">
+                                    <div *ngIf="formData.controls['phonePerfil'].errors?.['required']"><span>(*) Campo Obligatorio!</span></div>
+                                    <div *ngIf="formData.controls['phonePerfil'].errors?.['pattern']"><span>Numero invalido (8 digitos)</span></div>
+                                 </div>
                             </div>
                             <div class="row mb-3">
                                <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                               <div class="col-md-8 col-lg-9"> <input name="email" type="email" class="form-control" id="Email" value="{{correo}}"></div>
+                               <div class="col-md-8 col-lg-9"> <input  type="email" class="form-control" name="emailPerfil" id="emailPerfil" formControlName="emailPerfil" [ngClass]="{ 'is-invalid':formData.controls['emailPerfil'].errors }">
+                                <div *ngIf="formData.controls['emailPerfil'].errors" class="invalid-feedback">
+                                  <div *ngIf="formData.controls['emailPerfil'].errors?.['required']"><span>(*) Campo Obligatorio!</span></div>
+                                  <div *ngIf="formData.controls['emailPerfil'].errors?.['email']"><span>Correo invalido</span></div>
+                                </div>
+                              </div>
                             </div>
-                            <div class="text-center"> <button type="submit" class="btn btn-primary">Guardar Cambios</button></div>
+                            <div class="text-center"> <button type="submit" class="btn btn-primary" (click)="enviar()">Guardar Cambios</button></div>
                          </form>
                       </div>
                       <div class="tab-pane fade pt-3" id="profile-change-password">
