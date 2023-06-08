@@ -17,7 +17,9 @@ export class UpdateService {
     this.myApiUrl = 'api';
   }
   updatePerfiles(id_us:any,datos:ajustePerfil): Observable<any> {
-    console.log('que llega a ajustePErfil ',id_us,' ',datos)
     return this.http.put(`${this.myAppUrl}${this.myApiUrl}/users/update-perfil/${id_us}`,datos);
+  }
+  UpdateClave(id:number,datos:any):Observable<any>{
+    return this.http.put(`${this.myAppUrl}${this.myApiUrl}/users/update-clave/${id}`,datos);
   }
 }
