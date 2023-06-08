@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "../app/components/pages/login/login.component";
+import { ResetpassComponent } from './components/pages/resetpass/resetpass.component';
 import {PagesError404Component} from "../app/components/pages/pages-error404/pages-error404.component";
 import {PerfilComponent} from "../app/components/pages/perfil/perfil.component";
 import {InicioComponent} from "../app/components/pages/inicio/inicio.component";
@@ -22,6 +23,7 @@ const routes: Routes = [
   ,data:{role : 'vecino'}
   },
   {path: 'login', component: LoginComponent},
+  {path: 'resetpass', component: ResetpassComponent},
   {path: 'inicio', component: InicioComponent,canActivate:[AuthGuard]
   },
 
