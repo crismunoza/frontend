@@ -65,7 +65,7 @@ export class EditsolicitudComponent implements OnInit {
   }
 
 
-  
+
 
 updateSolicitud(): void {
     if (this.parentForm.invalid) {
@@ -88,8 +88,7 @@ updateSolicitud(): void {
         }).then(() => {
           this.parentForm.reset();
           window.location.reload();
-        }
-        );
+        });
       },
       error => {
         console.log(error);
