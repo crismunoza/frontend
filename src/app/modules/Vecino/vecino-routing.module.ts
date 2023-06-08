@@ -5,6 +5,7 @@ import { ProyectosComponent } from "./proyectos/proyectos.component";
 import { SolicitudesComponent } from "./solicitudes/solicitudes.component";
 import { NuevasolicitudComponent } from "./solicitudes/nuevasolicitud/nuevasolicitud.component";
 import { ValoracionComponent } from "./valoracion/valoracion.component";
+import { ContactComponent } from "./contact/contact.component"
 
 
 
@@ -17,6 +18,7 @@ const routes: Routes = [
             {path: 'solicitudes', component: SolicitudesComponent},
             {path: 'nuevasolicitud', component: NuevasolicitudComponent},
             {path: 'valoracion', component: ValoracionComponent},
+            {path: 'contact', component: ContactComponent},
             
         ]
     }

@@ -91,6 +91,12 @@ export class ComunaService {
     getUserData(id:any,rol:any,id_junta:any):Observable<any>{
       return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/users/data?id=${id}&rol=${rol}&junta=${id_junta}`);
     }
+
+
+    //metodo para traer los contactos de la base de datos del componente contacto
+    getContactos(id_junta_vecinal: any): Observable<any> {
+      return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/vercontacto/${id_junta_vecinal}`);
+    }
 }
 
 

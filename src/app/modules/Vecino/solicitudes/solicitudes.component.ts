@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as CryptoJS from 'crypto-js';
 import { AuthService } from 'src/app/services/auth.service';
 import { Solicitud2 } from '../../../interfaces/modelos';
 import { ComunaService } from 'src/app/services/servi.service';
-import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-solicitudes',

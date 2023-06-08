@@ -29,7 +29,7 @@
              <li> <a routerLink="/Vecino/accion/valoracion"> <i class="bi bi-circle"></i><span>Valoracion</span> </a></li>
           </ul>
        </li>
-       <li class="nav-item"> <a class="nav-link collapsed" routerLink="/pages-contact"> <i class="bi bi-envelope"></i> <span>Contacto</span> </a></li>
+       <li class="nav-item" *ngIf="rol ==='vecino'"><a class="nav-link collapsed" routerLink="/Vecino/accion/contact"> <i class="bi bi-envelope"></i> <span>Contacto</span> </a></li>
 
    </ul>
 </aside>
