@@ -75,7 +75,7 @@ export class CertificadoService {
     })
   };
 
-  sendEmail(): Promise<any> {
+  Enviocerti(): Promise<any> {
 
     return this.http.post(`${this.myAppUrl}${this.myApiUrlSendEmail}`, {}).toPromise();
   };

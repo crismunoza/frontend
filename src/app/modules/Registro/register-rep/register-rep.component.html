@@ -176,7 +176,7 @@
           </div>
           <div class="col-md-3 mt-1">
             <label for="clave_rep" class="form-label">Clave</label>
-            <input type="text" id="clave_rep" class="form-control" formControlName="clave_rep"
+            <input type="password" id="clave_rep" class="form-control" formControlName="clave_rep"
               [ngClass]="{ 'is-invalid': submitted && parentForm.controls['clave_rep'].errors }">
             <div *ngIf="submitted && parentForm.controls['clave_rep'].errors" class="invalid-feedback">
               <div *ngIf="parentForm.controls['clave_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
@@ -184,7 +184,7 @@
           </div>
           <div class="col-md-3 mt-1">
             <label for="clave_rep_conf" class="form-label">Confirmar Clave</label>
-            <input type="text" id="clave_rep_conf" class="form-control" formControlName="clave_rep_conf"
+            <input type="password" id="clave_rep_conf" class="form-control" formControlName="clave_rep_conf"
               [ngClass]="{ 'is-invalid': submitted && parentForm.controls['clave_rep_conf'].errors }">
             <div *ngIf="submitted && parentForm.controls['clave_rep_conf'].errors" class="invalid-feedback">
               <div *ngIf="parentForm.controls['clave_rep_conf'].errors?.['required']">(*) Campo Obligatorio!</div>

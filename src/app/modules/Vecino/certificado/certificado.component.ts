@@ -89,7 +89,7 @@ export class CertificadoComponent implements OnInit {
   };
   
   enviarCorreo(): void {
-    this.certificadoService.sendEmail()
+    this.certificadoService.Enviocerti()
       .then( message => {
         Swal.fire({
           icon: 'success',
