@@ -87,7 +87,9 @@ updateSolicitud(): void {
           timer: 1500
         }).then(() => {
           this.parentForm.reset();
-          window.location.reload();
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
         }
         );
       },

@@ -34,7 +34,7 @@
                     <td>{{ vecino.correo_electronico }}</td>
                     <td>{{ vecino.primer_nombre }} {{ vecino.segundo_nombre }}</td>
                     <td>{{ vecino.primer_apellido }} {{ vecino.segundo_apellido }}</td>
-                    <td>{{ vecino.telefono }}</td>
+                    <td>+569{{ vecino.telefono }}</td>
                     <td>{{ vecino.direccion }}</td>
                     <td>
                       <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -86,7 +86,7 @@
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                                     (click)="salir()">Salir</button>
-                                  <button type="submit" class="btn btn-primary"
+                                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
                                     (click)="updateVecinos()">Editar</button>
                                 </div>
                               </form>

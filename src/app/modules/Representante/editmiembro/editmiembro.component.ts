@@ -7,6 +7,8 @@ import { PostService } from 'src/app/services/postService.service';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 
+
+
 @Component({
   selector: 'app-editmiembro',
   templateUrl: './editmiembro.component.html',
