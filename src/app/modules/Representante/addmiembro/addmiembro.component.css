@@ -1,0 +1,13 @@
+.modal {
+  background-color: rgba(122, 119, 119, 0.555); /* Ajusta el valor de opacidad (0.7 en este caso) según tus preferencias */
+}
+#modAddRep {
+  position: block;
+  z-index: 1050; /* Valor mayor que el z-index del fondo */
+}
+.avatar-image {
+  width: 100px; /* Adjust the width as desired */
+  height: 100px; /* Adjust the height as desired */
+  object-fit: cover; /* Adjust the object-fit property as needed (e.g., cover, contain, etc.) */
+  border-radius: 50%; /* Apply border-radius to create a circular avatar */
+}

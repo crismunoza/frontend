@@ -65,7 +65,7 @@ export class EditsolicitudComponent implements OnInit {
   }
 
 
-  
+
 
 updateSolicitud(): void {
     if (this.parentForm.invalid) {
