@@ -3,10 +3,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import * as CryptoJS from 'crypto-js';
 import { ComunaService } from 'src/app/services/servi.service';
 import Swal from 'sweetalert2';
-import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UpdateService } from 'src/app/services/update.service';
 import { ajustePerfil } from 'src/app/interfaces/modelos';
-import { window } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -114,8 +113,12 @@ export class PerfilComponent implements OnInit {
           Swal.fire({
             icon: 'success',
             text: 'Ajustado con exito',
+            showConfirmButton: false,
             timer: 1500,
             position: 'center'
+          }).then(() => {
+            this.formData.reset();
+            window.location.reload()
           });
          }
        });
