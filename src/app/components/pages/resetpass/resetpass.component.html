@@ -24,12 +24,9 @@
                 <div class="card-body">
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Restablecer Contraseña</h5>
-                    <p class="text-center small" *ngIf="showRutInput">Ingresa Rut</p>
-                    <p class="text-center small" *ngIf="showCorreoInput">Ingresa Correo</p>
-                    <p class="text-center small" *ngIf="showRestablecerContrasenia">Ingresa contraseña</p>
                   </div>
                   <form class="row g-3" [formGroup]="resetpass">
-                    <div class="col-12" *ngIf="showRutInput">
+                    <div class="col-12" >
                       <label for="yourUsername" class="form-label">Rut</label>
                       <div class="input-group has-validation">
                             <span class="input-group-text" id="inputGroupPrepend">
@@ -43,12 +40,11 @@
                             </div>
                       </div>
                     </div>
-  
-                    <div class="col-12" *ngIf="showCorreoInput">
+                    <div class="col-12" >
                       <label for="yourPassword" class="form-label">
-                            Ingresa correo
+                            Correo Electronico
                       </label>
-                      <input type="text" formControlName="correo_electronico" class="form-control" id="correo_electronico" [ngClass]="{ 'is-invalid': submit && resetpass.controls['correo_electronico'].errors }">
+                      <input type="text" formControlName="correo_electronico" class="form-control" id="correo_electronico" [ngClass]="{ 'is-invalid': submit && resetpass.controls['correo_electronico'].errors }" placeholder="Ingrese correo electronico">
                       <div *ngIf="submit || resetpass.controls['correo_electronico'].errors" class="invalid-feedback">
                          <div 
                          *ngIf="resetpass.controls['correo_electronico'].errors?.['required']">(*) Campo Obligatorio!
@@ -57,39 +53,9 @@
                         </div>
                       </div>
                     </div>
-  
-                    <div class="col-12" *ngIf="showRestablecerContrasenia">
-                      <label for="yourPassword" class="form-label">Nueva Contraseña</label>
-                      <input type="password" formControlName="contrasenia" class="form-control" id="contrasenia">
-                      <div *ngIf="submit || resetpass.controls['contrasenia'].errors" class="invalid-feedback">
-                        <div 
-                        *ngIf="resetpass.controls['contrasenia'].errors?.['required']">(*) Campo Obligatorio!
-                        </div>
-                    </div>
-                    </div>
-  
-                    <div class="col-12" *ngIf="showRestablecerContrasenia">
-                      <label for="yourPassword" class="form-label">Repetir Contraseña</label>
-                      <input type="password" formControlName="repetircontrasenia" class="form-control" id="repetircontrasenia">
-                      <div *ngIf="submit || resetpass.controls['repetircontrasenia'].errors" class="invalid-feedback">
-                        <div 
-                        *ngIf="resetpass.controls['repetircontrasenia'].errors?.['required']">(*) Campo Obligatorio!
-                        </div>
-                    </div>
-                    </div>
-  
-                    <div class="col-12" *ngIf="showRutInput">
-                      <button class="btn btn-primary w-100" type="submit" (click)="verificarRut()">Verificar</button>
-                    </div>
-  
-                    <div class="col-12" *ngIf="showCorreoInput">
-                      <button class="btn btn-primary w-100" type="submit" (click)="verificarCorreo()">Verificar</button>
-                    </div>
-  
-                    <div class="col-12" *ngIf="showRestablecerContrasenia"> 
+                    <div class="col-12" > 
                       <button class="btn btn-primary w-100" type="submit" (click)="restablecerContrasenia()">Restablecer</button>
                     </div>
-  
                     <div class="col-12">
                       <p class="small mb-0">Ya tienes cuenta? <a href="login" style="text-decoration: underline; color: blue;">Iniciar Sesion</a></p>
                     </div>

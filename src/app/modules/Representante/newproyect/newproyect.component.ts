@@ -18,7 +18,7 @@ export class NewproyectComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private proyectoService: ProyectoService, private router: Router) {
     this.formProyect = this.formBuilder.group({
-      nombreProyecto: ['', [Validators.required, Validators.minLength(10), this.nameWhitoutNUMBERS]],
+      nombreProyecto: ['', [Validators.required, Validators.minLength(3), this.nameWhitoutNUMBERS]],
       cupoMinimo: [null, Validators.required],
       cupoMaximo: [null, [Validators.required, this.cupoMaximoValidator]],
       descripcion: ['',[Validators.required, this.descripcionValidator]],
@@ -90,11 +90,19 @@ export class NewproyectComponent implements OnInit {
   descripcionValidator(control: AbstractControl): ValidationErrors | null {
     const value = control.value;
     const words = value ? value.trim().split(/\s+/) : [];
-    if (words.length < 7) {
+  
+    // Si no hay palabras en el mensaje, se permite enviar el mensaje sin restricciones
+    if (words.length === 0) {
+      return null;
+    }
+  
+    if (words.length < 3) {
       return { minWords: true };
     }
+  
     return null;
   }
+  
   /**
    * 
    * @param control 

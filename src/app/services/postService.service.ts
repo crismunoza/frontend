@@ -70,13 +70,13 @@ export class PostService {
       return this.http.post(`${this.myAppUrl}${this.myApiUrl}/valoraciones/enviar`,val);
     }
    // servicio de restablecer contraseña
-    cambiarContrasena(rut: string, contrasenia: string): Observable<any> {
+    cambiarContrasena(rut: string, correo_electronico: string): Observable<any> {
       const url = `${this.myAppUrl}${this.myApiUrl}/reset/cambiarcontra`;
     
       // Crea un objeto con los datos a enviar al backend
       const data = {
         rut: rut,
-        contrasenia: contrasenia
+        correo_electronico: correo_electronico
       };
     
       return this.http.post(url, data);
