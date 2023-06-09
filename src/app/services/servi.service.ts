@@ -92,9 +92,14 @@ export class ComunaService {
       return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/users/data?id=${id}&rol=${rol}&junta=${id_junta}`);
     }
 
+    //metodo para traer los contactos de la base de datos del componente contacto
+    getContactos(id_junta_vecinal: any): Observable<any> {
+      return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/vercontacto/${id_junta_vecinal}`);
+
     cantRepresentantes(id_junta:number):Observable<any>{
       console.log('entra al servicio?',id_junta)
       return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/juntavecinal/cantidad/Rep/${id_junta}`);
+
     }
 }
 

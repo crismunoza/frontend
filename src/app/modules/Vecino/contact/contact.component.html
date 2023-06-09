@@ -1,0 +1,91 @@
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Contacto</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
+                <li class="breadcrumb-item active">Contacto</li>
+            </ol>
+        </nav>
+    </div>
+    <section class="section contact" *ngFor="let contact of vercontacto ">
+        <div class="row gy-4">
+            <div class="col-xl-6">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="info-box card">
+                            <i class="bi bi-geo-alt"></i>
+                            <h3>Direccion</h3>
+                            <p>{{contact.nombre}},<br>{{contact.direccion}}, {{contact.numero_calle}}</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="info-box card">
+                            <i class="bi bi-telephone"></i>
+                            <h3>Número Celular</h3>
+                            <p>+569{{contact.telefono}}</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="info-box card">
+                            <i class="bi bi-envelope"></i>
+                            <h3>Correo</h3>
+                            <p><a  class="__cf_email__"
+                                    data-cfemail="650c0b030a25001d04081509004b060a08">{{contact.correo_electronico}}</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="info-box card">
+                            <i class="bi bi-clock"></i>
+                            <h3>Horario Atención</h3>
+                            <p>Lunes - Viernes<br>10:00AM - 17:00PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card p-4">
+                    <div class="tab-content pt-2">
+                        <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                            <h1 class="card-title">Detalles Junta Vecinal</h1>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 label ">Representante</div>
+                                <div class="col-lg-8 col-md-8">{{contact.primer_nombre}} {{contact.segundo_nombre}} {{contact.primer_apellido}} {{contact.segundo_apellido}}</div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-5 col-md-4 label">Junta Vecinal</div>
+                                <div class="col-lg-7 col-md-8 label">{{contact.razon_social}}</div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-5 col-md-4 label">Rut Junta Vecinal</div>
+                                <div class="col-lg-4 col-md-8">{{contact.rut_junta}}</div>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Country</div>
+                                <div class="col-lg-9 col-md-8">USA</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Address</div>
+                                <div class="col-lg-9 col-md-8">Ludhiana, Punjab, India</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Phone</div>
+                                <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Email</div>
+                                <div class="col-lg-9 col-md-8"><a href="/cdn-cgi/l/email-protection"
+                                        class="__cf_email__"
+                                        data-cfemail="e982c788878d8c9b9a8687a98c91888499858cc78a8684">[email&#160;protected]</a>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

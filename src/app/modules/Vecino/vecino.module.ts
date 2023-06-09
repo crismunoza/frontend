@@ -8,6 +8,7 @@ import { ProyectosComponent } from "./proyectos/proyectos.component";
 import { SolicitudesComponent } from "./solicitudes/solicitudes.component";
 import { NuevasolicitudComponent } from "./solicitudes/nuevasolicitud/nuevasolicitud.component";
 import { ValoracionComponent } from "./valoracion/valoracion.component";
+import { ContactComponent } from './contact/contact.component';
 
 
 
@@ -17,7 +18,8 @@ import { ValoracionComponent } from "./valoracion/valoracion.component";
       ProyectosComponent,
       SolicitudesComponent,
       NuevasolicitudComponent,
-      ValoracionComponent
+      ValoracionComponent,
+      ContactComponent
     ],
     imports: [
       HttpClientModule,

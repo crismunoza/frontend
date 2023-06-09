@@ -91,3 +91,7 @@
 .pagination-grey .page-link:hover {
   background-color: #ddd;
 }
+
+.align-close {
+  margin-top: 10px;
+}

@@ -20,6 +20,11 @@ export class ProyectoService {
   private myApiUrlUpdateProyect = 'api/proyectos/modificar-proyecto/';
   private myApiUrlDeleteProyect = 'api/proyectos/eliminar-proyecto/';
   private myApiUrlImagen = 'images/proyectos/';
+  private myApiUrlInsertReport = 'api/reporte/agregar-reporte';
+  private myApiUrlGetReport = 'api/reporte/obtener-reportes/';
+  private myApiUrlGetNeighbors = 'api/reporte/count-vecinos-inscritos/';
+  private myApiUrlGetExcel = 'api/proyectos/obtener-excel/';
+  private myApiUrlGetFiltersModify = 'api/proyectos/filtro-proyectos-modificar';
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
 
   insertProyect(dataProyect: any) {
@@ -118,5 +123,52 @@ export class ProyectoService {
         map((blob: Blob) => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob)))
       );
   };
+
+  insertReport(id_proyecto: number, rut: string, inscrito: string): Promise<any> {
+    const data = {
+      id_proyecto: id_proyecto,
+      rut: rut,
+      inscrito: inscrito
+    };
+  
+    return this.http.post(`${this.myAppUrl}${this.myApiUrlInsertReport}`, data)
+      .toPromise()
+      .then(response => {
+        console.log('Información enviada con éxito al backend', response);
+        return response;
+      })
+      .catch(error => {
+        console.log('Error al enviar la información al backend', error);
+        throw error;
+      });
+  };
+
+  getReport(rut_vecino: string): Observable<any> {
+    return this.http.get(`${this.myAppUrl}${this.myApiUrlGetReport}${rut_vecino}`);
+  };
+
+  getVecinosInscritos(idProyecto: number): Observable<number> {
+    const url = `${this.myAppUrl}${this.myApiUrlGetNeighbors}${idProyecto}`;
+    return this.http.get<number>(url);
+  };
+
+  downloadExcel(idProyecto: number, nombre_proyecto: string): void {
+    this.http.get(`${this.myAppUrl}${this.myApiUrlGetExcel}${idProyecto}`, { responseType: 'blob' }).subscribe((response: Blob) => {
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(response);
+      const nombreProyectoFormmated = nombre_proyecto.replace(/\s+/g, '');
+      console.log(nombreProyectoFormmated,'nombreProyectoFormmated')
+      downloadLink.download = `Proyecto-${nombreProyectoFormmated}`;
+      downloadLink.click();
+    },
+    error => {
+      console.log(error);
+    });
+  };
+
+  getFiltersForModify(): Observable<string[]>{
+    return this.http.get<string[]>(`${this.myAppUrl}${this.myApiUrlGetFiltersModify}`)
+  };
+  
 
 }
