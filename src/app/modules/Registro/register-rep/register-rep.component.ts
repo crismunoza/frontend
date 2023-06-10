@@ -133,7 +133,7 @@ export class RegisterRepComponent implements OnInit {
                   correo_electronico: this.parentForm.controls['correo_rep'].value,
                   telefono: this.parentForm.controls['contacto_Rep'].value,
                   contrasenia: this.parentForm.controls['clave_rep'].value,
-                  comuna_rep: this.parentForm.controls['comuna_rep'].value,
+                  comuna_rep: this.parentForm.controls['comuna_junta'].value,
                   avatar: this.parentForm.controls['selectedAvatar'].value,
                   ruta_evidencia: 'hola.txt',
                   ruta_firma: base64Image,

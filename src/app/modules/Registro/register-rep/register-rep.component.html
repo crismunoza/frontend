@@ -80,7 +80,7 @@
             </div>
           </div>
           <div class="col-md-4">
-            <label for="p_nomb_rep" class="form-label">1er Nombre:</label>
+            <label for="p_nomb_rep" class="form-label">Primer Nombre:</label>
             <input type="text" class="form-control" id="p_nomb_rep" formControlName="p_nomb_rep"
               [ngClass]="{ 'is-invalid': submitted && parentForm.controls['p_nomb_rep'].errors }">
             <div *ngIf="submitted && parentForm.controls['p_nomb_rep'].errors" class="invalid-feedback">
@@ -89,7 +89,7 @@
             </div>
           </div>
           <div class="col-md-4">
-            <label for="s_nomb_rep" class="form-label">2do Nombre:</label>
+            <label for="s_nomb_rep" class="form-label">Segundo Nombre:</label>
             <input type="text" class="form-control" id="s_nomb_rep" formControlName="s_nomb_rep"
               [ngClass]="{ 'is-invalid': submitted && parentForm.controls['s_nomb_rep'].errors }">
             <div *ngIf="submitted && parentForm.controls['s_nomb_rep'].errors" class="invalid-feedback">
@@ -115,7 +115,7 @@
               <div *ngIf="parentForm.controls['ap_mat_rep'].errors?.['pattern']">Solo letras</div>
             </div>
           </div>
-          <div class="col-md-4 mt-1">
+          <!-- <div class="col-md-4 mt-1">
             <label for="comuna_rep" class="form-label">Comuna:</label>
             <select class="form-select" id="comuna_rep" formControlName="comuna_rep">
               <option *ngFor="let comuna of listcomunas" [value]="comuna.id_comuna">{{comuna.nombre}}</option>
@@ -123,9 +123,9 @@
             <div class="invalid-feedback">
               (*) Camplo Obligatorio
             </div>
-          </div>
+          </div> -->
           <div class="col-md-4 mt-1">
-            <label for="calle_rep" class="form-label">calle</label>
+            <label for="calle_rep" class="form-label">Direccion</label>
             <input type="text" class="form-control" id="calle_rep" formControlName="calle_rep"
               [ngClass]="{ 'is-invalid': submitted && parentForm.controls['calle_rep'].errors }">
             <div *ngIf="submitted && parentForm.controls['calle_rep'].errors" class="invalid-feedback">
@@ -134,7 +134,7 @@
             </div>
           </div>
           <div class="col-md-2 mt-1">
-            <label for="num_calle_rep" class="form-label">Número</label>
+            <label for="num_calle_rep" class="form-label">Número de Casa</label>
             <input type="number" class="form-control" id="num_calle_rep" formControlName="num_calle_rep"
               [ngClass]="{ 'is-invalid': submitted && parentForm.controls['num_calle_rep'].errors }">
             <div *ngIf="submitted && parentForm.controls['num_calle_rep'].errors" class="invalid-feedback">
@@ -175,7 +175,7 @@
             <img [src]="'/assets/img/avatars/'+selectedAvatar" alt="Avatar" class="avatar-image">
           </div>
           <div class="col-md-3 mt-1">
-            <label for="clave_rep" class="form-label">Clave</label>
+            <label for="clave_rep" class="form-label">Contraseñia</label>
             <input type="password" id="clave_rep" class="form-control" formControlName="clave_rep"
               [ngClass]="{ 'is-invalid': submitted && parentForm.controls['clave_rep'].errors }">
             <div *ngIf="submitted && parentForm.controls['clave_rep'].errors" class="invalid-feedback">
@@ -183,7 +183,7 @@
             </div>
           </div>
           <div class="col-md-3 mt-1">
-            <label for="clave_rep_conf" class="form-label">Confirmar Clave</label>
+            <label for="clave_rep_conf" class="form-label">Confirmar Contraseñia</label>
             <input type="password" id="clave_rep_conf" class="form-control" formControlName="clave_rep_conf"
               [ngClass]="{ 'is-invalid': submitted && parentForm.controls['clave_rep_conf'].errors }">
             <div *ngIf="submitted && parentForm.controls['clave_rep_conf'].errors" class="invalid-feedback">
