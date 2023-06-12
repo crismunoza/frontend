@@ -3,6 +3,8 @@ import { Proyect } from 'src/app/interfaces/modelos';
 import { ProyectoService } from 'src/app/services/proyecto.service';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import Swal from 'sweetalert2';
+import * as CryptoJS from 'crypto-js';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -16,50 +18,34 @@ export class EditproyecComponent implements OnInit {
   selectedStatus: string = '';
   editarFormVisible: boolean = false;
   formProyect: FormGroup;
-  cupoMinimoControl: AbstractControl;
-  cupoMaximoControl: AbstractControl;
   statusValidate : string = 'CERRADO';
-  estados: string[] = []; 
+  estados: string[] = [];
+  data:any = sessionStorage.getItem('data'); 
   
-  constructor(private proyectoService: ProyectoService, private formBuilder: FormBuilder) {
+  constructor(private proyectoService: ProyectoService, private formBuilder: FormBuilder, private auth: AuthService) {
     this.formProyect = this.formBuilder.group({
       idProyecto:[null],
       nombreProyecto: ['', [Validators.required, Validators.minLength(10), this.nameWhitoutNUMBERS]],
       cupoMinimo: [null, Validators.required],
-      cupoMaximo: [null, [Validators.required, this.cupoMaximoValidator]],
+      cupoMaximo: [null, [Validators.required]],
       descripcion: ['',[Validators.required, this.descripcionValidator]],
       estado: ['', [Validators.required, Validators.minLength(6), this.nameWhitoutNUMBERS]],
      
     });
-    this.cupoMinimoControl = this.formProyect.get('cupoMinimo') as AbstractControl;
-    this.cupoMaximoControl = this.formProyect.get('cupoMaximo') as AbstractControl;
     
-    if (this.cupoMinimoControl && this.cupoMaximoControl) {
-      this.cupoMinimoControl.valueChanges.subscribe(cupoMinimoValue =>
-        this.cupoMaximoControl.setValue(cupoMinimoValue !== null ? cupoMinimoValue + 1 : null)
-      );
-    }
    }
+   bytes:any = CryptoJS.AES.decrypt(this.data, this.auth.getKey());
+   org:any = this.bytes.toString(CryptoJS.enc.Utf8);
+   obj:any = JSON.parse(this.org);
+
+   id_junta_vecinal:string = this.obj.id_junta_vec;
+
    nameWhitoutNUMBERS(control: AbstractControl): ValidationErrors | null {
     const nombre = control.value;
     const regex = /^[^\d]+$/;
   
     if (nombre && !regex.test(nombre)) {
       return { nameWhitoutNUMBERS: true };
-    }
-  
-    return null;
-  };
-  
-  cupoMaximoValidator(control: AbstractControl): ValidationErrors | null {
-    const cupoMinimoValue = control.root.get('cupoMinimo')?.value;
-    const cupoMaximoValue = control.root.get('cupoMaximo')?.value;
-    
-    if (cupoMinimoValue !== null && cupoMaximoValue !== null) {
-      if (cupoMaximoValue <= cupoMinimoValue) {
-        const errors = { cupoMaximoInvalido: true };
-        return errors;
-      }
     }
   
     return null;
@@ -87,7 +73,7 @@ export class EditproyecComponent implements OnInit {
   };
   
   getAllProyects() {
-    this.proyectoService.getAllProyect()
+    this.proyectoService.getAllProyect(parseInt(this.id_junta_vecinal))
     .subscribe(
       (response) => {
         this.proyectos = response;
@@ -129,6 +115,7 @@ export class EditproyecComponent implements OnInit {
         descripcion: this.formProyect.value.descripcion,
         estado: this.formProyect.value.estado
       };
+      console.log(proyectData)
       this.proyectoService.updateProyect(proyectId, proyectData)
         .then(message => {
           Swal.fire({
@@ -228,10 +215,25 @@ export class EditproyecComponent implements OnInit {
     );
   };
 
+  getRut(): string{
+    const accessToken = localStorage.getItem('access_token');
+      let rut = '';
+      if (accessToken) {
+        const payload = accessToken.split('.')[1];
+        const decodedPayload = atob(payload);
+        const userData = JSON.parse(decodedPayload);
+        rut = userData.rut_user;
+      } else {
+        console.log('No se encontró el token');
+      }
+      return rut
+  };
   ngOnInit() {
     this.getAllProyects();
     this.getFilters();
-    this.getFiltersForMODIFY()
+    this.getFiltersForMODIFY();
+    this.getRut();
+    // this.proyectoService.sendRut(this.getRut().toString());
   }
 
 }

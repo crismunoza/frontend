@@ -15,7 +15,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Proyectos</h5>
-            <p>Aqui se podrá Editar <i class="ri-edit-2-line"></i> y Eliminar <i class="ri-delete-bin-2-line"></i> los
+            <p>Aqui se podrá Editar <i class="ri-edit-2-line"></i>, Eliminar <i class="ri-delete-bin-2-line"></i> y Descargar  <i class="ri-file-excel-2-line"></i> la información de los
               distintos Proyectos.</p>
             <div class="table-filter ">
               <div class="container d-flex justify-content-end">
@@ -60,13 +60,13 @@
                     <td>
                       <div class="action-buttons d-flex flex-wrap">
                         <button *ngIf="proyect.estado !== statusValidate" class="btn btn-warning btn-sm edit-btn" data-bs-toggle="modal"
-                          data-bs-target="#exampleModal" (click)="loadProyectDetails(proyect)">
+                         data-bs-target="#exampleModal" (click)="loadProyectDetails(proyect)" >
                           <i class="ri-edit-2-line"></i>
                         </button>
-                        <button *ngIf="proyect.estado === statusValidate" class="btn btn-success btn-sm excel-btn" (click)="downloadExcel(proyect.id_proyecto, proyect.nombre)">
+                        <button *ngIf="proyect.estado === statusValidate" class="btn btn-success btn-sm excel-btn" data-bs-toggle="tooltip" title="Descargar Cierre Proyecto" data-bs-placement="top" (click)="downloadExcel(proyect.id_proyecto, proyect.nombre)">
                           <i class="ri-file-excel-2-line"></i>
                         </button>
-                        <button class="btn btn-danger btn-sm delete-btn" (click)="deleteProyect(proyect)">
+                        <button class="btn btn-danger btn-sm delete-btn" data-bs-toggle="tooltip" title="Eliminar Proyecto" data-bs-placement="top" (click)="deleteProyect(proyect)">
                           <i class="ri-delete-bin-2-line"></i>
                         </button>
                       </div>

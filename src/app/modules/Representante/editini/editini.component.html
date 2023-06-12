@@ -1,1 +1,151 @@
-<p>editini works!</p>
+<main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Publicaciones</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+          <li class="breadcrumb-item">Administar</li>
+          <li class="breadcrumb-item active">Publicaciones</li>
+        </ol>
+      </nav>
+    </div>
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Publicaciones</h5>
+              <p>Aqui se podrá Crear <i class="ri-edit-2-line"></i>,y Modificar <i class="ri-edit-2-line"></i> las distintas Publicaciones.</p>
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="d-none"> Id</th>
+                      <th scope="col">Nombre Publicación</th>
+                      <th scope="col">Descripción</th>
+                      <th scope="col">Imagen</th>
+                      <th scope="col">Fecha Publicación</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let publication of publications">
+                      <td class="d-none">{{ publication.id_actividad }}</td>
+                      <td>{{ publication.nombre }}</td>
+                      <td>{{ publication.descripcion }}</td>
+                      <td class="text-center"><img [src]="imagenUrls[publication.ruta_imagen]" alt="Imagen" class="img-fluid rounded imagen-proyecto"></td>
+                      <td class="text-center">{{ publication.fecha_actividad }}</td>
+                      <td>
+                        <div class="action-buttons d-flex flex-wrap">
+                          <button class="btn btn-primary btn-sm edit-btn custom-button" data-bs-toggle="modal"
+                          data-bs-target="#addOrModifyPublication"
+                          (click)="updatetitle(1, publication.id_actividad)"
+                          >
+                          <i class="ri-edit-2-line"></i>
+                          Modificar
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+                <div class="col-md-9">
+                  <div class="d-flex justify-content-end mt-3">
+                    <button type="button" class="btn btn-success"
+                    data-bs-toggle="modal"
+                    data-bs-target="#addOrModifyPublication"
+                    (click)="updatetitle(0)"
+                    >
+                      Nueva Publicación <i class="ri-newspaper-line"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="modal fade" id="addOrModifyPublication" tabindex="-1" aria-labelledby="exampleModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">{{ titleModal }}</h1>  
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form [formGroup]="formPublication" #formRef="ngForm">
+                          <div class="row mb-3">
+                            <label for="nombreProyecto" class="col-sm-3 col-form-label">Nombre Publicación</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" formControlName="nombrePublicacion" [ngClass]="{
+                                  'is-invalid': formPublication.get('nombrePublicacion')?.invalid && formPublication.get('nombrePublicacion')?.touched 
+                                }" />
+                              <div class="invalid-feedback"
+                                *ngIf="formPublication.get('nombrePublicacion')?.errors?.['nameWhitoutNUMBERS']">
+                                El nombre no puede contener números.
+                              </div>
+                              <div class="invalid-feedback"
+                                *ngIf="formPublication.get('nombrePublicacion')?.invalid && formPublication.get('nombrePublicacion')?.errors?.['minlength']">
+                                El nombre debe tener al menos 10 caracteres.
+                              </div>
+                              <div class="invalid-feedback"
+                                *ngIf="formPublication.get('nombrePublicacion')?.invalid && formPublication.get('nombrePublicacion')?.errors?.['required']">
+                                Debes ingresar un nombre de proyecto.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row mb-3">
+                            <label for="descripcion" class="col-sm-3 col-form-label">Descripción</label>
+                            <div class="col-sm-9">
+                              <textarea class="form-control" formControlName="descripcion" [ngClass]="{
+                                 'is-invalid': formPublication.get('descripcion')?.invalid && formPublication.get('descripcion')?.touched 
+                                }"></textarea>
+                              <div class="invalid-feedback"
+                                *ngIf="formPublication.get('descripcion')?.invalid && formPublication.get('descripcion')?.touched">
+                                Descripción inválida.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row mb-3">
+                            <label for="imagen" class="col-sm-3 col-form-label">Insertar Imagen</label>
+                            <div class="col-sm-9">
+                              <input
+                                type="file"
+                                class="form-control"
+                                formControlName="imagen"
+                                id="imageInput"
+                                accept=".jpg, .jpeg, .png, .gif"
+                                [ngClass]="{
+                                 'is-invalid': formPublication.get('imagen')?.invalid && formPublication.get('imagen')?.touched 
+                                }" />
+                              <div class="invalid-feedback"
+                                *ngIf="formPublication.get('imagen')?.invalid && formPublication.get('imagen')?.touched">
+                                Debes insertar una imagen.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row mb-3">
+                            <label for="fecha" class="col-sm-3 col-form-label">Fecha</label>
+                            <div class="col-sm-9">
+                              <input type="date" class="form-control" formControlName="fecha" [ngClass]="{
+                                 'is-invalid': formPublication.get('fecha')?.invalid && formPublication.get('fecha')?.touched 
+                                }" />
+                              <div class="invalid-feedback"
+                                *ngIf="formPublication.get('fecha')?.invalid && formPublication.get('fecha')?.touched">
+                                Fecha inválida.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer ">
+                            <button type="button" class="btn btn-primary" (click)="formPublication.valid ? submitAction() : null"
+                            [disabled]="formPublication.invalid"
+                              >Agregar</button>
+                            <button type="button" class="btn btn-danger align-close" data-bs-dismiss="modal">Cerrar</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+</main>

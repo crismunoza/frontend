@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Proyect } from '../interfaces/modelos';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
@@ -14,7 +14,7 @@ export class ProyectoService {
 
   private myAppUrl = environment.endpoint;
   private myApiUrlInsert = 'api/proyectos/agregar-proyecto';
-  private myApiUrlGetAllProyect = 'api/proyectos/obtener-proyectos';
+  private myApiUrlGetAllProyect = 'api/proyectos/obtener-proyectos/';
   private myApiUrlGetFilters = 'api/proyectos/filtro-proyectos';
   private myApiUrlGetProyectsWithFilters = 'api/proyectos/obtener-proyectos-filtros';
   private myApiUrlUpdateProyect = 'api/proyectos/modificar-proyecto/';
@@ -46,8 +46,8 @@ export class ProyectoService {
         );
     });
   }
-  getAllProyect(): Observable<Proyect[]> {
-    return this.http.get<Proyect[]>(`${this.myAppUrl}${this.myApiUrlGetAllProyect}`)
+  getAllProyect(id_junta_vecinal: number): Observable<Proyect[]> {
+    return this.http.get<Proyect[]>(`${this.myAppUrl}${this.myApiUrlGetAllProyect}${id_junta_vecinal}`)
   };
 
   getFilters(): Observable<string[]>{
@@ -134,7 +134,6 @@ export class ProyectoService {
     return this.http.post(`${this.myAppUrl}${this.myApiUrlInsertReport}`, data)
       .toPromise()
       .then(response => {
-        console.log('Información enviada con éxito al backend', response);
         return response;
       })
       .catch(error => {
@@ -157,7 +156,6 @@ export class ProyectoService {
       const downloadLink = document.createElement('a');
       downloadLink.href = URL.createObjectURL(response);
       const nombreProyectoFormmated = nombre_proyecto.replace(/\s+/g, '');
-      console.log(nombreProyectoFormmated,'nombreProyectoFormmated')
       downloadLink.download = `Proyecto-${nombreProyectoFormmated}`;
       downloadLink.click();
     },
@@ -169,6 +167,7 @@ export class ProyectoService {
   getFiltersForModify(): Observable<string[]>{
     return this.http.get<string[]>(`${this.myAppUrl}${this.myApiUrlGetFiltersModify}`)
   };
+  
   
 
 }

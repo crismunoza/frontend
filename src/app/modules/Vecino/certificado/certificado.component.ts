@@ -108,8 +108,8 @@ export class CertificadoComponent implements OnInit {
       });
   }
   ngOnInit() {
-    
-    this.certificadoService.getParagraph()
+    setTimeout(() => {
+      this.certificadoService.getParagraph()
     .then((response: any) => {
       this.tittle = response.certified.title;
       this.header = response.certified.header;
@@ -126,6 +126,8 @@ export class CertificadoComponent implements OnInit {
     .catch(error => {
       // console.error('Error al obtener el párrafo:', error);
     });
+     }, 700);
+    
     this.certificadoService.sendRut(this.rutUser());
     this.rutUser();
   }

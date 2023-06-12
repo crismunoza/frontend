@@ -1,0 +1,12 @@
+.imagen-proyecto {
+    width: 150px; 
+    height: 80px;
+    
+    /* @media (max-width: 576px) {
+      width: 100%; 
+    } */
+}
+
+.custom-button {
+    width: 100px;
+}
