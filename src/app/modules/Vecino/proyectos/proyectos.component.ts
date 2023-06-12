@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { ProyectoService } from 'src/app/services/proyecto.service';
 import Swal from 'sweetalert2';
+import * as CryptoJS from 'crypto-js';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-proyectos',
@@ -14,7 +16,14 @@ export class ProyectosComponent implements OnInit {
   imagenUrls: { [rutaImagen: string]: SafeUrl } = {};
   proyectosActivos: string[] = [];
   statusProyect: string = 'ACTIVO';
-  constructor(private proyectoService: ProyectoService) { }
+  data:any = sessionStorage.getItem('data');
+
+  constructor(private proyectoService: ProyectoService, private auth: AuthService) { }
+  bytes:any = CryptoJS.AES.decrypt(this.data, this.auth.getKey());
+  org:any = this.bytes.toString(CryptoJS.enc.Utf8);
+  obj:any = JSON.parse(this.org);
+
+  id_junta_vecinal:string = this.obj.id_junta_vec;
 
   getRut(): string{
     const accessToken = localStorage.getItem('access_token');
@@ -74,38 +83,34 @@ export class ProyectosComponent implements OnInit {
       }
     });
 };
+ngOnInit(): void {
+  this.getRut();
+  forkJoin([
+    this.proyectoService.getAllProyect(parseInt(this.id_junta_vecinal)),
+    this.proyectoService.getReport(this.getRut())
+  ]).subscribe(([proyectos, reports]) => {
+    this.proyectos = proyectos;
+    this.proyectosActivos = this.proyectos.filter(proyecto => proyecto.estado === 'ACTIVO');
 
-  ngOnInit(): void {
-    this.proyectoService.getAllProyect().subscribe(data => {
-      this.proyectos = data;
-
-      this.proyectosActivos = this.proyectos.filter(proyecto => proyecto.estado === 'ACTIVO');
-
-      for (const proyecto of this.proyectos) {
-        this.proyectoService
-          .getImagen(proyecto.ruta_imagen)
-          .subscribe(url => {
-            this.imagenUrls[proyecto.ruta_imagen] = url;
-          });
-      };
-
-      for (const proyecto of this.proyectos) {
-        this.proyectoService.getVecinosInscritos(proyecto.id_proyecto).subscribe((count) => {
-          proyecto.vecinosInscritos = count;
+    for (const proyecto of this.proyectos) {
+      this.proyectoService
+        .getImagen(proyecto.ruta_imagen)
+        .subscribe(url => {
+          this.imagenUrls[proyecto.ruta_imagen] = url;
         });
-      }
-    });
+    }
 
-    this.proyectoService.getReport(this.getRut()).subscribe(reports => {
-      //verifica si el vecino está inscrito en cada proyecto.
-      for (const proyecto of this.proyectos) {
-        const reporteEncontrado = reports.find((report: any) => report.fk_id_proyecto === proyecto.id_proyecto);
-        proyecto.inscrito = reporteEncontrado && (reporteEncontrado.inscrito === 'SI' || reporteEncontrado.inscrito === 'NO');
-        
-      }
-    });
-    
-    
-  };
+    for (const proyecto of this.proyectos) {
+      this.proyectoService.getVecinosInscritos(proyecto.id_proyecto).subscribe((count) => {
+        proyecto.vecinosInscritos = count;
+      });
+    }
+
+    for (const proyecto of this.proyectos) {
+      const reporteEncontrado = reports.find((report: any) => report.fk_id_proyecto === proyecto.id_proyecto);
+      proyecto.inscrito = reporteEncontrado && (reporteEncontrado.inscrito === 'SI' || reporteEncontrado.inscrito === 'NO');
+    }
+  });
+}
 
 }
