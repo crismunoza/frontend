@@ -145,14 +145,12 @@ export class RegisterComponent implements OnInit {
         fk_id_junta_vecinal: this.selectedJuntaVecinalId || 0, // Utilizar el ID de la junta vecinal seleccionada
       };
       let rut = this.parentForm.controls['rut_vecino'].value;
-      console.log("LO QUE MANDAMOS PARA VERIFICAR:", rut);
-
       this.comunaService.verificarsiexiste(rut).subscribe(res => {
         if (res.msg === 'correo existe') {
           Swal.fire({
             position: 'center',
             icon: 'error',
-            title: 'Rut Se Encuentra Registrado como Representante',
+            title: 'Rut Se Encuentra Registrado',
             showConfirmButton: false,
             timer: 2000
           })

@@ -33,7 +33,6 @@ export class ContactComponent implements OnInit {
   
     this.solicitudeslist.getContactos(id_junta_vecinal).subscribe(
       (response: any) => {
-        console.log("data", response.data);
         if (response.data) {
           this.vercontacto = response.data;
 
@@ -44,7 +43,4 @@ export class ContactComponent implements OnInit {
       }
     );
   }
-
-
-
 }

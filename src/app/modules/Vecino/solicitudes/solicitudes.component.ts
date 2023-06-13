@@ -11,18 +11,18 @@ import { ComunaService } from 'src/app/services/servi.service';
 })
 export class SolicitudesComponent implements OnInit {
   listsolicitud: Solicitud2[] = [];
-  data:any = sessionStorage.getItem('data');
+  data: any = sessionStorage.getItem('data');
   fk_id_vecino!: string;
 
   constructor(
     private solicitudeslist: ComunaService,
-    private auth:AuthService,
-  ) {}
-  bytes:any = CryptoJS.AES.decrypt(this.data, this.auth.getKey()) ;
-  org:any  = this.bytes.toString(CryptoJS.enc.Utf8);
-  obj:any = JSON.parse(this.org);
+    private auth: AuthService,
+  ) { }
+  bytes: any = CryptoJS.AES.decrypt(this.data, this.auth.getKey());
+  org: any = this.bytes.toString(CryptoJS.enc.Utf8);
+  obj: any = JSON.parse(this.org);
 
-  id_vecino:string = this.obj.id;
+  id_vecino: string = this.obj.id;
 
   ngOnInit(): void {
     this.listarsolicitudes();
@@ -31,7 +31,7 @@ export class SolicitudesComponent implements OnInit {
 
   listarsolicitudes() {
     const id_vecino = parseInt(this.id_vecino);
-  
+
     this.solicitudeslist.getsolicitudes().subscribe(
       (response: any) => {
         console.log("data", response.data);

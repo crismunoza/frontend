@@ -1,8 +1,7 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { RutService } from 'rut-chileno';
-//import { Login } from 'src/app/interfaces/modelos';
 import Swal from 'sweetalert2';
 import { Login } from 'src/app/interfaces/modelos';
 import { AuthService } from 'src/app/services/auth.service';
@@ -40,7 +39,6 @@ export class LoginComponent implements OnInit {
     }
     else{
       //captura del dato y envio al metodo login
-      //const c = this.login.controls['rememberMe'].value;
       const datos: Login ={
         rut: this.login.controls['username'].value,
         contrasenia: this.login.controls['password'].value,

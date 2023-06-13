@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { reportes} from 'src/app/interfaces/modelos';
 import * as CryptoJS from 'crypto-js';
 import { ComunaService } from 'src/app/services/servi.service';
-import { PostService } from 'src/app/services/postService.service';
 
 import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/services/auth.service';
@@ -23,7 +21,6 @@ export class ReportsComponent implements OnInit {
   constructor(
     private auth:AuthService,
     private ComunaService: ComunaService,
-    private http: HttpClient
   ) { }
   bytes:any = CryptoJS.AES.decrypt(this.data, this.auth.getKey()) ;
   org:any  = this.bytes.toString(CryptoJS.enc.Utf8);
@@ -73,8 +70,4 @@ generarReporte() {
     }
   );
 }
-
-
-
-
 }

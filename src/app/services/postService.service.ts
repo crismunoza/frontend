@@ -83,6 +83,18 @@ export class PostService {
     }
     
 
+    //eliminar un representante en especifico y en su pantalla de perfil
+    deleteUser(id: number, id_junta: number): Observable<any> {
+      const url = `${this.myAppUrl}${this.myApiUrl}/users/delete`;
+      const data = {
+        id:id,
+        id_junta:id_junta, // Pasamos los parámetros de consulta aquí
+      };
+      
+      return this.http.post(url, data);
+    }
+    
+    
 
 }
 

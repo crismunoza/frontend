@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UpdateService } from 'src/app/services/update.service';
 import { ajustePerfil } from 'src/app/interfaces/modelos';
 import { Router } from '@angular/router';
-
+import { PostService } from 'src/app/services/postService.service';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
@@ -27,16 +27,8 @@ export class PerfilComponent implements OnInit {
   direccion:string = '';
   nombre_junta:string = '';
 
-  constructor(private auth:AuthService, private get:ComunaService, private fb:FormBuilder, private put:UpdateService, private router:Router) {
-
-    // const validarQueSeanIguales: Validators = (
-    //   control: FormGroup
-    // ): ValidationErrors | null => {
-    //   const password = control.get("nvaPassword")
-    //   const confirmarPassword = control.get("reNvaPassword")
-
-    //   return password?.value === confirmarPassword!.value? null: { noSonIguales: true }
-    // }
+  constructor(private auth:AuthService, private get:ComunaService, private fb:FormBuilder, private put:UpdateService, private router:Router,
+    private postservice: PostService) {
 
     this.formData = this.fb.group({
       phonePerfil: [this.telefono, [Validators.required,Validators.pattern('^[0-9]{8}$')]],
@@ -63,11 +55,7 @@ export class PerfilComponent implements OnInit {
       }
     });
 
-
-    // ,{
-    //   validators: validarQueSeanIguales    }
-
-   }
+  }
 
    //funcion para comparar las claves
    checarSiSonIguales(): boolean {
@@ -89,7 +77,6 @@ export class PerfilComponent implements OnInit {
     this.cambioClave = this.fb.group({
       claveActual: ["",[Validators.required]],
       nvaPassword: ["",[Validators.required]]
-      //reNvaPassword: ["",Validators.required]
     });
   }
 
@@ -124,6 +111,50 @@ export class PerfilComponent implements OnInit {
        });
     }
   }
+
+  eliminarCuenta(){
+    Swal.fire({
+      title: '¿Estas seguro?',
+      text: "No podras revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Si, eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const id = parseInt(this.id);
+        const id_junta = parseInt(this.obj.id_junta_vec);
+        this.postservice.deleteUser(id, id_junta).subscribe(res =>{
+          if(res.status === 200){
+            Swal.fire({
+              icon: 'success',
+              title: 'Tu cuenta ha sido eliminada',
+              showConfirmButton: false,
+              timer: 1500,
+              position: 'center'
+            }).then(() => {
+              sessionStorage.clear();
+              this.router.navigate(['/']);
+            });
+          }
+          else if(res.status === 404){
+            Swal.fire({
+              icon: 'error',
+              title: 'No se puede eliminar por que eres el unico administrador'
+            });
+          }
+          else if(res.error){
+            Swal.fire({
+              icon: 'error',
+              title: 'Ups!, hay un problema contactate con nosotros'
+            });
+          }
+        });
+      }
+    })
+  }
+
   //funcion del boton cambiar clave
   cambiarClave(){
     this.submitted = true;

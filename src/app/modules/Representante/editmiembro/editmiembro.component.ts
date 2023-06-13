@@ -85,7 +85,6 @@ export class EditmiembroComponent implements OnInit {
 
   seleccionarVecino(rut: string) {
     this.rutSeleccionado = rut;
-    console.log("vecino seleccionado en el modal", this.rutSeleccionado);
   }
 
   salir() {
@@ -106,6 +105,9 @@ export class EditmiembroComponent implements OnInit {
           if (result.isConfirmed) {
             this.deleteVecino.deleteVecino(rut_vecino).subscribe(data => {
             this.listarMiembros();
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
               }, error => {
               console.log(error);
               });
@@ -161,8 +163,6 @@ export class EditmiembroComponent implements OnInit {
       updatedVecino.contrasenia = vecino.contrasenia;
     }
   }
-     
-    console.log("vecino actualizado", updatedVecino);
   
     Swal.fire({
       title: '¿Estás seguro?',
@@ -182,7 +182,6 @@ export class EditmiembroComponent implements OnInit {
         );
         this.updateVecino.updatevecino(updatedVecino.rut_vecino, updatedVecino).subscribe(
           data => {
-            console.log(data); // Maneja la respuesta del backend según tus necesidades
             this.formularioVecino.reset();
             setTimeout(() => {
               window.location.reload();

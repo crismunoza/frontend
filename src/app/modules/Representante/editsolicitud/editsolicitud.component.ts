@@ -1,5 +1,5 @@
 import { Component,ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as CryptoJS from 'crypto-js';
 import { Solicitud3,Solicitud4 } from '../../../interfaces/modelos';
 import { ComunaService } from 'src/app/services/servi.service';

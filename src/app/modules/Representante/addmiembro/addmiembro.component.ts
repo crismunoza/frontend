@@ -18,7 +18,6 @@ export class AddmiembroComponent implements OnInit {
   listVecinos: Vecino4[] = [];
   fk_id_junta_vecinal!: string;
   imageUrl: string | undefined;
-
   rep2!:FormGroup;
   submitted:boolean = false;
   selectedAvatar!: string;
@@ -220,7 +219,6 @@ export class AddmiembroComponent implements OnInit {
         return;
     }
     else {
-      console.log('ingresa aqui esta bien el formulario')
       const fileInput = document.getElementById('evidencia') as HTMLInputElement;
             const file = fileInput.files?.[0];
 

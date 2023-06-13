@@ -42,7 +42,7 @@ export class CertificadoComponent implements OnInit {
         };
         this.certificadoService.updateSubtitle(payload)
         .then((message) => {
-          // console.log(message, 'Certificado actualizado con éxito');
+          console.log(message, 'Certificado actualizado con éxito');
         })
         .catch((error) => {
           console.error(error,'Error al actualizar el certificado');

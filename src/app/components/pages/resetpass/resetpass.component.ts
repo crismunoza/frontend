@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RutService } from 'rut-chileno';
 import { Router } from '@angular/router';
-import { ComunaService } from '../../../services/servi.service';
 import { PostService } from '../../../services/postService.service';
 
 import Swal from 'sweetalert2';
-import { SpinnerService } from 'src/app/services/spinner.service';
+
 
 
 @Component({
@@ -23,8 +22,7 @@ export class ResetpassComponent implements OnInit {
   showRestablecerContrasenia: boolean = false;
 
   constructor(private router: Router, private fb: FormBuilder, 
-    private rutService: RutService, private comunaService: ComunaService,
-    private PostService: PostService, private spinnerService:SpinnerService ) { }
+    private rutService: RutService, private PostService: PostService, ) { }
 
   formatearRut(event: Event): void {
     let rut = this.rutService.getRutChileForm(1, (event.target as HTMLInputElement).value);
