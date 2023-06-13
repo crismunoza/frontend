@@ -7,16 +7,18 @@ import { environment } from 'src/environments/environment';
 })
 export class CertificadoService {
 
-    private myAppUrl = environment.endpoint;
-    private myApiUrl = 'api/certificados/generate-pdf';
-    private myApiUrlUpdate = 'api/certificados/update-subtitle';
-    private myApiUrlUParagraph = 'api/certificados/obtener-parrafo';
+  private myAppUrl = environment.endpoint;
+  private myApiUrl = 'api/certificados/generate-pdf';
+  private myApiUrlUpdate = 'api/certificados/update-subtitle';
+  private myApiUrlUParagraph = 'api/certificados/obtener-parrafo';
+  private myApiUrlSenRut = 'api/certificados/obtener-rut';
+  private myApiUrlSendEmail = 'api/certificados/enviar-correo';
 
   constructor(private http: HttpClient) { }
   /**promesa que obtiene el certificado desde backend.*/
   downloadPDF(): Promise<any> {
     const url = `${this.myAppUrl}${this.myApiUrl}`;
-  
+
     return this.http.get(url, { responseType: 'blob' })
       .toPromise()
       .then((response: Blob | undefined) => {
@@ -37,7 +39,6 @@ export class CertificadoService {
       this.http.post(`${this.myAppUrl}${this.myApiUrlUpdate}`, payload)
         .subscribe(
           () => {
-            // resolve('Subtítulo actualizado con éxito en el backend');
             resolve('');
           },
           (error) => {
@@ -52,11 +53,30 @@ export class CertificadoService {
       this.http.get(`${this.myAppUrl}${this.myApiUrlUParagraph}`)
         .toPromise()
         .then(response => {
-          resolve(response); 
+          resolve(response);
         })
         .catch(error => {
-          reject(error); 
+          reject(error);
         });
     });
   }
+
+  sendRut(rutVecino: string) {
+    return new Promise((resolve, reject) => {
+      this.http.post(`${this.myAppUrl}${this.myApiUrlSenRut}`, { rutVecino })
+        .subscribe(
+          response => {
+            resolve(response);
+          },
+          error => {
+            reject(error);
+          }
+        )
+    })
+  };
+
+  Enviocerti(): Promise<any> {
+
+    return this.http.post(`${this.myAppUrl}${this.myApiUrlSendEmail}`, {}).toPromise();
+  };
 }  

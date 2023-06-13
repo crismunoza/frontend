@@ -1,0 +1,46 @@
+<main id="main" class="main">
+    <div class="pagetitle">
+       <h1>Proyectos</h1>
+       <nav>
+          <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+                <li class="breadcrumb-item">Menú</li>
+                <li class="breadcrumb-item active">proyectos</li>
+            </ol>
+        </nav>
+    </div>
+    <section class="section">
+       <div class="row align-items-top" *ngIf="proyectosActivos.length > 0; else noProyectos">
+            <div class="col-lg-12" *ngFor="let proyecto of proyectos">
+                <div class="card mb-3" *ngIf="proyecto.estado === statusProyect">
+                    <div class="row g-0">
+                        <div class="col-md-4 col-sm-12">
+                            <img [src]="imagenUrls[proyecto.ruta_imagen]" alt="Imagen" class="img-fluid rounded imagen-proyecto">
+                        </div>
+                        <div class="col-md-8 col-sm-12 d-flex flex-column">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <h5 class="card-title">{{proyecto.nombre}}</h5>
+                                    <strong class="badge-sm text-dark fecha-proyecto">{{proyecto.fecha_proyecto}}</strong>
+                                  </div>
+                                <p class="card-text">{{proyecto.descripcion}}</p>
+                                <div class="mt-auto">
+                                    <strong class="badge bg-primary me-4 mb-2">Cupos mínimos para aprobación: {{proyecto.cupo_min}}</strong>
+                                    <strong class="badge text-dark bg-warning me-4 mb-2">Cupos disponibles: {{proyecto.cupo_max}}</strong>
+                                    <strong class="badge text-white bg-secondary ">Vecinos inscritos: {{proyecto.vecinosInscritos}}</strong>
+                                </div>
+                            </div>
+                            <div class="card-footer mt-auto d-flex justify-content-end">
+                                <button  class="btn btn-danger me-2" (click)="refuse(proyecto.id_proyecto)" [disabled]="proyecto.inscrito">Rechazar</button>
+                                <button  class="btn btn-success" (click)="register(proyecto.id_proyecto)" [disabled]="proyecto.inscrito">Inscribirse</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+        </div>
+    </section>
+    <ng-template #noProyectos>
+        <strong class="mb-5">No existen proyectos para visualizar.</strong>
+    </ng-template>
+</main>

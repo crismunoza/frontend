@@ -1,21 +1,48 @@
-<header id="header" class="header fixed-top align-items-center">
-    <div class="d-flex align-items-center "> 
-        <div class="p-2 flex-grow-1"><a  style="color:#012970"><h3>Junt<i class="bi bi-arrow-up-left-circle-fill"></i> a UnClick</h3></a></div>
-        <div class="p-2 ml-3"><button class="btn btn-outline-primary" type="button" (click)="navigate('registro/vecinos/junta-vecinal')">Crear Junta Vecinal</button></div>
-        <div class="ms-auto  p-2"><button class="btn btn-outline-warning" type="button" (click)="navigate('login')" >Ingresar</button></div>             
-    </div>
-</header>
-<section class="section mt-5 mx-3">
-    <div class="row">
-        <div class="col-lg-12 mt-5">
-            <div class="card">
-                <img class="card-img-top" src="/assets/img/news-4.jpg" >
-                <div class="card-body ">
-                  <h5 class="card-title ms-auto">Card title</h5>
-                  <p class="card-text d-flex">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+<div class="container">
+  <section class="section ">
+    <nav class="navbar navbar-expand-md fixed-top navbar-light align-items-center" style="background-color: #fff;">
+      <a class="p-2 flex-grow-1" style="color:#012970"><h3>Junt<i class="bi bi-arrow-up-left-circle-fill"></i> a UnClick</h3></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="font-size: 0.75rem;"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end align-items-center mx-2" id="navbarNav">
+        <ul class="navbar-nav mr-auto mt-lg-0">
+          <li class="nav-item ms-md-2 mt-1">
+            <button class="btn btn-outline-primary btn-sm" type="button" (click)="navigate('registro/vecinos/junta-vecinal')">Crear Junta Vecinal</button>
+          </li>
+          <li class="nav-item ms-md-2 mt-1">
+            <button class="btn btn-outline-warning btn-sm" type="button" (click)="navigate('login')">Ingresar</button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+      <div class="row d-flex mt-5 mx-3">
+          <div class="col-lg-12 mt-5">
+              <div class="card">
+                  <div class="card-body ">
+                    <img class="card-img-top" src="/assets/img/Inicio rectangular.jpg" width="100%" >
+
+                    <h1 class="title ms-auto">¡Bienvenido!</h1>
+                    <h3 class="card-text d-flex"><u style="color:#012970">"Somos tu mejor opción para la correcta<br>
+                      gestión y organización de tu Junta Vecinal."</u></h3>
+
+                    <p class="card-text d-flex">Nuestra solución web viene a satisfacer una gran cantidad de nececidades<br>
+                      para el mundo de las Juntas Vecinales y sus vecinos. Seremos su ayuda para<br>
+                      que su partcipación sea en beneficio de su barrio, y que la información llegue<br>
+                      de manera oportuna a todos sus miembros.<br>
+                      ¡Que lo disfrute!</p>
+                      <div class="d-flex">
+                        <div class="ms-auto">
+                          <img class="img-fluid" src="/assets/img/LogoJSMC.jpg" style="max-width: 250px; height: auto;">
+                        </div>
+                      </div>
+
+                  </div>
+
                 </div>
-              </div>
-        </div>
-    </div>
-</section>
+          </div>
+      </div>
+  </section>
+
+</div>
+

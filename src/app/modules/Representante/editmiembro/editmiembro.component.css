@@ -1,0 +1,12 @@
+.modal {
+  background-color: rgba(122, 119, 119, 0.555); /* Ajusta el valor de opacidad (0.7 en este caso) según tus preferencias */
+}
+#disablebackdrop {
+  position: block;
+  z-index: 1050; /* Valor mayor que el z-index del fondo */
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-evenly;
+}

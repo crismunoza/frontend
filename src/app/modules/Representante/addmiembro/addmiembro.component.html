@@ -1,48 +1,209 @@
 <main id="main" class="main">
     <div class="pagetitle">
-       <h1>Miembros Nuevos</h1>
-       <nav>
-          <ol class="breadcrumb">
-             <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
-             <li class="breadcrumb-item">Administar</li>
-             <li class="breadcrumb-item active">Miembros Nuevos</li>
-          </ol>
-       </nav>
+        <h1>Miembros Nuevos</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+                <li class="breadcrumb-item">Administar</li>
+                <li class="breadcrumb-item active">Miembros Nuevos</li>
+            </ol>
+        </nav>
     </div>
     <section class="section">
-       <div class="row">
-          <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                    <h5 class="card-title">Nuevos Miembros</h5>
-                    <p>Aqui se podra Aceptar <i class="ri-user-follow-line"></i> y Denegar  <i class="ri-user-unfollow-line"></i>  los  Nuevos Miembros.</p>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">apellido</th>
-                                <th scope="col">Domicilio</th>
-                                <th scope="col">Evidencia</th>
-                                <th scope="col">Accion</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let vecino of listVecinos">
-                                <td>{{ vecino.primer_nombre }}</td>
-                                <td>{{vecino.primer_apellido}} {{vecino.segundo_apellido}}</td>
-                                <td>{{ vecino.direccion }}</td>
-                                <td>{{ vecino.ruta_evidencia }}</td>
-                                <td>
-                                <button type="submit" class="btn btn-success" (click)="enviarRut(vecino.rut_vecino)"><i class="ri-user-follow-line"></i></button>
-                                <button type="button" class="btn btn-danger" (click)="Rechazo(vecino.rut_vecino)"><i class="ri-user-unfollow-line"></i></button> 
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>                    
+                        <h5 class="card-title">Nuevos Miembros</h5>
+
+                        <p>Aqui se podra Aceptar <i class="ri-user-follow-line"></i> y Denegar <i
+                                class="ri-user-unfollow-line"></i> los Nuevos Miembros.</p>
+                                <div class="col-12 d-flex justify-content-end mb-3"><button class="btn btn-outline-dark" id="addRep" [disabled]="true" (click)="abrirMod()">Representante +</button></div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">apellido</th>
+                                        <th scope="col">Domicilio</th>
+                                        <th scope="col">Evidencia</th>
+                                        <th scope="col">Accion</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let vecino of listVecinos">
+                                        <td>{{ vecino.primer_nombre }}</td>
+                                        <td>{{vecino.primer_apellido}} {{vecino.segundo_apellido}}</td>
+                                        <td>{{ vecino.direccion }}</td>
+                                        <td><a [href]="vecino.imageUrl"
+                                                [download]="vecino.rut_vecino + '.jpg'">Descargar imagen</a></td>
+                                        <td>
+                                            <button type="submit" class="btn btn-success"
+                                                (click)="enviarRut(vecino.rut_vecino)"><i
+                                                    class="ri-user-follow-line"></i></button>
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="Rechazo(vecino.rut_vecino)"><i
+                                                    class="ri-user-unfollow-line"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="modal fade" id="modAddRep" tabindex="-1" role="dialog" aria-labelledby="modAddRepModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+             <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: #012970;">Añadir Representante</h5>
+                <button type="button" class="btn btn-outline-danger"  (click)="closemodal()">Cerrar</button>
+             </div>
+             <div class="modal-body">
+                <form class="row my-2" [formGroup]="rep2">
+                <div class="col-md-4">
+                  <label for="run_rep" class="form-label">Run:</label>
+                  <input type="text" class="form-control" id="run_rep" formControlName="run_rep"
+                    (input)="formatearRut2($event)"
+                    [ngClass]="{ 'is-invalid': submitted && rep2.controls['run_rep'].errors }">
+                  <div *ngIf="submitted && rep2.controls['run_rep'].errors" class="invalid-feedback">
+                    <div *ngIf="rep2.controls['run_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+                    <div *ngIf="rep2.controls['run_rep'].errors?.['rutnovalido']">Rut invalido</div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <label for="p_nomb_rep" class="form-label">1er Nombre:</label>
+                  <input type="text" class="form-control" id="p_nomb_rep" formControlName="p_nomb_rep"
+                    [ngClass]="{ 'is-invalid': submitted && rep2.controls['p_nomb_rep'].errors }">
+                  <div *ngIf="submitted && rep2.controls['p_nomb_rep'].errors" class="invalid-feedback">
+                    <div *ngIf="rep2.controls['p_nomb_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+                    <div *ngIf="rep2.controls['p_nomb_rep'].errors?.['pattern']">Solo letras</div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <label for="s_nomb_rep" class="form-label">2do Nombre:</label>
+                  <input type="text" class="form-control" id="s_nomb_rep" formControlName="s_nomb_rep"
+                    [ngClass]="{ 'is-invalid': submitted && rep2.controls['s_nomb_rep'].errors }">
+                  <div *ngIf="submitted && rep2.controls['s_nomb_rep'].errors" class="invalid-feedback">
+                    <div *ngIf="rep2.controls['s_nomb_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+                    <div *ngIf="rep2.controls['s_nomb_rep'].errors?.['pattern']">Solo letras</div>
+                  </div>
+                </div>
+                <div class="col-md-4 mt-1">
+                  <label for="ap_pat_rep" class="form-label">Apellido Paterno:</label>
+                  <input type="text" class="form-control" id="ap_pat_rep" formControlName="ap_pat_rep"
+                    [ngClass]="{ 'is-invalid': submitted && rep2.controls['ap_pat_rep'].errors }">
+                  <div *ngIf="submitted && rep2.controls['p_nomb_rep'].errors" class="invalid-feedback">
+                    <div *ngIf="rep2.controls['ap_pat_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+                    <div *ngIf="rep2.controls['ap_pat_rep'].errors?.['pattern']">Solo letras</div>
+                  </div>
+                </div>
+                <div class="col-md-4 mt-1">
+                  <label for="ap_mat_rep" class="form-label">Apellido Materno:</label>
+                  <input type="text" class="form-control" id="ap_mat_rep" formControlName="ap_mat_rep"
+                    [ngClass]="{ 'is-invalid': submitted && rep2.controls['ap_mat_rep'].errors }">
+                  <div *ngIf="submitted && rep2.controls['ap_mat_rep'].errors" class="invalid-feedback">
+                    <div *ngIf="rep2.controls['ap_mat_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+                    <div *ngIf="rep2.controls['ap_mat_rep'].errors?.['pattern']">Solo letras</div>
+                  </div>
+                </div>
+                <div class="col-md-4 mt-1">
+                  <label for="comuna_rep" class="form-label">Comuna:</label>
+                  <select class="form-select" id="comuna_rep" formControlName="comuna_rep">
+                    <option *ngFor="let comuna of listcomunas" [value]="comuna.id_comuna">{{comuna.nombre}}</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    (*) Camplo Obligatorio
+                  </div>
+                </div>
+                <div class="col-md-4 mt-1">
+                  <label for="calle_rep" class="form-label">calle</label>
+                  <input type="text" class="form-control" id="calle_rep" formControlName="calle_rep"
+                    [ngClass]="{ 'is-invalid': submitted && rep2.controls['calle_rep'].errors }">
+                  <div *ngIf="submitted && rep2.controls['calle_rep'].errors" class="invalid-feedback">
+                    <div *ngIf="rep2.controls['calle_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+                    <div *ngIf="rep2.controls['calle_rep'].errors?.['pattern']">Solo letras y espacio</div>
+                  </div>
+                </div>
+                <div class="col-md-2 mt-1">
+                  <label for="num_calle_rep" class="form-label">Número</label>
+                  <input type="number" class="form-control" id="num_calle_rep" formControlName="num_calle_rep"
+                    [ngClass]="{ 'is-invalid': submitted && rep2.controls['num_calle_rep'].errors }">
+                  <div *ngIf="submitted && rep2.controls['num_calle_rep'].errors" class="invalid-feedback">
+                    <div *ngIf="rep2.controls['num_calle_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+                    <div *ngIf="rep2.controls['num_calle_rep'].errors?.['pattern']">solo números enteros positivos</div>
+                  </div>
+                </div>
+                <hr class="mt-4 mb-2">
+                <div class="col-md-4 mt-1">
+                  <label for="contacto_Rep" class="form-label">Celular</label>
+                  <div class="input-group">
+                    <span class="input-group-text" id="basic-addon2">+569</span>
+                    <input type="number" class="form-control" id="contacto_Rep" formControlName="contacto_Rep"
+                      [ngClass]="{ 'is-invalid': submitted && rep2.controls['contacto_Rep'].errors }">
+                    <div *ngIf="submitted && rep2.controls['contacto_Rep'].errors" class="invalid-feedback">
+                      <div *ngIf="rep2.controls['contacto_Rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+                      <div *ngIf="rep2.controls['contacto_Rep'].errors?.['pattern']">n° celular invalido</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mt-1">
+                  <label for="correo_rep" class="form-label">Correo</label>
+                  <input type="text" class="form-control" id="correo_rep" formControlName="correo_rep"
+                    [ngClass]="{ 'is-invalid': submitted && rep2.controls['correo_rep'].errors }">
+                  <div *ngIf="submitted && rep2.controls['correo_rep'].errors" class="invalid-feedback">
+                    <div *ngIf="rep2.controls['correo_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+                    <div *ngIf="rep2.controls['correo_rep'].errors?.['email']">Correo invalido</div>
+                  </div>
+                </div>
+                <hr class="mt-4 mb-2">
+                <div class="col-md-1 mt-1">
+                  <label for="avatar" class="form-label">Avatar</label>
+                  <select class="form-control" formControlName="selectedAvatar" (change)="onChangeAvatar()">
+                    <option *ngFor="let avatar of avatars" [value]="avatar">{{ avatar }}</option>
+                  </select>
+                </div>
+                <div *ngIf="rep2.controls['selectedAvatar'].value" class="col-md-2 mt-1 mr-3">
+                  <img [src]="'/assets/img/avatars/'+selectedAvatar" alt="Avatar" class="avatar-image">
+                </div>
+                <div class="col-md-3 mt-1">
+                  <label for="clave_rep" class="form-label">Clave</label>
+                  <input type="password" id="clave_rep" class="form-control" formControlName="clave_rep"
+                    [ngClass]="{ 'is-invalid': submitted && rep2.controls['clave_rep'].errors }">
+                  <div *ngIf="submitted && rep2.controls['clave_rep'].errors" class="invalid-feedback">
+                    <div *ngIf="rep2.controls['clave_rep'].errors?.['required']">(*) Campo Obligatorio!</div>
+                  </div>
+                </div>
+                <div class="col-md-3 mt-1">
+                  <label for="clave_rep_conf" class="form-label">Confirmar Clave</label>
+                  <input type="password" id="clave_rep_conf" class="form-control" formControlName="clave_rep_conf"
+                    [ngClass]="{ 'is-invalid': submitted && rep2.controls['clave_rep_conf'].errors }">
+                  <div *ngIf="submitted && rep2.controls['clave_rep_conf'].errors" class="invalid-feedback">
+                    <div *ngIf="rep2.controls['clave_rep_conf'].errors?.['required']">(*) Campo Obligatorio!</div>
+                  </div>
+                </div>
+                <hr class="mt-3">
+                <div class="col-md-12">
+                  <p>Debe adjuntar una imagen de su firma, en la cual aparezca Claramente. Esta sera usada para la emision de
+                    certificados</p>
+                  <div class="col-md-4 ">
+                    <input class="form-control" type="file" accept=".jpg" id="evidencia" formControlName="evidencia"
+                      [ngClass]="{ 'is-invalid': submitted && rep2.controls['evidencia'].errors }">
+                    <div *ngIf="submitted && rep2.controls['evidencia'].errors" class="invalid-feedback">
+                      <div *ngIf="rep2.controls['evidencia'].errors?.['required']">Evidencia Obligatorio!</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12  d-flex my-4 mx-2 justify-content-center">
+                  <button class="btn btn-primary " type="submit" (click)="onSubmit()">Añadir Representante</button>
+                </div>
+              </form>
+             </div>
+          </div>
+          </div>
        </div>
     </section>
- </main>
+</main>

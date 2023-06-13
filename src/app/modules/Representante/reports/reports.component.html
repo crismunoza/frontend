@@ -1,1 +1,48 @@
-<p>reports works!</p>
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Reportes</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+        <li class="breadcrumb-item">Administar</li>
+        <li class="breadcrumb-item active">Reportes</li>
+      </ol>
+    </nav>
+  </div>
+  <section class="section">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Tabla Reportes</h5>
+        <p>Aqui podrás observar la interacción de los vecinos en los distintos proyectos y podrás descargar un excel con la información de cada proyecto.</p>
+        <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Rut Miembro</th>
+              <th scope="col">Nombre Miembro</th>
+              <th scope="col">Proyecto</th>
+              <th scope="col">Inscrito</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let reporte of listreportes">
+              <th scope="row">{{reporte.rut_vecino}}</th>
+              <td>{{reporte.primer_nombre}} {{reporte.segundo_nombre}} {{reporte.primer_apellido}}</td>
+              <td>{{reporte.nombre}}</td>
+              <td>{{reporte.inscrito}}</td>
+              <td>{{reporte.estado}}</td>
+              <td>{{reporte.fecha_proyecto}}</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+      </div>
+      <div class="card-footer text-center d-flex justify-content-center">
+        <button type="submit" class="btn btn-outline-success" (click)="generarReporte()">Descargar Reporte<i class="ri-file-excel-2-fill ri-lg estilo-button"></i></button>
+     </div>
+    </div>
+  </section>
+</main>

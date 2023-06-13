@@ -1,15 +1,15 @@
-<aside id="sidebar" class="sidebar" *ngIf="rol === ('admin'||'vecino')">
+<aside id="sidebar" class="sidebar" *ngIf="(rol === 'admin') || (rol === 'vecino')">
     <ul class="sidebar-nav" id="sidebar-nav">
        <li class="nav-item"> <a class="nav-link " routerLink="/inicio"> <i class="bi bi-grid"></i> <span>Inicio</span> </a></li>
        <li class="nav-item" href="#" >
       
-         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" > <i class="bi bi-menu-button-wide"></i><span>Administrar</span><i class="bi bi-chevron-down ms-auto"></i> </a>
-         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav" *ngIf="rol ==='admin'">
-            <li> <a routerLink="/admin/representante/"> <i class="bi bi-circle"></i><span>Publicaciones</span> </a></li>
+         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" *ngIf="rol ==='admin'"> <i class="bi bi-menu-button-wide"></i><span>Administrar</span><i class="bi bi-chevron-down ms-auto"></i> </a>
+         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav" >
+            <li> <a routerLink="/admin/representante/edit-ini"> <i class="bi bi-circle"></i><span>Publicaciones</span> </a></li>
             <li> <a routerLink="/admin/representante/edit-proyec"> <i class="bi bi-circle"></i><span>Proyectos</span> </a></li>
             <li> <a routerLink="/admin/representante/edit-sol"> <i class="bi bi-circle"></i><span>Solicitudes</span> </a></li>
+            <li> <a routerLink="/admin/representante/add-miembro"> <i class="bi bi-circle"></i><span>Nuevos Miembros</span> </a></li>
             <li> <a routerLink="/admin/representante/edit-miemb"> <i class="bi bi-circle"></i><span>Miembros</span> </a></li>
-            <!-- <li> <a routerLink=""> <i class="bi bi-circle"></i><span>Miembros Antiguos</span> </a></li> -->
             <!-- <li>   <a (click)="navigate('registro/vecinos/junta-vecinal')">Ruta Junta</a></li> -->
          </ul>
       </li>
@@ -23,13 +23,13 @@
        <li class="nav-item" *ngIf="rol ==='vecino'">
           <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#"> <i class="bi bi-journal-text"></i><span>Menú</span><i class="bi bi-chevron-down ms-auto"></i> </a>
           <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-             <li> <a routerLink="/certificado"> <i class="bi bi-circle"></i><span>Certificado</span> </a></li>
-             <li> <a routerLink="/solicitudes"> <i class="bi bi-circle"></i><span>Solicitudes</span> </a></li>
-             <li> <a routerLink="/proyectos"> <i class="bi bi-circle"></i><span>proyectos</span> </a></li>
-             <li> <a routerLink="/valoracion"> <i class="bi bi-circle"></i><span>Valoracion</span> </a></li>
+             <li> <a routerLink="/Vecino/accion/certificado"> <i class="bi bi-circle"></i><span>Certificado</span> </a></li>
+             <li> <a routerLink="/Vecino/accion/solicitudes"> <i class="bi bi-circle"></i><span>Solicitudes</span> </a></li>
+             <li> <a routerLink="/Vecino/accion/proyectos"> <i class="bi bi-circle"></i><span>Proyectos</span> </a></li>
+             <li> <a routerLink="/Vecino/accion/valoracion"> <i class="bi bi-circle"></i><span>Valoracion</span> </a></li>
           </ul>
        </li>
-       <li class="nav-item"> <a class="nav-link collapsed" routerLink="/pages-contact"> <i class="bi bi-envelope"></i> <span>Contacto</span> </a></li>
+       <li class="nav-item" *ngIf="rol ==='vecino'"><a class="nav-link collapsed" routerLink="/Vecino/accion/contact"> <i class="bi bi-envelope"></i> <span>Contacto</span> </a></li>
 
    </ul>
 </aside>

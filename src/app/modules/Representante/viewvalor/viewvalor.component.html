@@ -1,1 +1,68 @@
-<p>viewvalor works!</p>
+
+<main id="main" class="main">
+    <div class="pagetitle">
+       <h1>Valoraciones</h1>
+       <nav>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+             <li class="breadcrumb-item">Valoraciones</li>
+          </ol>
+       </nav>
+    </div>
+    <section class="section">
+       <div class="row">
+          <div class="col-lg-12">
+             <div class="card">
+                <div class="card-body">
+                   <h5 class="card-title">Estadisticas</h5>
+
+                   <div class="chart-container d-flex flex-column align-items-center" style="position:static; height:40vh; width:80vw"><canvas id="oilChart"></canvas></div>
+
+                          <!-- Modal -->
+                  <div class="modal fade" id="mod_valoraciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog modal-lg" role="document">
+                     <div class="modal-content">
+                        <div class="modal-header">
+                           <h5 class="modal-title" id="exampleModalLabel" style="color: #012970;">Valoraciones de tus Vecinos</h5>
+                        </div>
+                        <div class="modal-body">
+                              <div class="table-responsive mx-1">
+                                 <table class="table table-bordered">
+                                    <thead style="background-color: #012970;">
+                                       <tr style="color: #ffffff;">
+                                          <th scope="col">Vecino</th>
+                                          <th scope="col">Estrellas</th>
+                                          <th scope="col">Comentario</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                       <tr *ngFor="let valoracion of listValoraciones">
+                                          <td>{{ valoracion.vecino}}</td>
+                                          <td>{{ valoracion.estrellas  }}</td>
+                                          <td>{{ valoracion.comentario }}</td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-outline-danger"  (click)="closemodal()">Cerrar</button>
+                        </div>
+                     </div>
+                     </div>
+                  </div>
+
+
+                   <div class="d-flex justify-content-end mt-3">
+                      <button type="button" class="btn btn-success" (click)="open_modal()">
+                         Ver comentarios
+                      </button>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+
+    </section>
+
+ </main>

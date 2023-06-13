@@ -1,73 +1,237 @@
 <main id="main" class="main">
-    <div class="pagetitle">
-       <h1>Proyectos</h1>
-       <nav>
-          <ol class="breadcrumb">
-             <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
-             <li class="breadcrumb-item">Administar</li>
-             <li class="breadcrumb-item active">Proyectos</li>
-          </ol>
-       </nav>
-    </div>
-    <section class="section">
-       <div class="row">
-          <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                    <h5 class="card-title">Proyectos</h5>
-                    <p>Aqui se podra Editar <i class="ri-edit-2-line"></i> , Eliminar  <i class="ri-delete-bin-2-line"></i>  y Cerrar <i class="ri-eye-close-line"></i> los Proyectos.</p>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">N°</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col">Accion</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>luminarias led</td>
-                                <td>Abierto</td>
-                                <td>
-                                <button type="button" class="btn btn-success"><i class="ri-edit-2-line"></i></button> 
-                                <button type="button" class="btn btn-danger"><i class="ri-delete-bin-2-line"></i></button> 
-                                <button type="button" class="btn btn-warning"><i class="ri-eye-close-line"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Arreglo de calles</td>
-                                <td>Abierto</td>
-                                <td>
-                                <button type="button" class="btn btn-success"><i class="ri-edit-2-line"></i></button> 
-                                <button type="button" class="btn btn-danger"><i class="ri-delete-bin-2-line"></i></button> 
-                                <button type="button" class="btn btn-warning"><i class="ri-eye-close-line"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Arreglo techumbre</td>
-                                <td>Abierto</td>
-                                <td>
-                                <button type="button" class="btn btn-success"><i class="ri-edit-2-line"></i></button> 
-                                <button type="button" class="btn btn-danger"><i class="ri-delete-bin-2-line"></i></button> 
-                                <button type="button" class="btn btn-warning"><i class="ri-eye-close-line"></i></button>
-                                </td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>                    
-                    <div class="d-flex justify-content-end mt-3">
-                        <button type="button" class="btn btn-primary" routerLink="/admin/representante/nvo-proy">
-                           Nueva Proyecto <i class="ri-newspaper-line"></i>
-                        </button>
-                     </div>
+  <div class="pagetitle">
+    <h1>Proyectos</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+        <li class="breadcrumb-item">Administar</li>
+        <li class="breadcrumb-item active">Proyectos</li>
+      </ol>
+    </nav>
+  </div>
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Proyectos</h5>
+            <p>Aqui se podrá Editar <i class="ri-edit-2-line"></i>, Eliminar <i class="ri-delete-bin-2-line"></i> y Descargar  <i class="ri-file-excel-2-line"></i> la información de los
+              distintos Proyectos.</p>
+            <div class="table-filter ">
+              <div class="container d-flex justify-content-end">
+                <div class="row mb-4">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="filter-status">Estado</label>
+                      <select class="form-select" id="filter-status" [(ngModel)]="selectedStatus"
+                        (ngModelChange)="filterProyects(selectedStatus)">
+                        <option *ngFor="let status of status" value="{{ status }}">{{ status }}</option>
+                      </select>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
-       </div>
-    </section>
- </main>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col" class="d-none"> Id</th>
+                    <th scope="col">Nombre Proyecto</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Cupo Mínimo</th>
+                    <th scope="col">Cupo Máximo</th>
+                    <th scope="col">Vecinos Inscritos</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col" class="d-none">Descripción</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let proyect of proyectos">
+                    <td class="d-none">{{ proyect.id_proyecto }}</td>
+                    <td>{{ proyect.nombre }}</td>
+                    <td>{{ proyect.estado }}</td>
+                    <td class="text-center">{{ proyect.cupo_min }}</td>
+                    <td class="text-center">{{ proyect.cupo_max }}</td>
+                    <td class="text-center">{{ proyect.inscritos }}</td>
+                    <td>{{ proyect.fecha_proyecto }}</td>
+                    <td class="d-none">{{ proyect.descripcion }}</td>
+                    <td>
+                      <div class="action-buttons d-flex flex-wrap">
+                        <button *ngIf="proyect.estado !== statusValidate" class="btn btn-warning btn-sm edit-btn" data-bs-toggle="modal"
+                         data-bs-target="#exampleModal" (click)="loadProyectDetails(proyect)" >
+                          <i class="ri-edit-2-line"></i>
+                        </button>
+                        <button *ngIf="proyect.estado === statusValidate" class="btn btn-success btn-sm excel-btn" data-bs-toggle="tooltip" title="Descargar Cierre Proyecto" data-bs-placement="top" (click)="downloadExcel(proyect.id_proyecto, proyect.nombre)">
+                          <i class="ri-file-excel-2-line"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm delete-btn" data-bs-toggle="tooltip" title="Eliminar Proyecto" data-bs-placement="top" (click)="deleteProyect(proyect)">
+                          <i class="ri-delete-bin-2-line"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Proyecto</h1>
+
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form [formGroup]="formProyect" (ngSubmit)="submitProyect()" #formRef="ngForm">
+                        <div class="row mb-3">
+                          <label for="nombreProyecto" class="col-sm-3 col-form-label">Nombre Proyecto</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" formControlName="nombreProyecto" [ngClass]="{
+                                'is-invalid': formProyect.get('nombreProyecto')?.invalid && formProyect.get('nombreProyecto')?.touched 
+                              }" />
+                            <div class="invalid-feedback"
+                              *ngIf="formProyect.get('nombreProyecto')?.errors?.['nameWhitoutNUMBERS']">
+                              El nombre no puede contener números.
+                            </div>
+                            <div class="invalid-feedback"
+                              *ngIf="formProyect.get('nombreProyecto')?.invalid && formProyect.get('nombreProyecto')?.errors?.['minlength']">
+                              El nombre debe tener al menos 10 caracteres.
+                            </div>
+                            <div class="invalid-feedback"
+                              *ngIf="formProyect.get('nombreProyecto')?.invalid && formProyect.get('nombreProyecto')?.errors?.['required']">
+                              Debes ingresar un nombre de proyecto.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mb-3 d-none">
+                          <label for="cupoMinimo" class="col-sm-3 col-form-label">Cupo Mínimo</label>
+                          <div class="col-sm-9">
+                            <input type="number" class="form-control" formControlName="cupoMinimo"
+                              (keydown)="cancelNumberInputMin($event)" min="1" [ngClass]="{
+                                'is-invalid': formProyect.get('cupoMaximo')?.invalid && formProyect.get('cupoMaximo')?.touched                    
+                              }" />
+                            <div class="invalid-feedback"
+                              *ngIf="formProyect.get('cupoMinimo')?.invalid && formProyect.get('cupoMinimo')?.touched">
+                              Debes ingresar un cupo mínimo.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label for="cupoMaximo" class="col-sm-3 col-form-label">Cupo Máximo</label>
+                          <div class="col-sm-9">
+                            <input type="number" class="form-control" formControlName="cupoMaximo"
+                              (keydown)="cancelNumberInput($event)" min="1"
+                              [value]="formProyect.get('cupoMinimo')?.value !== null ? (formProyect.get('cupoMinimo')?.value + 1) : null"
+                              [ngClass]="{
+                               'is-invalid': formProyect.get('cupoMaximo')?.invalid && formProyect.get('cupoMaximo')?.touched 
+                              }"
+                              [class.invalid]="formProyect.hasError('cupoMaximoInvalido') && formProyect.get('cupoMinimo')?.value < formProyect.get('cupoMaximo')?.value" />
+                            <div class="invalid-feedback"
+                              *ngIf="formProyect.get('cupoMaximo')?.errors?.['cupoMaximoInvalido'] && formProyect.get('cupoMaximo')?.touched && formProyect.get('cupoMinimo')?.value <= formProyect.get('cupoMaximo')?.value">
+                              El cupo máximo es inválido.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label for="descripcion" class="col-sm-3 col-form-label">Descripción</label>
+                          <div class="col-sm-9">
+                            <textarea class="form-control" formControlName="descripcion" [ngClass]="{
+                               'is-invalid': formProyect.get('descripcion')?.invalid && formProyect.get('descripcion')?.touched 
+                              }"></textarea>
+                            <div class="invalid-feedback"
+                              *ngIf="formProyect.get('descripcion')?.invalid && formProyect.get('descripcion')?.touched">
+                              Descripción inválida.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label for="nombreProyecto" class="col-sm-3 col-form-label">Estado</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" formControlName="estado" [ngClass]="{
+                              'is-invalid': formProyect.get('estado')?.invalid && formProyect.get('estado')?.touched 
+                            }">
+                              <option *ngFor="let estado of estados" [value]="estado">{{ estado }}</option>
+                            </select>
+                            <div class="invalid-feedback"
+                              *ngIf="formProyect.get('estado')?.errors?.['nameWhitoutNUMBERS']">
+                              El estado no puede contener números.
+                            </div>
+                            <div class="invalid-feedback"
+                              *ngIf="formProyect.get('estado')?.invalid && formProyect.get('estado')?.errors?.['minlength']">
+                              Estado inválido.
+                            </div>
+                            <div class="invalid-feedback"
+                              *ngIf="formProyect.get('nombreProyecto')?.invalid && formProyect.get('nombreProyecto')?.errors?.['required']">
+                              Debes ingresar un nombre de proyecto.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer ">
+                          <button type="button" class="btn btn-primary" (click)="submitProyect()"
+                            >Modificar</button>
+                          <button type="button" class="btn btn-danger align-close" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="table-pagination">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="d-flex justify-content-start align-items-center mt-3">
+                      <!-- <nav>
+                        <ul class="pagination pagination-grey">
+                          <li class="page-item mt-2">
+                            <a class="page-link" href="#" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                          </li>
+                          <li class="page-item"><a class="page-link mt-2 ms-1" href="#">1</a></li>
+                          <li class="page-item"><a class="page-link mt-2" href="#">2</a></li>
+                          <li class="page-item"><a class="page-link mt-2 " href="#">3</a></li>
+                          <li class="page-item">
+                            <a class="page-link mt-2 ms-1" href="#" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                              <span class="sr-only ">Next</span>
+                            </a>
+                          </li>
+                          <li class="page-item">
+                            <div class="d-flex align-items-center">
+                              <span class="page-link ms-3 mt-2">Filas: </span>
+                              <select class="page-link ms-1 mt-2" id="rowsPerPage">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                              </select>
+                            </div>
+                          </li>
+                        </ul>
+                      </nav> -->
+                    </div>
+                  </div>
+                  <div class="col-md-9">
+                    <div class="d-flex justify-content-end mt-3">
+                      <button type="button" class="btn btn-primary" routerLink="/admin/representante/nvo-proy">
+                        Nuevo Proyecto <i class="ri-newspaper-line"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+</main>

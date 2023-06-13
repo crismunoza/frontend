@@ -1,8 +1,8 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { Route, Router } from '@angular/router';
-//import { Login } from 'src/app/interfaces/modelos';
-//import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+import { RutService } from 'rut-chileno';
+import Swal from 'sweetalert2';
 import { Login } from 'src/app/interfaces/modelos';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -12,63 +12,91 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  login!:FormGroup; //formulario distinto de null
+  login!: FormGroup; //formulario distinto de null
+  parentForm!: FormGroup;
+  submit: boolean = false;
+  constructor(private router: Router, private fb: FormBuilder, private loggin: AuthService, private rutService: RutService,
+  ) { }
 
-  submit: boolean = false; 
-  constructor(private router:Router,private fb:FormBuilder, private loggin: AuthService
-   , ) { }
+  formatearRut(event: Event): void {
+    let username = this.rutService.getRutChileForm(1, (event.target as HTMLInputElement).value)
+    if (username)
+      this.login.controls['username'].patchValue(username, { emitEvent: false });
+  }
 
   ngOnInit(): void {
     this.login = this.fb.group({
       username: ["", [Validators.required]],
       password: ["", [Validators.required]],
-      rememberMe: false
+      rol_us: false
     });
-    
+
   }
-  onSubmit(){
+  onSubmit() {
     this.submit = true;
-    if(this.login.invalid){
+    if (this.login.invalid) {
       return;
     }
-    else{
+    else {
       //captura del dato y envio al metodo login
-      //const c = this.login.controls['rememberMe'].value;
-      const datos: Login ={
+      const datos: Login = {
         rut: this.login.controls['username'].value,
-        contrasenia: this.login.controls['password'].value
+        contrasenia: this.login.controls['password'].value,
+        tipo_user: this.login.controls['rol_us'].value
+      }
+      try {
+        this.loggin.login(datos).subscribe(res => {
+
+          if (res.status === 500) {
+            Swal.fire({
+              icon: 'error',
+              text: res.respuesta
+            })
+          }
+          else if (res.status === 404) {
+            Swal.fire({
+              icon: 'error',
+              text: res.respuesta
+            })
+          }
+          else {
+            if (res.alo[2] === 'admin') {
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Ingreso Exitoso!!',
+                showConfirmButton: false,
+                timer: 1500
+              }).then(() => {
+                /* Read more about isConfirmed, isDenied below */
+                this.router.navigate(['inicio']);
+              })
+            }
+            else if (res.alo[2] === 'vecino') {
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Ingreso Exitoso!!',
+                showConfirmButton: false,
+                timer: 1500
+              }).then(() => {
+                /* Read more about isConfirmed, isDenied below */
+                this.router.navigate(['inicio']);
+              })
+
+            }
+          }
+
+        });
+      } catch (error) {
+        console.error('Error al parsear la respuesta JSON:', error);
       }
 
-      console.log('lo q enviamos',datos)
-      try {
-          this.loggin.login(datos).subscribe( res =>{
-            //respuesta y modal de sweetAlert
-            console.log(res)
-            // if(res.alo[0] === 'representante'){
-            //   //Set.localStorage
-            //   //this.router.navigate(['inicio']);
-            //   Swal.fire({
-            //     position: 'center',
-            //     icon: 'success',
-            //     title: 'Ingreso Exitoso!!',
-            //     showConfirmButton: false,
-            //     timer: 1500
-            //   }).then(() => {
-            //     /* Read more about isConfirmed, isDenied below */
-            //     //this.router.navigate(['inicio']);
-            })
-            //}
-          
-        // });
-      }catch (error) {
-        console.error('Error al parsear la respuesta JSON:', error);
-      }  
-      
     }
   }
 
   //aqui indicamos la funcion de navigate la cual recibe una ruta y nos direcciona
-  navigate(ruta:any){ 
+  navigate(ruta: any) {
     this.router.navigateByUrl(ruta);
   }
 }

@@ -1,0 +1,97 @@
+.button-container {
+    display: flex;
+    justify-content: space-around; 
+}
+.action-buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+.table-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.form-group.col-md-3 {
+  padding-right: 0;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-toggle {
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 5px 10px;
+  background-color: #ffffff;
+  color: #212529;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.dropdown-menu {
+  min-width: auto;
+  padding: 5px 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-item {
+  padding: 5px 10px;
+  color: #212529;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+.btn-primary {
+  margin-top: 10px;
+  padding: 5px 15px;
+  border-radius: 4px;
+}
+
+.btn-primary i {
+  margin-right: 5px;
+}
+.custom-pagination {
+    background-color: #f2f2f2; /* Color gris claro */
+}
+
+.page-link-custom {
+  color: #333333; /* Color de texto */
+  background-color: white; /* Color de fondo de los botones */
+}
+
+.page-link-custom:hover {
+  color: #ffffff; /* Color de texto al pasar el cursor sobre los botones */
+  background-color: #a9a8a8; /* Color de fondo al pasar el cursor sobre los botones */
+}
+.page-item.active .page-link-custom {
+  background-color: #a9a8a8; /* Color de fondo del botón activo */
+}
+
+.page-link-custom[aria-label="Previous"] span,
+.page-link-custom[aria-label="Next"] span {
+  color: #555555; /* Color de las flechas */
+}
+.pagination-grey {
+  background-color: white;
+  border-color: #ccc;
+  
+}
+
+.pagination-grey .page-link {
+  color: #333;
+}
+
+.pagination-grey .page-link:hover {
+  background-color: #ddd;
+}
+
+.align-close {
+  margin-top: 10px;
+}

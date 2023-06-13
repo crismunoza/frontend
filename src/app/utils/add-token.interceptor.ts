@@ -9,7 +9,6 @@ import {
 import { Observable, catchError, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
-
 @Injectable()
 export class AddTokenInterceptor implements HttpInterceptor {
  

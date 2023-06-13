@@ -1,12 +1,11 @@
 export interface Municipalidad{
-   id_municipalidad: number;
+  id_municipalidad: number;
   nombre: string;
 };
 
-
 export interface comuna{
-    id_comuna: number;
-    nombre: string;
+  id_comuna: number;
+  nombre: string;
 };
 
 export interface JuntaVecinal {
@@ -25,35 +24,35 @@ export interface JuntaVecinal2 {
 export interface RepresentanteVecinal {
   rut_representante: string,
   primer_nombre: string,
-  segundo_nombre: String,
-  primer_apellido: String,
-  segundo_apellido: String,
-  direccion_rep: String,
-  numero_rep: Number,
-  correo_electronico: String,
-  telefono: Number;
-  contrasenia: String,
-  comuna_rep: Number,
+  segundo_nombre: string,
+  primer_apellido: string,
+  segundo_apellido: string,
+  direccion_rep: string,
+  numero_rep: number,
+  correo_electronico: string,
+  telefono: number;
+  contrasenia: string,
+  comuna_rep: number,
   avatar:string,
   ruta_evidencia: string,
   ruta_firma: string,
-  id_junta_vecinal: Number
+  id_junta_vecinal: number
 };
 
 export interface Vecino {
   rut_vecino: string,
   primer_nombre: string,
-  segundo_nombre: String,
-  primer_apellido: String,
-  segundo_apellido: String,
-  direccion: String,
-  correo_electronico: String,
-  telefono: Number;
-  contrasenia: String,
+  segundo_nombre: string,
+  primer_apellido: string,
+  segundo_apellido: string,
+  direccion: string,
+  correo_electronico: string,
+  telefono: number;
+  contrasenia: string,
   avatar:string,
   ruta_evidencia: string,
-  estado: Number,
-  fk_id_junta_vecinal: Number,
+  estado: number,
+  fk_id_junta_vecinal: number,
 };
 
 export interface Vecino2 {
@@ -68,27 +67,145 @@ export interface Vecino2 {
   contrasenia: string
 };
 
-
 export interface Proyect {
-
-  nombreProyecto : string;
-  cupoMinimo : number;
-  cupoMaximo : number;
+  id_proyecto : number;
+  nombre: string;
+  cupo_min : number;
+  cupo_max : number;
   descripcion : string;
-  fecha : string;
+  fecha_proyecto : string;
   imagen : string;
-  resp?: string;
-
+  estado: string;
+  resp?: any;
+  inscritos?: number;
 };
+
 export interface Login{
   rut: string,
-  contrasenia: string
+  contrasenia: string,
+  tipo_user: boolean
 };
+
 export interface User {
-  id: String,
-  name: String,
+  id: string,
+  name: string,
   apellido: string,
-  rut: String,
+  rut: string,
   avatar: string,
   id_junta_vec: number
 };
+
+export interface Solicitud {
+  titulo_solicitud: string,
+  asunto_solicitud: string,
+  descripcion: string,
+  estado_solicitud: string,
+  fk_id_vecino: number
+};
+
+export interface Solicitud2 {
+  createdAt: Date,
+  titulo_solicitud: string,
+  asunto_solicitud: string,
+  descripcion: string,
+  estado_solicitud: string,
+  respuesta: string,
+  fk_id_vecino: number
+};
+
+export interface Solicitud3 {
+  id_solicitud: number,
+  titulo_solicitud: string,
+  asunto_solicitud: string,
+  descripcion: string,
+  estado_solicitud: string,
+  createdAt: Date,
+  primer_nombre: string,
+  primer_apellido: string,
+  respuesta: string,
+  fk_id_vecino: number,
+  fk_id_junta_vecinal: number
+};
+
+export interface Solicitud4 {
+  id_solicitud: number,
+  estado_solicitud: string,
+  respuesta: string
+};
+
+export interface Valoracion {
+  opinion: string,
+  estrellas: number,
+  id_v:number
+};
+
+export interface Vecino4 {
+  rut_vecino: string,
+  primer_nombre: string,
+  segundo_nombre: string,
+  primer_apellido: string,
+  segundo_apellido: string,
+  direccion: string,
+  correo_electronico: string,
+  telefono: number;
+  contrasenia: string,
+  avatar: string,
+  ruta_evidencia: string,
+  estado: number,
+  fk_id_junta_vecinal: number,
+  imageUrl?: string, // Nueva propiedad imageUrl de tipo string opcional
+};
+
+export interface listValor {
+  vecino: string,
+  estrellas: number,
+  comentario: string
+};
+
+export interface reportes {
+  id_junta_vecinal : number,
+  rut_junta : string,
+  razon_social : string,
+  rut_vecino : string,
+  primer_nombre : string,
+  segundo_nombre : string,
+  primer_apellido : string,
+  segundo_apellido : string,
+  direccion : string,
+  nombre : string,
+  descripcion : string,
+  estado : string,
+  fecha_proyecto : string,
+  cupo_min : number,
+  cupo_max : number,
+  inscrito?: string,
+};
+
+export interface ajustePerfil{
+  rol : string,
+  telefono: number,
+  correo: string
+};
+
+export interface contacto{
+  nombre: string,
+  direccion: string,
+  numero_calle: number,
+  rut_junta: string,
+  razon_social: string,
+  primer_nombre: string,
+  segundo_nombre: string,
+  primer_apellido: string,
+  segundo_apellido: string,
+  correo_electronico: string,
+  telefono: number,
+};
+
+export interface Publication {
+  id_actividad: number;
+  nombre: string;
+  descripcion: string;
+  ruta_imagen: string;
+  fecha_actividad: string;
+  resp?: any;
+}
