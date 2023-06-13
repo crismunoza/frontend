@@ -176,389 +176,386 @@
    * Initiate TinyMCE Editor
    */
 
-  // var useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-  // tinymce.init({
-  //   selector: 'textarea.tinymce-editor',
-  //   plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
-  //   imagetools_cors_hosts: ['picsum.photos'],
-  //   menubar: 'file edit view insert format tools table help',
-  //   toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
-  //   toolbar_sticky: true,
-  //   autosave_ask_before_unload: true,
-  //   autosave_interval: '30s',
-  //   autosave_prefix: '{path}{query}-{id}-',
-  //   autosave_restore_when_empty: false,
-  //   autosave_retention: '2m',
-  //   image_advtab: true,
-  //   link_list: [{
-  //       title: 'My page 1',
-  //       value: 'https://www.tiny.cloud'
-  //     },
-  //     {
-  //       title: 'My page 2',
-  //       value: 'http://www.moxiecode.com'
-  //     }
-  //   ],
-  //   image_list: [{
-  //       title: 'My page 1',
-  //       value: 'https://www.tiny.cloud'
-  //     },
-  //     {
-  //       title: 'My page 2',
-  //       value: 'http://www.moxiecode.com'
-  //     }
-  //   ],
-  //   image_class_list: [{
-  //       title: 'None',
-  //       value: ''
-  //     },
-  //     {
-  //       title: 'Some class',
-  //       value: 'class-name'
-  //     }
-  //   ],
-  //   importcss_append: true,
-  //   file_picker_callback: function(callback, value, meta) {
-  //     /* Provide file and text for the link dialog */
-  //     if (meta.filetype === 'file') {
-  //       callback('https://www.google.com/logos/google.jpg', {
-  //         text: 'My text'
-  //       });
-  //     }
+  tinymce.init({
+    selector: 'textarea.tinymce-editor',
+    plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+    imagetools_cors_hosts: ['picsum.photos'],
+    menubar: 'file edit view insert format tools table help',
+    toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+    toolbar_sticky: true,
+    autosave_ask_before_unload: true,
+    autosave_interval: '30s',
+    autosave_prefix: '{path}{query}-{id}-',
+    autosave_restore_when_empty: false,
+    autosave_retention: '2m',
+    image_advtab: true,
+    link_list: [{
+        title: 'My page 1',
+        value: 'https://www.tiny.cloud'
+      },
+      {
+        title: 'My page 2',
+        value: 'http://www.moxiecode.com'
+      }
+    ],
+    image_list: [{
+        title: 'My page 1',
+        value: 'https://www.tiny.cloud'
+      },
+      {
+        title: 'My page 2',
+        value: 'http://www.moxiecode.com'
+      }
+    ],
+    image_class_list: [{
+        title: 'None',
+        value: ''
+      },
+      {
+        title: 'Some class',
+        value: 'class-name'
+      }
+    ],
+    importcss_append: true,
+    file_picker_callback: function(callback, value, meta) {
+      /* Provide file and text for the link dialog */
+      if (meta.filetype === 'file') {
+        callback('https://www.google.com/logos/google.jpg', {
+          text: 'My text'
+        });
+      }
 
-  //     /* Provide image and alt text for the image dialog */
-  //     if (meta.filetype === 'image') {
-  //       callback('https://www.google.com/logos/google.jpg', {
-  //         alt: 'My alt text'
-  //       });
-  //     }
+      /* Provide image and alt text for the image dialog */
+      if (meta.filetype === 'image') {
+        callback('https://www.google.com/logos/google.jpg', {
+          alt: 'My alt text'
+        });
+      }
 
-  //     /* Provide alternative source and posted for the media dialog */
-  //     if (meta.filetype === 'media') {
-  //       callback('movie.mp4', {
-  //         source2: 'alt.ogg',
-  //         poster: 'https://www.google.com/logos/google.jpg'
-  //       });
-  //     }
-  //   },
-  //   templates: [{
-  //       title: 'New Table',
-  //       description: 'creates a new table',
-  //       content: '<div class="mceTmpl"><table width="98%%"  border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>'
-  //     },
-  //     {
-  //       title: 'Starting my story',
-  //       description: 'A cure for writers block',
-  //       content: 'Once upon a time...'
-  //     },
-  //     {
-  //       title: 'New list with dates',
-  //       description: 'New List with dates',
-  //       content: '<div class="mceTmpl"><span class="cdate">cdate</span><br /><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>'
-  //     }
-  //   ],
-  //   template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
-  //   template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
-  //   height: 600,
-  //   image_caption: true,
-  //   quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
-  //   noneditable_noneditable_class: 'mceNonEditable',
-  //   toolbar_mode: 'sliding',
-  //   contextmenu: 'link image imagetools table',
-  //   skin: useDarkMode ? 'oxide-dark' : 'oxide',
-  //   content_css: useDarkMode ? 'dark' : 'default',
-  //   content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-  // });
+      /* Provide alternative source and posted for the media dialog */
+      if (meta.filetype === 'media') {
+        callback('movie.mp4', {
+          source2: 'alt.ogg',
+          poster: 'https://www.google.com/logos/google.jpg'
+        });
+      }
+    },
+    templates: [{
+        title: 'New Table',
+        description: 'creates a new table',
+        content: '<div class="mceTmpl"><table width="98%%"  border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>'
+      },
+      {
+        title: 'Starting my story',
+        description: 'A cure for writers block',
+        content: 'Once upon a time...'
+      },
+      {
+        title: 'New list with dates',
+        description: 'New List with dates',
+        content: '<div class="mceTmpl"><span class="cdate">cdate</span><br /><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>'
+      }
+    ],
+    template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
+    template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
+    height: 600,
+    image_caption: true,
+    quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+    noneditable_noneditable_class: 'mceNonEditable',
+    toolbar_mode: 'sliding',
+    contextmenu: 'link image imagetools table',
+    skin: useDarkMode ? 'oxide-dark' : 'oxide',
+    content_css: useDarkMode ? 'dark' : 'default',
+    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+  });
 
-  // /**
-  //  * Initiate Bootstrap validation check
-  //  */
-  // var needsValidation = document.querySelectorAll('.needs-validation')
+  /**
+   * Initiate Bootstrap validation check
+   */
+  var needsValidation = document.querySelectorAll('.needs-validation')
 
-  // Array.prototype.slice.call(needsValidation)
-  //   .forEach(function(form) {
-  //     form.addEventListener('submit', function(event) {
-  //       if (!form.checkValidity()) {
-  //         event.preventDefault()
-  //         event.stopPropagation()
-  //       }
+  Array.prototype.slice.call(needsValidation)
+    .forEach(function(form) {
+      form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
 
-  //       form.classList.add('was-validated')
-  //     }, false)
-  //   })
+        form.classList.add('was-validated')
+      }, false)
+    })
 
-  // /**
-  //  * Initiate Datatables
-  //  */
-  // const datatables = select('.datatable', true)
-  // datatables.forEach(datatable => {
-  //   new simpleDatatables.DataTable(datatable);
-  // })
+  /**
+   * Initiate Datatables
+   */
+  const datatables = select('.datatable', true)
+  datatables.forEach(datatable => {
+    new simpleDatatables.DataTable(datatable);
+  })
 
   /**
    * Autoresize echart charts
    */
-  // const mainContainer = select('#main');
-  // if (mainContainer) {
-  //   setTimeout(() => {
-  //     new ResizeObserver(function() {
-  //       select('.echart', true).forEach(getEchart => {
-  //         echarts.getInstanceByDom(getEchart).resize();
-  //       })
-  //     }).observe(mainContainer);
-  //   }, 200);
-  // }
-  // /*Charts*/
-  // var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
-  //   legend: {
-  //     data: ['Allocated Budget', 'Actual Spending']
-  //   },
-  //   radar: {
-  //     // shape: 'circle',
-  //     indicator: [{
-  //         name: 'Sales',
-  //         max: 6500
-  //       },
-  //       {
-  //         name: 'Administration',
-  //         max: 16000
-  //       },
-  //       {
-  //         name: 'Information Technology',
-  //         max: 30000
-  //       },
-  //       {
-  //         name: 'Customer Support',
-  //         max: 38000
-  //       },
-  //       {
-  //         name: 'Development',
-  //         max: 52000
-  //       },
-  //       {
-  //         name: 'Marketing',
-  //         max: 25000
-  //       }
-  //     ]
-  //   },
-  //   series: [{
-  //     name: 'Budget vs spending',
-  //     type: 'radar',
-  //     data: [{
-  //         value: [4200, 3000, 20000, 35000, 50000, 18000],
-  //         name: 'Allocated Budget'
-  //       },
-  //       {
-  //         value: [5000, 14000, 28000, 26000, 42000, 21000],
-  //         name: 'Actual Spending'
-  //       }
-  //     ]
-  //   }]
-  // });
-  // var trafficChart = echarts.init(document.querySelector("#trafficChart")).setOption({
-  //   tooltip: {
-  //     trigger: 'item'
-  //   },
-  //   legend: {
-  //     top: '5%',
-  //     left: 'center'
-  //   },
-  //   series: [{
-  //     name: 'Access From',
-  //     type: 'pie',
-  //     radius: ['40%', '70%'],
-  //     avoidLabelOverlap: false,
-  //     label: {
-  //       show: false,
-  //       position: 'center'
-  //     },
-  //     emphasis: {
-  //       label: {
-  //         show: true,
-  //         fontSize: '18',
-  //         fontWeight: 'bold'
-  //       }
-  //     },
-  //     labelLine: {
-  //       show: false
-  //     },
-  //     data: [{
-  //         value: 1048,
-  //         name: 'Search Engine'
-  //       },
-  //       {
-  //         value: 735,
-  //         name: 'Direct'
-  //       },
-  //       {
-  //         value: 580,
-  //         name: 'Email'
-  //       },
-  //       {
-  //         value: 484,
-  //         name: 'Union Ads'
-  //       },
-  //       {
-  //         value: 300,
-  //         name: 'Video Ads'
-  //       }
-  //     ]
-  //   }]
-  // });
+  const mainContainer = select('#main');
+  if (mainContainer) {
+    setTimeout(() => {
+      new ResizeObserver(function() {
+        select('.echart', true).forEach(getEchart => {
+          echarts.getInstanceByDom(getEchart).resize();
+        })
+      }).observe(mainContainer);
+    }, 200);
+  }
+  /*Charts*/
+  var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
+    legend: {
+      data: ['Allocated Budget', 'Actual Spending']
+    },
+    radar: {
+      // shape: 'circle',
+      indicator: [{
+          name: 'Sales',
+          max: 6500
+        },
+        {
+          name: 'Administration',
+          max: 16000
+        },
+        {
+          name: 'Information Technology',
+          max: 30000
+        },
+        {
+          name: 'Customer Support',
+          max: 38000
+        },
+        {
+          name: 'Development',
+          max: 52000
+        },
+        {
+          name: 'Marketing',
+          max: 25000
+        }
+      ]
+    },
+    series: [{
+      name: 'Budget vs spending',
+      type: 'radar',
+      data: [{
+          value: [4200, 3000, 20000, 35000, 50000, 18000],
+          name: 'Allocated Budget'
+        },
+        {
+          value: [5000, 14000, 28000, 26000, 42000, 21000],
+          name: 'Actual Spending'
+        }
+      ]
+    }]
+  });
+  var trafficChart = echarts.init(document.querySelector("#trafficChart")).setOption({
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      top: '5%',
+      left: 'center'
+    },
+    series: [{
+      name: 'Access From',
+      type: 'pie',
+      radius: ['40%', '70%'],
+      avoidLabelOverlap: false,
+      label: {
+        show: false,
+        position: 'center'
+      },
+      emphasis: {
+        label: {
+          show: true,
+          fontSize: '18',
+          fontWeight: 'bold'
+        }
+      },
+      labelLine: {
+        show: false
+      },
+      data: [{
+          value: 1048,
+          name: 'Search Engine'
+        },
+        {
+          value: 735,
+          name: 'Direct'
+        },
+        {
+          value: 580,
+          name: 'Email'
+        },
+        {
+          value: 484,
+          name: 'Union Ads'
+        },
+        {
+          value: 300,
+          name: 'Video Ads'
+        }
+      ]
+    }]
+  });
   
-//Echart
-// var EareaChart = echarts.init(document.querySelector("#EareaChart")).setOption({
-//   xAxis: {
-//     type: 'category',
-//     boundaryGap: false,
-//     data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-//   },
-//   yAxis: {
-//     type: 'value'
-//   },
+Echart
+var EareaChart = echarts.init(document.querySelector("#EareaChart")).setOption({
+  xAxis: {
+    type: 'category',
+    boundaryGap: false,
+    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  },
+  yAxis: {
+    type: 'value'
+  },
   
-//   series: [{
-//     data: [820, 932, 901, 934, 1290, 1330, 1320],
-//     type: 'line',
-//     smooth: true,
-//     areaStyle: {}
-//   }]
-// });
+  series: [{
+    data: [820, 932, 901, 934, 1290, 1330, 1320],
+    type: 'line',
+    smooth: true,
+    areaStyle: {}
+  }]
+});
 
-// var barChart = echarts.init(document.querySelector("#barChart")).setOption({
-//   xAxis: {
-//     type: 'category',
-//     data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-//   },
-//   yAxis: {
-//     type: 'value'
-//   },
-//   series: [{
-//     data: [120, 200, 150, 80, 70, 110, 130],
-//     type: 'bar'
-//   }]
-// });
+var barChart = echarts.init(document.querySelector("#barChart")).setOption({
+  xAxis: {
+    type: 'category',
+    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [{
+    data: [120, 200, 150, 80, 70, 110, 130],
+    type: 'bar'
+  }]
+});
 
-// var verticalBarChart = echarts.init(document.querySelector("#verticalBarChart")).setOption({
-//   title: {
-//     text: 'World Population'
-//   },
-//   tooltip: {
-//     trigger: 'axis',
-//     axisPointer: {
-//       type: 'shadow'
-//     }
-//   },
-//   legend: {},
-//   grid: {
-//     left: '3%',
-//     right: '4%',
-//     bottom: '3%',
-//     containLabel: true
-//   },
-//   xAxis: {
-//     type: 'value',
-//     boundaryGap: [0, 0.01]
-//   },
-//   yAxis: {
-//     type: 'category',
-//     data: ['Brazil', 'Indonesia', 'USA', 'India', 'China', 'World']
-//   },
-//   series: [{
-//       name: '2011',
-//       type: 'bar',
-//       data: [18203, 23489, 29034, 104970, 131744, 630230]
-//     },
-//     {
-//       name: '2012',
-//       type: 'bar',
-//       data: [19325, 23438, 31000, 121594, 134141, 681807]
-//     }
-//   ]
-// });
+var verticalBarChart = echarts.init(document.querySelector("#verticalBarChart")).setOption({
+  title: {
+    text: 'World Population'
+  },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    }
+  },
+  legend: {},
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  xAxis: {
+    type: 'value',
+    boundaryGap: [0, 0.01]
+  },
+  yAxis: {
+    type: 'category',
+    data: ['Brazil', 'Indonesia', 'USA', 'India', 'China', 'World']
+  },
+  series: [{
+      name: '2011',
+      type: 'bar',
+      data: [18203, 23489, 29034, 104970, 131744, 630230]
+    },
+    {
+      name: '2012',
+      type: 'bar',
+      data: [19325, 23438, 31000, 121594, 134141, 681807]
+    }
+  ]
+});
 
-  
-  
-  
   }, 1);
-  // new ApexCharts(document.querySelector("#reportsChart"), {
-  //   series: [{
-  //     name: 'Sales',
-  //     data: [31, 40, 28, 51, 42, 82, 56],
-  //   }, {
-  //     name: 'Revenue',
-  //     data: [11, 32, 45, 32, 34, 52, 41]
-  //   }, {
-  //     name: 'Customers',
-  //     data: [15, 11, 32, 18, 9, 24, 11]
-  //   }],
-  //   chart: {
-  //     height: 350,
-  //     type: 'area',
-  //     toolbar: {
-  //       show: false
-  //     },
-  //   },
-  //   markers: {
-  //     size: 4
-  //   },
-  //   colors: ['#4154f1', '#2eca6a', '#ff771d'],
-  //   fill: {
-  //     type: "gradient",
-  //     gradient: {
-  //       shadeIntensity: 1,
-  //       opacityFrom: 0.3,
-  //       opacityTo: 0.4,
-  //       stops: [0, 90, 100]
-  //     }
-  //   },
-  //   dataLabels: {
-  //     enabled: false
-  //   },
-  //   stroke: {
-  //     curve: 'smooth',
-  //     width: 2
-  //   },
-  //   xaxis: {
-  //     type: 'datetime',
-  //     categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-  //   },
-  //   tooltip: {
-  //     x: {
-  //       format: 'dd/MM/yy HH:mm'
-  //     },
-  //   }
-  // }).render();
-  // //ApexCharts
-  // var lineChart = new ApexCharts(document.querySelector("#AlineChart"), {
-  //   series: [{
-  //     name: "Desktops",
-  //     data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-  //   }],
-  //   chart: {
-  //     height: 350,
-  //     type: 'line',
-  //     zoom: {
-  //       enabled: false
-  //     }
-  //   },
-  //   dataLabels: {
-  //     enabled: false
-  //   },
-  //   stroke: {
-  //     curve: 'straight'
-  //   },
-  //   grid: {
-  //     row: {
-  //       colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-  //       opacity: 0.5
-  //     },
-  //   },
-  //   xaxis: {
-  //     categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-  //   }
-  // }).render();
+  new ApexCharts(document.querySelector("#reportsChart"), {
+    series: [{
+      name: 'Sales',
+      data: [31, 40, 28, 51, 42, 82, 56],
+    }, {
+      name: 'Revenue',
+      data: [11, 32, 45, 32, 34, 52, 41]
+    }, {
+      name: 'Customers',
+      data: [15, 11, 32, 18, 9, 24, 11]
+    }],
+    chart: {
+      height: 350,
+      type: 'area',
+      toolbar: {
+        show: false
+      },
+    },
+    markers: {
+      size: 4
+    },
+    colors: ['#4154f1', '#2eca6a', '#ff771d'],
+    fill: {
+      type: "gradient",
+      gradient: {
+        shadeIntensity: 1,
+        opacityFrom: 0.3,
+        opacityTo: 0.4,
+        stops: [0, 90, 100]
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'smooth',
+      width: 2
+    },
+    xaxis: {
+      type: 'datetime',
+      categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+    },
+    tooltip: {
+      x: {
+        format: 'dd/MM/yy HH:mm'
+      },
+    }
+  }).render();
+  //ApexCharts
+  var lineChart = new ApexCharts(document.querySelector("#AlineChart"), {
+    series: [{
+      name: "Desktops",
+      data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+    }],
+    chart: {
+      height: 350,
+      type: 'line',
+      zoom: {
+        enabled: false
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'straight'
+    },
+    grid: {
+      row: {
+        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+        opacity: 0.5
+      },
+    },
+    xaxis: {
+      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+    }
+  }).render();
 
   const series = {
     "monthDataSeries1": {
@@ -906,312 +903,314 @@
       ]
     }
   }
-  // var AareaChart = new ApexCharts(document.querySelector("#AareaChart"), {
-  //   series: [{
-  //     name: "STOCK ABC",
-  //     data: series.monthDataSeries1.prices
-  //   }],
-  //   chart: {
-  //     type: 'area',
-  //     height: 350,
-  //     zoom: {
-  //       enabled: false
-  //     }
-  //   },
-  //   dataLabels: {
-  //     enabled: false
-  //   },
-  //   stroke: {
-  //     curve: 'straight'
-  //   },
-  //   subtitle: {
-  //     text: 'Price Movements',
-  //     align: 'left'
-  //   },
-  //   labels: series.monthDataSeries1.dates,
-  //   xaxis: {
-  //     type: 'datetime',
-  //   },
-  //   yaxis: {
-  //     opposite: true
-  //   },
-  //   legend: {
-  //     horizontalAlign: 'left'
-  //   }
-  // }).render();
-  // //Chart.js
-  // new Chart(document.querySelector('#lineChart'), {
-  //   type: 'line',
-  //   data: {
-  //     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  //     datasets: [{
-  //       label: 'Line Chart',
-  //       data: [65, 59, 80, 81, 56, 55, 40],
-  //       fill: false,
-  //       borderColor: 'rgb(75, 192, 192)',
-  //       tension: 0.1
-  //     }]
-  //   },
-  //   options: {
-  //     scales: {
-  //       y: {
-  //         beginAtZero: true
-  //       }
-  //     }
-  //   }
-  // });
-  // new Chart(document.querySelector('#barChart'), {
-  //   type: 'bar',
-  //   data: {
-  //     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  //     datasets: [{
-  //       label: 'Bar Chart',
-  //       data: [65, 59, 80, 81, 56, 55, 40],
-  //       backgroundColor: [
-  //         'rgba(255, 99, 132, 0.2)',
-  //         'rgba(255, 159, 64, 0.2)',
-  //         'rgba(255, 205, 86, 0.2)',
-  //         'rgba(75, 192, 192, 0.2)',
-  //         'rgba(54, 162, 235, 0.2)',
-  //         'rgba(153, 102, 255, 0.2)',
-  //         'rgba(201, 203, 207, 0.2)'
-  //       ],
-  //       borderColor: [
-  //         'rgb(255, 99, 132)',
-  //         'rgb(255, 159, 64)',
-  //         'rgb(255, 205, 86)',
-  //         'rgb(75, 192, 192)',
-  //         'rgb(54, 162, 235)',
-  //         'rgb(153, 102, 255)',
-  //         'rgb(201, 203, 207)'
-  //       ],
-  //       borderWidth: 1
-  //     }]
-  //   },
-  //   options: {
-  //     scales: {
-  //       y: {
-  //         beginAtZero: true
-  //       }
-  //     }
-  //   }
-  // });
-  // new Chart(document.querySelector('#pieChart'), {
-  //   type: 'pie',
-  //   data: {
-  //     labels: [
-  //       'Red',
-  //       'Blue',
-  //       'Yellow'
-  //     ],
-  //     datasets: [{
-  //       label: 'My First Dataset',
-  //       data: [300, 50, 100],
-  //       backgroundColor: [
-  //         'rgb(255, 99, 132)',
-  //         'rgb(54, 162, 235)',
-  //         'rgb(255, 205, 86)'
-  //       ],
-  //       hoverOffset: 4
-  //     }]
-  //   }
-  // });
-  // new Chart(document.querySelector('#doughnutChart'), {
-  //   type: 'doughnut',
-  //   data: {
-  //     labels: [
-  //       'Red',
-  //       'Blue',
-  //       'Yellow'
-  //     ],
-  //     datasets: [{
-  //       label: 'My First Dataset',
-  //       data: [300, 50, 100],
-  //       backgroundColor: [
-  //         'rgb(255, 99, 132)',
-  //         'rgb(54, 162, 235)',
-  //         'rgb(255, 205, 86)'
-  //       ],
-  //       hoverOffset: 4
-  //     }]
-  //   }
-  // });
-  // new Chart(document.querySelector('#radarChart'), {
-  //   type: 'radar',
-  //   data: {
-  //     labels: [
-  //       'Eating',
-  //       'Drinking',
-  //       'Sleeping',
-  //       'Designing',
-  //       'Coding',
-  //       'Cycling',
-  //       'Running'
-  //     ],
-  //     datasets: [{
-  //       label: 'First Dataset',
-  //       data: [65, 59, 90, 81, 56, 55, 40],
-  //       fill: true,
-  //       backgroundColor: 'rgba(255, 99, 132, 0.2)',
-  //       borderColor: 'rgb(255, 99, 132)',
-  //       pointBackgroundColor: 'rgb(255, 99, 132)',
-  //       pointBorderColor: '#fff',
-  //       pointHoverBackgroundColor: '#fff',
-  //       pointHoverBorderColor: 'rgb(255, 99, 132)'
-  //     }, {
-  //       label: 'Second Dataset',
-  //       data: [28, 48, 40, 19, 96, 27, 100],
-  //       fill: true,
-  //       backgroundColor: 'rgba(54, 162, 235, 0.2)',
-  //       borderColor: 'rgb(54, 162, 235)',
-  //       pointBackgroundColor: 'rgb(54, 162, 235)',
-  //       pointBorderColor: '#fff',
-  //       pointHoverBackgroundColor: '#fff',
-  //       pointHoverBorderColor: 'rgb(54, 162, 235)'
-  //     }]
-  //   },
-  //   options: {
-  //     elements: {
-  //       line: {
-  //         borderWidth: 3
-  //       }
-  //     }
-  //   }
-  // });
-  // new Chart(document.querySelector('#polarAreaChart'), {
-  //   type: 'polarArea',
-  //   data: {
-  //     labels: [
-  //       'Red',
-  //       'Green',
-  //       'Yellow',
-  //       'Grey',
-  //       'Blue'
-  //     ],
-  //     datasets: [{
-  //       label: 'My First Dataset',
-  //       data: [11, 16, 7, 3, 14],
-  //       backgroundColor: [
-  //         'rgb(255, 99, 132)',
-  //         'rgb(75, 192, 192)',
-  //         'rgb(255, 205, 86)',
-  //         'rgb(201, 203, 207)',
-  //         'rgb(54, 162, 235)'
-  //       ]
-  //     }]
-  //   }
-  // });
-  // new Chart(document.querySelector('#stakedBarChart'), {
-  //   type: 'bar',
-  //   data: {
-  //     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  //     datasets: [{
-  //         label: 'Dataset 1',
-  //         data: [-75, -15, 18, 48, 74],
-  //         backgroundColor: 'rgb(255, 99, 132)',
-  //       },
-  //       {
-  //         label: 'Dataset 2',
-  //         data: [-11, -1, 12, 62, 95],
-  //         backgroundColor: 'rgb(75, 192, 192)',
-  //       },
-  //       {
-  //         label: 'Dataset 3',
-  //         data: [-44, -5, 22, 35, 62],
-  //         backgroundColor: 'rgb(255, 205, 86)',
-  //       },
-  //     ]
-  //   },
-  //   options: {
-  //     plugins: {
-  //       title: {
-  //         display: true,
-  //         text: 'Chart.js Bar Chart - Stacked'
-  //       },
-  //     },
-  //     responsive: true,
-  //     scales: {
-  //       x: {
-  //         stacked: true,
-  //       },
-  //       y: {
-  //         stacked: true
-  //       }
-  //     }
-  //   }
-  // });
+  var AareaChart = new ApexCharts(document.querySelector("#AareaChart"), {
+    series: [{
+      name: "STOCK ABC",
+      data: series.monthDataSeries1.prices
+    }],
+    chart: {
+      type: 'area',
+      height: 350,
+      zoom: {
+        enabled: false
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'straight'
+    },
+    subtitle: {
+      text: 'Price Movements',
+      align: 'left'
+    },
+    labels: series.monthDataSeries1.dates,
+    xaxis: {
+      type: 'datetime',
+    },
+    yaxis: {
+      opposite: true
+    },
+    legend: {
+      horizontalAlign: 'left'
+    }
+  }).render();
 
-  // new Chart(document.querySelector('#bubbleChart'), {
-  //   type: 'bubble',
-  //   data: {
-  //     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  //     datasets: [{
-  //         label: 'Dataset 1',
-  //         data: [{
-  //             x: 20,
-  //             y: 30,
-  //             r: 15
-  //           },
-  //           {
-  //             x: 40,
-  //             y: 10,
-  //             r: 10
-  //           },
-  //           {
-  //             x: 15,
-  //             y: 37,
-  //             r: 12
-  //           },
-  //           {
-  //             x: 32,
-  //             y: 42,
-  //             r: 33
-  //           }
-  //         ],
-  //         borderColor: 'rgb(255, 99, 132)',
-  //         backgroundColor: 'rgba(255, 99, 132, 0.5)'
-  //       },
-  //       {
-  //         label: 'Dataset 2',
-  //         data: [{
-  //             x: 40,
-  //             y: 25,
-  //             r: 22
-  //           },
-  //           {
-  //             x: 24,
-  //             y: 47,
-  //             r: 11
-  //           },
-  //           {
-  //             x: 65,
-  //             y: 11,
-  //             r: 14
-  //           },
-  //           {
-  //             x: 11,
-  //             y: 55,
-  //             r: 8
-  //           }
-  //         ],
-  //         borderColor: 'rgb(75, 192, 192)',
-  //         backgroundColor: 'rgba(75, 192, 192, 0.5)'
-  //       }
-  //     ]
-  //   },
-  //   options: {
-  //     responsive: true,
-  //     plugins: {
-  //       legend: {
-  //         position: 'top',
-  //       },
-  //       title: {
-  //         display: true,
-  //         text: 'Chart.js Bubble Chart'
-  //       }
-  //     }
-  //   }
-  // });
+  
+  //Chart.js
+  new Chart(document.querySelector('#lineChart'), {
+    type: 'line',
+    data: {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [{
+        label: 'Line Chart',
+        data: [65, 59, 80, 81, 56, 55, 40],
+        fill: false,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+  new Chart(document.querySelector('#barChart'), {
+    type: 'bar',
+    data: {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [{
+        label: 'Bar Chart',
+        data: [65, 59, 80, 81, 56, 55, 40],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(201, 203, 207, 0.2)'
+        ],
+        borderColor: [
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(153, 102, 255)',
+          'rgb(201, 203, 207)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+  new Chart(document.querySelector('#pieChart'), {
+    type: 'pie',
+    data: {
+      labels: [
+        'Red',
+        'Blue',
+        'Yellow'
+      ],
+      datasets: [{
+        label: 'My First Dataset',
+        data: [300, 50, 100],
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 205, 86)'
+        ],
+        hoverOffset: 4
+      }]
+    }
+  });
+  new Chart(document.querySelector('#doughnutChart'), {
+    type: 'doughnut',
+    data: {
+      labels: [
+        'Red',
+        'Blue',
+        'Yellow'
+      ],
+      datasets: [{
+        label: 'My First Dataset',
+        data: [300, 50, 100],
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 205, 86)'
+        ],
+        hoverOffset: 4
+      }]
+    }
+  });
+  new Chart(document.querySelector('#radarChart'), {
+    type: 'radar',
+    data: {
+      labels: [
+        'Eating',
+        'Drinking',
+        'Sleeping',
+        'Designing',
+        'Coding',
+        'Cycling',
+        'Running'
+      ],
+      datasets: [{
+        label: 'First Dataset',
+        data: [65, 59, 90, 81, 56, 55, 40],
+        fill: true,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgb(255, 99, 132)',
+        pointBackgroundColor: 'rgb(255, 99, 132)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgb(255, 99, 132)'
+      }, {
+        label: 'Second Dataset',
+        data: [28, 48, 40, 19, 96, 27, 100],
+        fill: true,
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgb(54, 162, 235)',
+        pointBackgroundColor: 'rgb(54, 162, 235)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgb(54, 162, 235)'
+      }]
+    },
+    options: {
+      elements: {
+        line: {
+          borderWidth: 3
+        }
+      }
+    }
+  });
+  new Chart(document.querySelector('#polarAreaChart'), {
+    type: 'polarArea',
+    data: {
+      labels: [
+        'Red',
+        'Green',
+        'Yellow',
+        'Grey',
+        'Blue'
+      ],
+      datasets: [{
+        label: 'My First Dataset',
+        data: [11, 16, 7, 3, 14],
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(75, 192, 192)',
+          'rgb(255, 205, 86)',
+          'rgb(201, 203, 207)',
+          'rgb(54, 162, 235)'
+        ]
+      }]
+    }
+  });
+  new Chart(document.querySelector('#stakedBarChart'), {
+    type: 'bar',
+    data: {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [{
+          label: 'Dataset 1',
+          data: [-75, -15, 18, 48, 74],
+          backgroundColor: 'rgb(255, 99, 132)',
+        },
+        {
+          label: 'Dataset 2',
+          data: [-11, -1, 12, 62, 95],
+          backgroundColor: 'rgb(75, 192, 192)',
+        },
+        {
+          label: 'Dataset 3',
+          data: [-44, -5, 22, 35, 62],
+          backgroundColor: 'rgb(255, 205, 86)',
+        },
+      ]
+    },
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: 'Chart.js Bar Chart - Stacked'
+        },
+      },
+      responsive: true,
+      scales: {
+        x: {
+          stacked: true,
+        },
+        y: {
+          stacked: true
+        }
+      }
+    }
+  });
+
+  new Chart(document.querySelector('#bubbleChart'), {
+    type: 'bubble',
+    data: {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [{
+          label: 'Dataset 1',
+          data: [{
+              x: 20,
+              y: 30,
+              r: 15
+            },
+            {
+              x: 40,
+              y: 10,
+              r: 10
+            },
+            {
+              x: 15,
+              y: 37,
+              r: 12
+            },
+            {
+              x: 32,
+              y: 42,
+              r: 33
+            }
+          ],
+          borderColor: 'rgb(255, 99, 132)',
+          backgroundColor: 'rgba(255, 99, 132, 0.5)'
+        },
+        {
+          label: 'Dataset 2',
+          data: [{
+              x: 40,
+              y: 25,
+              r: 22
+            },
+            {
+              x: 24,
+              y: 47,
+              r: 11
+            },
+            {
+              x: 65,
+              y: 11,
+              r: 14
+            },
+            {
+              x: 11,
+              y: 55,
+              r: 8
+            }
+          ],
+          borderColor: 'rgb(75, 192, 192)',
+          backgroundColor: 'rgba(75, 192, 192, 0.5)'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Chart.js Bubble Chart'
+        }
+      }
+    }
+  });
 
  
 })();

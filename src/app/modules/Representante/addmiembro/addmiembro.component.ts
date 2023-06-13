@@ -1,14 +1,12 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { Vecino4,User, RepresentanteVecinal, comuna} from 'src/app/interfaces/modelos';
+import { Component, OnInit} from '@angular/core';
+import { Vecino4, RepresentanteVecinal, comuna} from 'src/app/interfaces/modelos';
 import * as CryptoJS from 'crypto-js';
 import { ComunaService } from 'src/app/services/servi.service';
 import { PostService } from 'src/app/services/postService.service';
-
 import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { RutService } from 'rut-chileno';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addmiembro',
@@ -35,9 +33,8 @@ export class AddmiembroComponent implements OnInit {
     private deleteVecino: PostService,
     private modificarEstado: PostService,
     private fb:FormBuilder,
-    private rutService: RutService
-    ,private junta:PostService
-    ,private router:Router
+    private rutService: RutService,
+    private junta:PostService,
   ) {
     this.rep2 = this.fb.group ({
       run_rep: ["", [Validators.required, this.rutService.validaRutForm]],

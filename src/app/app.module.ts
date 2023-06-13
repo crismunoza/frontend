@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RutModule } from 'rut-chileno';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,9 +12,11 @@ import { LoginComponent } from './components/pages/login/login.component';
 import { PerfilComponent } from './components/pages/perfil/perfil.component';
 import { PagesError404Component } from './components/pages/pages-error404/pages-error404.component';
 import { InicioComponent } from './components/pages/inicio/inicio.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { InicioGeneralComponent } from './components/inicio-general/inicio-general.component';
 import { ResetpassComponent } from './components/pages/resetpass/resetpass.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { InterceptorService } from './services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -35,9 +38,14 @@ import { ResetpassComponent } from './components/pages/resetpass/resetpass.compo
     HttpClientModule,
     FormsModule,
     RutModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
   ],
-  providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

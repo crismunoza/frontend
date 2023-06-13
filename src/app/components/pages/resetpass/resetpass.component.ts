@@ -6,6 +6,7 @@ import { ComunaService } from '../../../services/servi.service';
 import { PostService } from '../../../services/postService.service';
 
 import Swal from 'sweetalert2';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class ResetpassComponent implements OnInit {
 
   constructor(private router: Router, private fb: FormBuilder, 
     private rutService: RutService, private comunaService: ComunaService,
-    private PostService: PostService) { }
+    private PostService: PostService, private spinnerService:SpinnerService ) { }
 
   formatearRut(event: Event): void {
     let rut = this.rutService.getRutChileForm(1, (event.target as HTMLInputElement).value);
@@ -31,95 +32,6 @@ export class ResetpassComponent implements OnInit {
       this.resetpass.controls['rut'].patchValue(rut, { emitEvent: false });
     }
   }
-
-  
-  // verificarRut() {
-  //   this.submit = true;
-  //   if (this.resetpass.controls['rut'].invalid) {
-  //     return;
-  //   }
-    
-  //   let rut = this.resetpass.controls['rut'].value;
-  //   // Aquí debes enviar el rut al backend y manejar la respuesta
-  //   this.comunaService.verificarRut(rut).subscribe(res => {
-  //     if (res.msg === 'ok') {
-  //       Swal.fire({
-  //         position: 'center',
-  //         icon: 'success',
-  //         title: 'Rut Verificado',
-  //         showConfirmButton: false,
-  //         timer: 2000
-  //       }).then(() => {
-  //         this.showRutInput = false;
-  //         this.showCorreoInput = true;
-  //       });
-  //     } else if(res.msg === 'no esta') {
-  //       // Aquí puedes manejar el mensaje recibido en el bloque else if
-  //       Swal.fire({
-  //         position: 'center',
-  //         icon: 'error',
-  //         title: 'Rut no  Registrado',
-  //         showConfirmButton: false,
-  //         timer: 2000
-  //       });
-        
-  //     }
-  //   }, error => {
-  //     Swal.fire({
-  //       position: 'center',
-  //       icon: 'error',
-  //       title: 'no se pudo verificar el rut',
-  //       showConfirmButton: false,
-  //       timer: 2000
-  //     });
-  //     console.log('Error al obtener las juntas vecinales:', error);
-  //   });
-  // }
-  
-  
-
-  // verificarCorreo() {
-  //   this.submit = true;
-  //   if (this.resetpass.controls['correo_electronico'].invalid) {
-  //     return;
-  //   }
-    
-  //   let correo_electronico = this.resetpass.controls['correo_electronico'].value;
-  //   // Aquí debes enviar el correo al backend y manejar la respuesta
-  //   this.comunaService.verificarCorreo(correo_electronico).subscribe(res => {
-  //     if (res.msg === 'ok correo') {
-  //       Swal.fire({
-  //         position: 'center',
-  //         icon: 'success',
-  //         title: 'Correo Verificado',
-  //         showConfirmButton: false,
-  //         timer: 2000
-  //       }).then(() => {
-  //         this.showCorreoInput = false;
-  //         this.showRestablecerContrasenia = true;
-  //       });
-  //     } else if (res.msg === 'no esta el correo') {
-  //       // Aquí puedes manejar el mensaje recibido en el bloque else if
-  //       Swal.fire({
-  //         position: 'center',
-  //         icon: 'error',
-  //         title: 'Correo no encontrado',
-  //         showConfirmButton: false,
-  //         timer: 2000
-  //       });
-  //     }
-  //   }, error => {
-  //     Swal.fire({
-  //       position: 'center',
-  //       icon: 'error',
-  //       title: 'No se pudo verificar el correo',
-  //       showConfirmButton: false,
-  //       timer: 2000
-  //     });
-  //     console.log('Error al obtener las juntas vecinales:', error);
-  //   });
-  // }
-  
 
   restablecerContrasenia() {
     this.submit = true;
