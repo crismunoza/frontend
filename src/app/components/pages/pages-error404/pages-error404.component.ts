@@ -8,16 +8,16 @@ import { Router } from '@angular/router';
 })
 export class PagesError404Component implements OnInit {
 
-  constructor(private r:Router) { }
+  constructor(private r: Router) { }
 
   ngOnInit(): void {
   }
-  navegar(){
+  navegar() {
     console.log('entra por el boton')
     const toke = localStorage.getItem('access_token');
     //necesitamos epecificar que tiene que venir algo en session para redireccionarlo al inicio de user
     const rol = sessionStorage.getItem('rol');
-    if(toke !== '' && rol !== null){
+    if (toke !== '' && rol !== null) {
       this.r.navigate(['inicio']);
     }
     else {

@@ -12,20 +12,20 @@ import { ComunaService } from 'src/app/services/servi.service';
 })
 export class ViewvalorComponent implements OnInit, AfterViewInit {
   private oilChart!: Chart<any, any, any>;
-  data:any = sessionStorage.getItem('data');
+  data: any = sessionStorage.getItem('data');
   listValoraciones: listValor[] = [];
-  constructor(private elementRef: ElementRef,private auth:AuthService, private env:ComunaService) {
+  constructor(private elementRef: ElementRef, private auth: AuthService, private env: ComunaService) {
     Chart.register(...registerables);
   }
-  bytes:any = CryptoJS.AES.decrypt(this.data, this.auth.getKey()) ;
-  org:any  = this.bytes.toString(CryptoJS.enc.Utf8);
-  obj:any = JSON.parse(this.org);
+  bytes: any = CryptoJS.AES.decrypt(this.data, this.auth.getKey());
+  org: any = this.bytes.toString(CryptoJS.enc.Utf8);
+  obj: any = JSON.parse(this.org);
 
-  id_Junta:string = this.obj.id_junta_vec;
+  id_Junta: string = this.obj.id_junta_vec;
   ngAfterViewInit(): void {
-    if(this.id_Junta){
+    if (this.id_Junta) {
       const id = this.id_Junta;
-      this.env.obtenerEstrellas(id).subscribe(res =>{
+      this.env.obtenerEstrellas(id).subscribe(res => {
         //le entregamos a una constante la respuesta
         const estrellasArray = res.estrellas[0];
         //inicializamos el array
@@ -60,21 +60,21 @@ export class ViewvalorComponent implements OnInit, AfterViewInit {
               hoverOffset: 4
             }]
           };
-          const config:any = {
+          const config: any = {
             type: 'doughnut',
             data: data,
             options: {
               plugins: {
-                  title: {
-                      display: true,
-                      text: 'Cantidad de Estrellas',
-                      responsive: true
-                  }
+                title: {
+                  display: true,
+                  text: 'Cantidad de Estrellas',
+                  responsive: true
+                }
               }
-          }
+            }
           };
 
-          this.oilChart = new Chart(oilCanvas,config);
+          this.oilChart = new Chart(oilCanvas, config);
         }
       });
 
@@ -84,15 +84,15 @@ export class ViewvalorComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     const a = parseInt(this.id_Junta);
-    this.env.listaVecValoraciones(a).subscribe((resp) =>{
+    this.env.listaVecValoraciones(a).subscribe((resp) => {
       this.listValoraciones = resp.data;
-     });
+    });
   }
-  open_modal(){
+  open_modal() {
     //asiganmos el id del modal a una constatante (lo tratara como elementoHTML)
     const mod = document.getElementById('mod_valoraciones');
     //si es que se enecuntra
-    if(mod){
+    if (mod) {
       //le agregaremos las clase show, lo deplegamos y le seteamos q ya no se encuentre escondido
       mod.classList.add('show');
       mod.style.display = 'block';
@@ -100,11 +100,11 @@ export class ViewvalorComponent implements OnInit, AfterViewInit {
     }
 
   }
-  closemodal(){
+  closemodal() {
     //asiganmos el id del modal a una constatante (lo tratara como elementoHTML)
     const mod = document.getElementById('mod_valoraciones');
     //si es que se enecuntra
-    if(mod){
+    if (mod) {
       //le agregaremos las clase show, lo deplegamos y le seteamos q ya no se encuentre escondido
       mod.classList.add('hide');
       mod.style.display = 'none';

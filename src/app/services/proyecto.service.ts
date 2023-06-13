@@ -37,11 +37,11 @@ export class ProyectoService {
           (error) => {
             let errorType = -1;
             let messageError;
-          
-          errorType = error.error.error.includes('0') ? 0 : error.error.error.includes('1') ? 1 : errorType;
-          messageError = errorType !== -1 ? error.error.resp : undefined;
-          //rechazo de la promesa.
-          reject({ messageError, errorType }); 
+
+            errorType = error.error.error.includes('0') ? 0 : error.error.error.includes('1') ? 1 : errorType;
+            messageError = errorType !== -1 ? error.error.resp : undefined;
+            //rechazo de la promesa.
+            reject({ messageError, errorType });
           }
         );
     });
@@ -50,31 +50,31 @@ export class ProyectoService {
     return this.http.get<Proyect[]>(`${this.myAppUrl}${this.myApiUrlGetAllProyect}${id_junta_vecinal}`)
   };
 
-  getFilters(): Observable<string[]>{
+  getFilters(): Observable<string[]> {
     return this.http.get<string[]>(`${this.myAppUrl}${this.myApiUrlGetFilters}`)
   };
   filtrarProyectos(filtro: any): Observable<Proyect[]> {
     return this.http.post<Proyect[]>(`${this.myAppUrl}${this.myApiUrlGetProyectsWithFilters}`, filtro)
-    .pipe(
-      map(response => {
-        if (response.length > 0) {
-          return response;
-        } else {
-          throw new Error("No se encontraron proyectos según el filtro especificado");
-        }
-      }),
-      catchError(error => {
-        if (error instanceof HttpErrorResponse) {
-          if (error.status === 404) {
+      .pipe(
+        map(response => {
+          if (response.length > 0) {
+            return response;
+          } else {
             throw new Error("No se encontraron proyectos según el filtro especificado");
+          }
+        }),
+        catchError(error => {
+          if (error instanceof HttpErrorResponse) {
+            if (error.status === 404) {
+              throw new Error("No se encontraron proyectos según el filtro especificado");
+            } else {
+              throw new Error("Error al filtrar proyectos");
+            }
           } else {
             throw new Error("Error al filtrar proyectos");
           }
-        } else {
-          throw new Error("Error al filtrar proyectos");
-        }
-      })
-    );
+        })
+      );
   };
 
   updateProyect(idProyecto: number, data: any): Promise<any> {
@@ -87,11 +87,11 @@ export class ProyectoService {
           error => {
             let errorType = -1;
             let messageError;
-          
-          errorType = error.error.error.includes('0') ? 0 : error.error.error.includes('1') ? 1 : errorType;
-          messageError = errorType !== -1 ? error.error.resp : undefined;
-          //rechazo de la promesa.
-          reject({ messageError, errorType });
+
+            errorType = error.error.error.includes('0') ? 0 : error.error.error.includes('1') ? 1 : errorType;
+            messageError = errorType !== -1 ? error.error.resp : undefined;
+            //rechazo de la promesa.
+            reject({ messageError, errorType });
           }
         );
     });
@@ -100,20 +100,20 @@ export class ProyectoService {
   deleteProyect(idProyecto: number): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.delete(`${this.myAppUrl}${this.myApiUrlDeleteProyect}${idProyecto}`)
-      .subscribe(
-        response => {
-          resolve(response);
-        },
-        error => {
-          let errorType = -1;
+        .subscribe(
+          response => {
+            resolve(response);
+          },
+          error => {
+            let errorType = -1;
             let messageError;
-          
-          errorType = error.error.error.includes('0') ? 0 : error.error.error.includes('1') ? 1 : errorType;
-          messageError = errorType !== -1 ? error.error.resp : undefined;
-          //rechazo de la promesa.
-          reject({ messageError, errorType });
-        }
-      );
+
+            errorType = error.error.error.includes('0') ? 0 : error.error.error.includes('1') ? 1 : errorType;
+            messageError = errorType !== -1 ? error.error.resp : undefined;
+            //rechazo de la promesa.
+            reject({ messageError, errorType });
+          }
+        );
     });
   };
 
@@ -130,7 +130,7 @@ export class ProyectoService {
       rut: rut,
       inscrito: inscrito
     };
-  
+
     return this.http.post(`${this.myAppUrl}${this.myApiUrlInsertReport}`, data)
       .toPromise()
       .then(response => {
@@ -159,15 +159,15 @@ export class ProyectoService {
       downloadLink.download = `Proyecto-${nombreProyectoFormmated}`;
       downloadLink.click();
     },
-    error => {
-      console.log(error);
-    });
+      error => {
+        console.log(error);
+      });
   };
 
-  getFiltersForModify(): Observable<string[]>{
+  getFiltersForModify(): Observable<string[]> {
     return this.http.get<string[]>(`${this.myAppUrl}${this.myApiUrlGetFiltersModify}`)
   };
-  
-  
+
+
 
 }

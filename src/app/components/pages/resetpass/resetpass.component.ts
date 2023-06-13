@@ -21,8 +21,8 @@ export class ResetpassComponent implements OnInit {
   showCorreoInput: boolean = false;
   showRestablecerContrasenia: boolean = false;
 
-  constructor(private router: Router, private fb: FormBuilder, 
-    private rutService: RutService, private PostService: PostService, ) { }
+  constructor(private router: Router, private fb: FormBuilder,
+    private rutService: RutService, private PostService: PostService,) { }
 
   formatearRut(event: Event): void {
     let rut = this.rutService.getRutChileForm(1, (event.target as HTMLInputElement).value);
@@ -90,12 +90,12 @@ export class ResetpassComponent implements OnInit {
       console.log(error);
     });
   }
-  
+
 
   ngOnInit(): void {
     this.resetpass = this.fb.group({
       rut: ["", [Validators.required]],
-      correo_electronico: ["", [Validators.required, Validators.email,Validators.pattern(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/)]],
+      correo_electronico: ["", [Validators.required, Validators.email, Validators.pattern(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/)]],
       contrasenia: ["", [Validators.required]],
       repetircontrasenia: ["", [Validators.required]]
     });

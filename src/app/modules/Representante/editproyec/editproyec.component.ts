@@ -13,41 +13,41 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./editproyec.component.css']
 })
 export class EditproyecComponent implements OnInit {
-  proyectos: Proyect[] =  [];
+  proyectos: Proyect[] = [];
   status: string[] = [];
   selectedStatus: string = '';
   editarFormVisible: boolean = false;
   formProyect: FormGroup;
-  statusValidate : string = 'CERRADO';
+  statusValidate: string = 'CERRADO';
   estados: string[] = [];
-  data:any = sessionStorage.getItem('data'); 
-  
+  data: any = sessionStorage.getItem('data');
+
   constructor(private proyectoService: ProyectoService, private formBuilder: FormBuilder, private auth: AuthService) {
     this.formProyect = this.formBuilder.group({
-      idProyecto:[null],
+      idProyecto: [null],
       nombreProyecto: ['', [Validators.required, Validators.minLength(10), this.nameWhitoutNUMBERS]],
       cupoMinimo: [null, Validators.required],
       cupoMaximo: [null, [Validators.required]],
-      descripcion: ['',[Validators.required, this.descripcionValidator]],
+      descripcion: ['', [Validators.required, this.descripcionValidator]],
       estado: ['', [Validators.required, Validators.minLength(6), this.nameWhitoutNUMBERS]],
-     
+
     });
-    
-   }
-   bytes:any = CryptoJS.AES.decrypt(this.data, this.auth.getKey());
-   org:any = this.bytes.toString(CryptoJS.enc.Utf8);
-   obj:any = JSON.parse(this.org);
 
-   id_junta_vecinal:string = this.obj.id_junta_vec;
+  }
+  bytes: any = CryptoJS.AES.decrypt(this.data, this.auth.getKey());
+  org: any = this.bytes.toString(CryptoJS.enc.Utf8);
+  obj: any = JSON.parse(this.org);
 
-   nameWhitoutNUMBERS(control: AbstractControl): ValidationErrors | null {
+  id_junta_vecinal: string = this.obj.id_junta_vec;
+
+  nameWhitoutNUMBERS(control: AbstractControl): ValidationErrors | null {
     const nombre = control.value;
     const regex = /^[^\d]+$/;
-  
+
     if (nombre && !regex.test(nombre)) {
       return { nameWhitoutNUMBERS: true };
     }
-  
+
     return null;
   };
 
@@ -71,18 +71,18 @@ export class EditproyecComponent implements OnInit {
     }
     return null;
   };
-  
+
   getAllProyects() {
     this.proyectoService.getAllProyect(parseInt(this.id_junta_vecinal))
-    .subscribe(
-      (response) => {
-        this.proyectos = response;
-        this.loadVecinosInscritos();
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
+      .subscribe(
+        (response) => {
+          this.proyectos = response;
+          this.loadVecinosInscritos();
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
   };
 
   loadVecinosInscritos() {
@@ -93,7 +93,7 @@ export class EditproyecComponent implements OnInit {
       });
     });
   };
-  
+
   loadProyectDetails(proyect: any) {
     this.formProyect.patchValue({
       idProyecto: proyect.id_proyecto,
@@ -123,21 +123,21 @@ export class EditproyecComponent implements OnInit {
             title: 'Modificado',
             text: message.resp,
           })
-          .then(() => {
-            window.location.reload();
-          })
+            .then(() => {
+              window.location.reload();
+            })
         })
         .catch(error => {
           let messageAlert;
-        
-          messageAlert = error.errorType === 0 ? messageAlert = error.messageError: messageAlert = error.messageError;
+
+          messageAlert = error.errorType === 0 ? messageAlert = error.messageError : messageAlert = error.messageError;
           Swal.fire({
             icon: 'error',
             title: 'Error',
             text: messageAlert,
           });
-            console.error(error);
-          });
+          console.error(error);
+        });
     }
   };
 
@@ -181,11 +181,11 @@ export class EditproyecComponent implements OnInit {
         this.status = response;
       },
       error => {
-        
+
       }
     );
   };
-  
+
   filterProyects(valor: string) {
     const filtro = valor ? { estado: valor } : null;
 
@@ -199,11 +199,11 @@ export class EditproyecComponent implements OnInit {
       }
     );
   };
-  
-  downloadExcel(id_proyecto: number, nombre_proyecto: string){
+
+  downloadExcel(id_proyecto: number, nombre_proyecto: string) {
     this.proyectoService.downloadExcel(id_proyecto, nombre_proyecto)
   };
-  
+
   getFiltersForMODIFY() {
     this.proyectoService.getFiltersForModify().subscribe(
       estados => {
@@ -215,18 +215,18 @@ export class EditproyecComponent implements OnInit {
     );
   };
 
-  getRut(): string{
+  getRut(): string {
     const accessToken = localStorage.getItem('access_token');
-      let rut = '';
-      if (accessToken) {
-        const payload = accessToken.split('.')[1];
-        const decodedPayload = atob(payload);
-        const userData = JSON.parse(decodedPayload);
-        rut = userData.rut_user;
-      } else {
-        console.log('No se encontró el token');
-      }
-      return rut
+    let rut = '';
+    if (accessToken) {
+      const payload = accessToken.split('.')[1];
+      const decodedPayload = atob(payload);
+      const userData = JSON.parse(decodedPayload);
+      rut = userData.rut_user;
+    } else {
+      console.log('No se encontró el token');
+    }
+    return rut
   };
   ngOnInit() {
     this.getAllProyects();

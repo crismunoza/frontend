@@ -16,26 +16,26 @@ export class PublicacionService {
   private myApiUrlUpdatePublication = 'api/publicacion/modificar-publicacion/';
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
-  
-  insertPublicacion(dataPublication: any){
+
+  insertPublicacion(dataPublication: any) {
     return new Promise<Publication>((resolve, reject) => {
       this.http.post(`${this.myAppUrl}${this.myAppUrlInsertPublication}`, dataPublication)
-    .subscribe(
-      (response: any) => {
-        resolve(response);
-      },
-      (error) => {
-        let errorType = -1;
-        let messageError;
-      
-      errorType = error.error.error.includes('0') ? 0 : error.error.error.includes('1') ? 1 : errorType;
-      messageError = errorType !== -1 ? error.error.resp : undefined;
-      //rechazo de la promesa.
-      reject({ messageError, errorType });
-      } 
-    )
-    
-    }) 
+        .subscribe(
+          (response: any) => {
+            resolve(response);
+          },
+          (error) => {
+            let errorType = -1;
+            let messageError;
+
+            errorType = error.error.error.includes('0') ? 0 : error.error.error.includes('1') ? 1 : errorType;
+            messageError = errorType !== -1 ? error.error.resp : undefined;
+            //rechazo de la promesa.
+            reject({ messageError, errorType });
+          }
+        )
+
+    })
   };
 
   getAllPublications(id_junta_vecinal: number): Observable<Publication[]> {
@@ -49,26 +49,26 @@ export class PublicacionService {
       );
   };
 
-  updatePublication(id_actividad: number, data_plublicacion: any){
+  updatePublication(id_actividad: number, data_plublicacion: any) {
     return new Promise<Publication>((resolve, reject) => {
       this.http.put(`${this.myAppUrl}${this.myApiUrlUpdatePublication}${id_actividad}`, data_plublicacion)
-      .subscribe(
-        (response: any) => {
-          console.log('enviado con éxito los datos al backend')
-          resolve(response);
-        },
-        (error) => {
-          let errorType = -1;
-          let messageError;
-        
-        errorType = error.error.error.includes('0') ? 0 : error.error.error.includes('1') ? 1 : errorType;
-        messageError = errorType !== -1 ? error.error.resp : undefined;
-        //rechazo de la promesa.
-        console.log('error al enviar los datos al backend')
-        reject({ messageError, errorType });
-        } 
-      )
-      
+        .subscribe(
+          (response: any) => {
+            console.log('enviado con éxito los datos al backend')
+            resolve(response);
+          },
+          (error) => {
+            let errorType = -1;
+            let messageError;
+
+            errorType = error.error.error.includes('0') ? 0 : error.error.error.includes('1') ? 1 : errorType;
+            messageError = errorType !== -1 ? error.error.resp : undefined;
+            //rechazo de la promesa.
+            console.log('error al enviar los datos al backend')
+            reject({ messageError, errorType });
+          }
+        )
+
     })
   }
 }
