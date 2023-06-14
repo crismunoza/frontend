@@ -110,7 +110,7 @@
                     <div *ngIf="rep2.controls['ap_mat_rep'].errors?.['pattern']">Solo letras</div>
                   </div>
                 </div>
-                <div class="col-md-4 mt-1">
+                <!-- <div class="col-md-4 mt-1">
                   <label for="comuna_rep" class="form-label">Comuna:</label>
                   <select class="form-select" id="comuna_rep" formControlName="comuna_rep">
                     <option *ngFor="let comuna of listcomunas" [value]="comuna.id_comuna">{{comuna.nombre}}</option>
@@ -118,7 +118,7 @@
                   <div class="invalid-feedback">
                     (*) Camplo Obligatorio
                   </div>
-                </div>
+                </div> -->
                 <div class="col-md-4 mt-1">
                   <label for="calle_rep" class="form-label">calle</label>
                   <input type="text" class="form-control" id="calle_rep" formControlName="calle_rep"

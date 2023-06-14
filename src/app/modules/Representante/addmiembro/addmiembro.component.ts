@@ -41,7 +41,7 @@ export class AddmiembroComponent implements OnInit {
       s_nomb_rep: ["", [Validators.required, Validators.pattern("^[a-zA-ZñÑ ]+$")]],
       ap_pat_rep: ["", [Validators.required, Validators.pattern("^[a-zA-ZñÑ ]+$")]],
       ap_mat_rep: ["", [Validators.required, Validators.pattern("^[a-zA-ZñÑ ]+$")]],
-      comuna_rep: [""],
+      comuna_rep: new FormControl(null),
       calle_rep: ["", [Validators.required, Validators.pattern("^[a-zA-Z ]+$")]],
       num_calle_rep: ["", [Validators.required, Validators.pattern("^[0-9]\\d*$")]],
       contacto_Rep: ["", [Validators.required, Validators.pattern("^[0-9]{8}$")]],
@@ -260,8 +260,8 @@ export class AddmiembroComponent implements OnInit {
             ruta_firma: base64Image,
             id_junta_vecinal: parseInt(this.id_junta)
           };
-          console.log(RepOne)
-          this.junta.inserRep(RepOne).subscribe(response => {
+          console.log("ESTO ESTOY MANDANDO",RepOne)
+          this.junta.inserRep2(RepOne).subscribe(response => {
             if (response.msg === 'yes') {
               Swal.fire({
                 position: 'center',

@@ -21,15 +21,20 @@ export class PostService {
   insertJuntaVecinal(junta: JuntaVecinal): Observable<any> {
     return this.http.post(`${this.myAppUrl}${this.myApiUrl}/juntavecinal`, junta);
   }
-
+// insertar nuevo representante vecinal
   inserRep(Rep: RepresentanteVecinal): Observable<any> {
     return this.http.post(`${this.myAppUrl}${this.myApiUrl}/juntavecinal/insercion`, Rep);
+  }
+// insert del segundo representate vecinal
+  inserRep2(Rep: RepresentanteVecinal): Observable<any> {
+    return this.http.post(`${this.myAppUrl}${this.myApiUrl}/juntavecinal/insercion2`, Rep);
   }
 
   // registro de vecinos del modulo de registro de vecinos
   insertvecino(Vecino: Vecino): Observable<any> {
     return this.http.post(`${this.myAppUrl}${this.myApiUrl}/insertvecino`, Vecino);
   }
+
   // delete y update del modulo de editar de vecinos
   deleteVecino(rut_vecino: string): Observable<any> {
     return this.http.delete(`${this.myAppUrl}${this.myApiUrl}/insertvecino/deletevecino/${rut_vecino}`);
