@@ -1,3 +1,11 @@
+****dependencias instaladas****
+npm i sweetalert2
+npm install ngx-spinner --save
+npm i crypto-js
+npm install --save-dev @types/crypto-js--force
+npm i chart.js --force
+npm i rut-chileno --force
+
 # Admindashboard
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.3.

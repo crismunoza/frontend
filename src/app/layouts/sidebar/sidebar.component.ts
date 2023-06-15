@@ -7,16 +7,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
- rol:any = sessionStorage.getItem('rol');
+  rol: any = sessionStorage.getItem('rol');
   constructor(protected router: Router) { }
 
   ngOnInit(): void {
   }
 
-  navigate(ruta:any){
-    console.log(ruta);    
+  navigate(ruta: any) {
+    console.log(ruta);
     this.router.navigateByUrl(ruta);
   }
 
-    
+
 }

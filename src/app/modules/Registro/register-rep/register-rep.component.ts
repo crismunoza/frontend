@@ -1,11 +1,10 @@
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { RutService } from 'rut-chileno';
 import { RepresentanteVecinal, comuna } from 'src/app/interfaces/modelos';
 import { PostService } from 'src/app/services/postService.service';
 import { ComunaService } from 'src/app/services/servi.service';
-import {JuntaVecinal} from 'src/app/interfaces/modelos';
+import { JuntaVecinal } from 'src/app/interfaces/modelos';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -22,25 +21,25 @@ export class RegisterRepComponent implements OnInit {
   selectedAvatar!: string;
   comunaRazon!: string;
   //aqui entregamos los nombre de los archivos de los avatars 
-  avatars: string[] = ['bear.png', 'cat.png', 'lion.png','meerkat.png','panda.png','polar-bear.png','sloth.png']; 
+  avatars: string[] = ['bear.png', 'cat.png', 'lion.png', 'meerkat.png', 'panda.png', 'polar-bear.png', 'sloth.png'];
   // inicializar variables
   listcomunas: comuna[] = [];
 
-  constructor(private fb: FormBuilder,private rutService: RutService,private comunaService: ComunaService, private junta:PostService,private router:Router) { 
-    
+  constructor(private fb: FormBuilder, private rutService: RutService, private comunaService: ComunaService, private junta: PostService, private router: Router) {
+
   }
 
-   //aqui se formatea el rut cuando se inserta
-   formatearRut(event : Event): void {
+  //aqui se formatea el rut cuando se inserta
+  formatearRut(event: Event): void {
     let rut = this.rutService.getRutChileForm(1, (event.target as HTMLInputElement).value)
     if (rut)
-      this.parentForm.controls['rut_junta'].patchValue(rut, {emitEvent :false});    
-    } 
-    formatearRut2(event : Event): void {
-      let rut = this.rutService.getRutChileForm(1, (event.target as HTMLInputElement).value)
-      if (rut)
-        this.parentForm.controls['run_rep'].patchValue(rut, {emitEvent :false});    
-      } 
+      this.parentForm.controls['rut_junta'].patchValue(rut, { emitEvent: false });
+  }
+  formatearRut2(event: Event): void {
+    let rut = this.rutService.getRutChileForm(1, (event.target as HTMLInputElement).value)
+    if (rut)
+      this.parentForm.controls['run_rep'].patchValue(rut, { emitEvent: false });
+  }
 
   ngOnInit(): void {
 
@@ -48,23 +47,23 @@ export class RegisterRepComponent implements OnInit {
     this.parentForm = this.fb.group({
       rut_junta: ["", [Validators.required, this.rutService.validaRutForm]], // <- Aqui es donde viene el validador la funcion validaRutForm la cual retorna un null o un objeto { [key: string]: boolean } 
       nomb_junta: ["", [Validators.required]],
-      comuna_junta:[""],
-      calle_junta: ["", [Validators.required, Validators.pattern("^[a-zA-Z ]+$")]],
+      comuna_junta: [""],
+      calle_junta: ["", [Validators.required, Validators.pattern("^[a-zA-ZñÑ ]+$")]],
       num_calle_junta: ["", [Validators.required, Validators.pattern("^[0-9]\\d*$")]],
       run_rep: ["", [Validators.required, this.rutService.validaRutForm]],
-      p_nomb_rep: ["", [Validators.required, Validators.pattern("^[a-zA-Z]+$")]],
-      s_nomb_rep: ["", [Validators.required, Validators.pattern("^[a-zA-Z]+$")]],
-      ap_pat_rep: ["", [Validators.required, Validators.pattern("^[a-zA-Z]+$")]],
-      ap_mat_rep: ["", [Validators.required, Validators.pattern("^[a-zA-Z]+$")]],
-      comuna_rep:[""],
-      calle_rep: ["", [Validators.required, Validators.pattern("^[a-zA-Z ]+$")]],
+      p_nomb_rep: ["", [Validators.required, Validators.pattern("^[a-zA-ZñÑ ]+$")]],
+      s_nomb_rep: ["", [Validators.required, Validators.pattern("^[a-zA-ZñÑ ]+$")]],
+      ap_pat_rep: ["", [Validators.required, Validators.pattern("^[a-zA-ZñÑ ]+$")]],
+      ap_mat_rep: ["", [Validators.required, Validators.pattern("^[a-zA-ZñÑ ]+$")]],
+      comuna_rep: [""],
+      calle_rep: ["", [Validators.required, Validators.pattern("^[a-zA-ZñÑ ]+$")]],
       num_calle_rep: ["", [Validators.required, Validators.pattern("^[0-9]\\d*$")]],
       contacto_Rep: ["", [Validators.required, Validators.pattern("^[0-9]{8}$")]],
-      correo_rep: ["", [Validators.required,Validators.email]],
+      correo_rep: ["", [Validators.required, Validators.email, Validators.pattern(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/)]],
       clave_rep: ["", [Validators.required]],
       clave_rep_conf: ["", [Validators.required]],
       selectedAvatar: new FormControl(null),
-      evidencia:["", [Validators.required]]
+      evidencia: ["", [Validators.required]]
     });
 
     //consumir el servicio listar comunas
@@ -83,15 +82,28 @@ export class RegisterRepComponent implements OnInit {
     console.log(this.selectedAvatar);
   }
 
-  open_Modal(){
+  open_Modal() {
     console.log('Abrir modal');
   }
 
-  onSubmit(){
+  onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
-    if (this.parentForm.invalid) {
-        return;
+    if (this.parentForm.invalid || this.parentForm.controls['clave_rep'].invalid || this.parentForm.controls['clave_rep_conf'].invalid) {
+      return;
+    }
+    const clave_veci = this.parentForm.controls['clave_rep'].value;
+    const clave_veci_conf = this.parentForm.controls['clave_rep_conf'].value;
+
+    if (clave_veci !== clave_veci_conf) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Las contraseñas no coinciden',
+        showConfirmButton: false,
+        timer: 2000
+      });
+      return;
     }
     else {
       //capturamos los valores de los formularios y se los entregamos a la variable de la interfaces
@@ -101,88 +113,88 @@ export class RegisterRepComponent implements OnInit {
         direccion: this.parentForm.controls['calle_junta'].value,
         numero_calle: this.parentForm.controls['num_calle_junta'].value,
         rut_junta: this.parentForm.controls['rut_junta'].value,
-      }    
+      }
       console.log(junta);
 
       this.junta.insertJuntaVecinal(junta)
-      .subscribe(response => {
-        // Maneja la respuesta de la solicitud aquí
-        try {
-          // Si el mensaje tiene un 'ok', realizaremos una inserción del representante
-          if (response.msg === 'ok') {
-            
-            const fileInput = document.getElementById('evidencia') as HTMLInputElement;
-            const file = fileInput.files?.[0];  
+        .subscribe(response => {
+          // Maneja la respuesta de la solicitud aquí
+          try {
+            // Si el mensaje tiene un 'ok', realizaremos una inserción del representante
+            if (response.msg === 'ok') {
 
-            if (file) {
-              //FileReader permite almacenar ficheros de datos de forma asyncrona desde el navegador (img, videos, etc.)
-              const reader = new FileReader();            
-              //cuando esta en cargado ya en el navegador
-              reader.onload = () => {
-                //convertimos la imagen o el reader a un string 
-                const base64Image = reader.result as string;
+              const fileInput = document.getElementById('evidencia') as HTMLInputElement;
+              const file = fileInput.files?.[0];
 
-                const RepOne: RepresentanteVecinal = {
-                  rut_representante: this.parentForm.controls['run_rep'].value,
-                  primer_nombre: this.parentForm.controls['p_nomb_rep'].value,
-                  segundo_nombre: this.parentForm.controls['s_nomb_rep'].value,
-                  primer_apellido: this.parentForm.controls['ap_pat_rep'].value,
-                  segundo_apellido: this.parentForm.controls['ap_mat_rep'].value,
-                  direccion_rep: this.parentForm.controls['calle_rep'].value,
-                  numero_rep: this.parentForm.controls['num_calle_rep'].value,
-                  correo_electronico: this.parentForm.controls['correo_rep'].value,
-                  telefono: this.parentForm.controls['contacto_Rep'].value,
-                  contrasenia: this.parentForm.controls['clave_rep'].value,
-                  comuna_rep: this.parentForm.controls['comuna_rep'].value,
-                  avatar: this.parentForm.controls['selectedAvatar'].value,
-                  ruta_evidencia: 'hola.txt',
-                  ruta_firma: base64Image,
-                  id_junta_vecinal: response.id
+              if (file) {
+                //FileReader permite almacenar ficheros de datos de forma asyncrona desde el navegador (img, videos, etc.)
+                const reader = new FileReader();
+                //cuando esta en cargado ya en el navegador
+                reader.onload = () => {
+                  //convertimos la imagen o el reader a un string 
+                  const base64Image = reader.result as string;
+
+                  const RepOne: RepresentanteVecinal = {
+                    rut_representante: this.parentForm.controls['run_rep'].value,
+                    primer_nombre: this.parentForm.controls['p_nomb_rep'].value,
+                    segundo_nombre: this.parentForm.controls['s_nomb_rep'].value,
+                    primer_apellido: this.parentForm.controls['ap_pat_rep'].value,
+                    segundo_apellido: this.parentForm.controls['ap_mat_rep'].value,
+                    direccion_rep: this.parentForm.controls['calle_rep'].value,
+                    numero_rep: this.parentForm.controls['num_calle_rep'].value,
+                    correo_electronico: this.parentForm.controls['correo_rep'].value,
+                    telefono: this.parentForm.controls['contacto_Rep'].value,
+                    contrasenia: this.parentForm.controls['clave_rep'].value,
+                    comuna_rep: this.parentForm.controls['comuna_junta'].value,
+                    avatar: this.parentForm.controls['selectedAvatar'].value,
+                    ruta_evidencia: 'hola.txt',
+                    ruta_firma: base64Image,
+                    id_junta_vecinal: response.id
+                  };
+
+                  this.junta.inserRep(RepOne).subscribe(response => {
+                    if (response.msg === 'yes') {
+                      Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Generada con exito, Ahora puedes ingresar',
+                        showConfirmButton: false,
+                        timer: 2000
+                      }).then(() => {
+                        this.router.navigate(['login']);
+                      });
+
+                    }
+                    else {
+                      this.parentForm.reset();
+                      Swal.fire({
+                        icon: 'error',
+                        title: response.msg
+                      });
+                    }
+                  });
                 };
 
-                this.junta.inserRep(RepOne).subscribe(response => {
-                  if (response.msg === 'yes') {
-                    Swal.fire({
-                      position: 'center',
-                      icon: 'success',
-                      title: 'Generada con exito, Ahora puedes ingresar',
-                      showConfirmButton: false,
-                      timer: 2000
-                    }).then(() => {
-                      this.router.navigate(['login']);
-                    });
+                //esta da por finalizada la carga del archivo al navgador y la lista como DONE la tarea
+                reader.readAsDataURL(file);
+              }
 
-                  }
-                  else{
-                    this.parentForm.reset();
-                    Swal.fire({
-                      icon: 'error',
-                      title: response.msg
-                    });
-                  }
-                });
-              };
-
-              //esta da por finalizada la carga del archivo al navgador y la lista como DONE la tarea
-              reader.readAsDataURL(file);
-            }          
-            
-          }
-          else{
+            }
+            else {
+              Swal.fire({
+                icon: 'error',
+                title: 'La junta vecinal ya se encuentra registrada.'
+              });
+            }
+          } catch (error) {
             Swal.fire({
               icon: 'error',
-               title: 'La junta vecinal ya se encuentra registrada.'
-             });
+              title: 'La junta vecinal ya se encuentra registrada.'
+            });
           }
-        } catch  (error){
-           Swal.fire({
-           icon: 'error',
-            title: 'La junta vecinal ya se encuentra registrada.'
-          });
-        }
- 
-         });
-       
+
+        });
+
 
     }
   }

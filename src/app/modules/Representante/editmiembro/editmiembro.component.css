@@ -5,3 +5,8 @@
   position: block;
   z-index: 1050; /* Valor mayor que el z-index del fondo */
 }
+
+.action-buttons {
+  display: flex;
+  justify-content: space-evenly;
+}

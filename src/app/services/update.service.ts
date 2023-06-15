@@ -16,10 +16,10 @@ export class UpdateService {
     this.myAppUrl = environment.endpoint;
     this.myApiUrl = 'api';
   }
-  updatePerfiles(id_us:any,datos:ajustePerfil): Observable<any> {
-    return this.http.put(`${this.myAppUrl}${this.myApiUrl}/users/update-perfil/${id_us}`,datos);
+  updatePerfiles(id_us: any, datos: ajustePerfil): Observable<any> {
+    return this.http.put(`${this.myAppUrl}${this.myApiUrl}/users/update-perfil/${id_us}`, datos);
   }
-  UpdateClave(id:number,datos:any):Observable<any>{
-    return this.http.put(`${this.myAppUrl}${this.myApiUrl}/users/update-clave/${id}`,datos);
+  UpdateClave(id: number, datos: any): Observable<any> {
+    return this.http.put(`${this.myAppUrl}${this.myApiUrl}/users/update-clave/${id}`, datos);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inicio-general',
@@ -9,11 +9,11 @@ import { Route, Router } from '@angular/router';
 export class InicioGeneralComponent implements OnInit {
   document: any;
 
-  constructor(private router:Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
-  navigate(ruta:any){
+  navigate(ruta: any) {
     console.log(ruta);
     this.router.navigateByUrl(ruta);
   }

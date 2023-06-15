@@ -7,6 +7,8 @@ import { PostService } from 'src/app/services/postService.service';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 
+
+
 @Component({
   selector: 'app-editmiembro',
   templateUrl: './editmiembro.component.html',
@@ -14,7 +16,7 @@ import Swal from 'sweetalert2';
 })
 export class EditmiembroComponent implements OnInit {
   @ViewChild('verticalycentered') modal: ElementRef | undefined;
-  data:any = sessionStorage.getItem('data');
+  data: any = sessionStorage.getItem('data');
   formularioVecino: FormGroup;
   listVecinos: Vecino[] = [];
   rutSeleccionado: string = '';
@@ -45,17 +47,17 @@ export class EditmiembroComponent implements OnInit {
       primer_apellido: ['', Validators.required],
       segundo_apellido: [''],
       direccion: ['', Validators.required],
-      correo_electronico: ['', [Validators.required, Validators.email,Validators.pattern(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/)]],
+      correo_electronico: ['', [Validators.required, Validators.email, Validators.pattern(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/)]],
       telefono: ['', Validators.required],
       contrasenia: ['', Validators.required]
     });
   }
 
-  bytes:any = CryptoJS.AES.decrypt(this.data, this.auth.getKey());
-  org:any = this.bytes.toString(CryptoJS.enc.Utf8);
-  obj:any = JSON.parse(this.org);
+  bytes: any = CryptoJS.AES.decrypt(this.data, this.auth.getKey());
+  org: any = this.bytes.toString(CryptoJS.enc.Utf8);
+  obj: any = JSON.parse(this.org);
 
-  id_Junta:string = this.obj.id_junta_vec;
+  id_Junta: string = this.obj.id_junta_vec;
 
   ngOnInit(): void {
     this.listarMiembros();
@@ -83,7 +85,6 @@ export class EditmiembroComponent implements OnInit {
 
   seleccionarVecino(rut: string) {
     this.rutSeleccionado = rut;
-    console.log("vecino seleccionado en el modal", this.rutSeleccionado);
   }
 
   salir() {
@@ -101,67 +102,68 @@ export class EditmiembroComponent implements OnInit {
       confirmButtonText: 'Eliminar',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
-          if (result.isConfirmed) {
-            this.deleteVecino.deleteVecino(rut_vecino).subscribe(data => {
-            this.listarMiembros();
-              }, error => {
-              console.log(error);
-              });
-          }
-          else if (result.isDismissed) {
-            Swal.fire(
-              'Cancelado',
-              '...............',
-              'error'
-            )
-            console.log('Clicked No, File is safe!');
-          }
+      if (result.isConfirmed) {
+        this.deleteVecino.deleteVecino(rut_vecino).subscribe(data => {
+          this.listarMiembros();
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }, error => {
+          console.log(error);
         });
+      }
+      else if (result.isDismissed) {
+        Swal.fire(
+          'Cancelado',
+          '...............',
+          'error'
+        )
+        console.log('Clicked No, File is safe!');
+      }
+    });
   }
 
   updateVecinos() {
     const updatedVecino: Vecino2 = { ...this.vecinoSeleccionado };
-  // Actualizar los campos modificados del formulario
-  updatedVecino.rut_vecino = this.rutSeleccionado;
-  updatedVecino.primer_nombre = this.formularioVecino.get('primer_nombre')?.value;
-  updatedVecino.segundo_nombre = this.formularioVecino.get('segundo_nombre')?.value;
-  updatedVecino.primer_apellido = this.formularioVecino.get('primer_apellido')?.value;
-  updatedVecino.segundo_apellido = this.formularioVecino.get('segundo_apellido')?.value;
-  updatedVecino.direccion = this.formularioVecino.get('direccion')?.value;
-  updatedVecino.telefono = this.formularioVecino.get('telefono')?.value;
-  updatedVecino.correo_electronico = this.formularioVecino.get('correo_electronico')?.value;
-  updatedVecino.contrasenia = this.formularioVecino.get('contrasenia')?.value;
+    // Actualizar los campos modificados del formulario
+    updatedVecino.rut_vecino = this.rutSeleccionado;
+    updatedVecino.primer_nombre = this.formularioVecino.get('primer_nombre')?.value;
+    updatedVecino.segundo_nombre = this.formularioVecino.get('segundo_nombre')?.value;
+    updatedVecino.primer_apellido = this.formularioVecino.get('primer_apellido')?.value;
+    updatedVecino.segundo_apellido = this.formularioVecino.get('segundo_apellido')?.value;
+    updatedVecino.direccion = this.formularioVecino.get('direccion')?.value;
+    updatedVecino.telefono = this.formularioVecino.get('telefono')?.value;
+    updatedVecino.correo_electronico = this.formularioVecino.get('correo_electronico')?.value;
+    updatedVecino.contrasenia = this.formularioVecino.get('contrasenia')?.value;
 
-  // Combinar con la lógica existente para actualizar los campos no modificados
-  for (const vecino of this.listVecinos) {
-    if (vecino.primer_nombre && !updatedVecino.primer_nombre) {
-      updatedVecino.primer_nombre = vecino.primer_nombre;
+    // Combinar con la lógica existente para actualizar los campos no modificados
+    for (const vecino of this.listVecinos) {
+      if (vecino.primer_nombre && !updatedVecino.primer_nombre) {
+        updatedVecino.primer_nombre = vecino.primer_nombre;
+      }
+      if (vecino.segundo_nombre && !updatedVecino.segundo_nombre) {
+        updatedVecino.segundo_nombre = vecino.segundo_nombre;
+      }
+      if (vecino.primer_apellido && !updatedVecino.primer_apellido) {
+        updatedVecino.primer_apellido = vecino.primer_apellido;
+      }
+      if (vecino.segundo_apellido && !updatedVecino.segundo_apellido) {
+        updatedVecino.segundo_apellido = vecino.segundo_apellido;
+      }
+      if (vecino.direccion && !updatedVecino.direccion) {
+        updatedVecino.direccion = vecino.direccion;
+      }
+      if (vecino.telefono && !updatedVecino.telefono) {
+        updatedVecino.telefono = vecino.telefono;
+      }
+      if (vecino.correo_electronico && !updatedVecino.correo_electronico) {
+        updatedVecino.correo_electronico = vecino.correo_electronico;
+      }
+      if (vecino.contrasenia && !updatedVecino.contrasenia) {
+        updatedVecino.contrasenia = vecino.contrasenia;
+      }
     }
-    if (vecino.segundo_nombre && !updatedVecino.segundo_nombre) {
-      updatedVecino.segundo_nombre = vecino.segundo_nombre;
-    }
-    if (vecino.primer_apellido && !updatedVecino.primer_apellido) {
-      updatedVecino.primer_apellido = vecino.primer_apellido;
-    }
-    if (vecino.segundo_apellido && !updatedVecino.segundo_apellido) {
-      updatedVecino.segundo_apellido = vecino.segundo_apellido;
-    }
-    if (vecino.direccion && !updatedVecino.direccion) {
-      updatedVecino.direccion = vecino.direccion;
-    }
-    if (vecino.telefono && !updatedVecino.telefono) {
-      updatedVecino.telefono = vecino.telefono;
-    }
-    if (vecino.correo_electronico && !updatedVecino.correo_electronico) {
-      updatedVecino.correo_electronico = vecino.correo_electronico;
-    }
-    if (vecino.contrasenia && !updatedVecino.contrasenia) {
-      updatedVecino.contrasenia = vecino.contrasenia;
-    }
-  }
-     
-    console.log("vecino actualizado", updatedVecino);
-  
+
     Swal.fire({
       title: '¿Estás seguro?',
       text: 'Se actualizarán los datos del vecino',
@@ -180,12 +182,11 @@ export class EditmiembroComponent implements OnInit {
         );
         this.updateVecino.updatevecino(updatedVecino.rut_vecino, updatedVecino).subscribe(
           data => {
-            console.log(data); // Maneja la respuesta del backend según tus necesidades
             this.formularioVecino.reset();
             setTimeout(() => {
               window.location.reload();
             }, 2000);
-            
+
             // Resto del código...
           },
           error => {

@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
       comuna_junta: new FormControl(null),
       dirreccion_veci: ["", [Validators.required, Validators.pattern("^[a-zA-ZñÑ0-9 ]+$")]],
       telefono: ["", [Validators.required, Validators.pattern("^[0-9]{8}$")]],
-      correo_veci: ["", [Validators.required, Validators.email,Validators.pattern(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/)]],
+      correo_veci: ["", [Validators.required, Validators.email, Validators.pattern(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/)]],
       clave_veci: ["", [Validators.required]],
       clave_veci_conf: ["", [Validators.required]],
       selectedAvatar: new FormControl(null),
@@ -118,7 +118,7 @@ export class RegisterComponent implements OnInit {
 
     const fileInput = document.getElementById('evidencia') as HTMLInputElement;
     const file = fileInput?.files?.[0];
-    
+
     if (!file) {
       console.log('No se ha seleccionado ningún archivo');
       // Manejar el caso en que no se seleccionó ningún archivo, como mostrar un mensaje de error o realizar alguna acción específica.
@@ -145,25 +145,23 @@ export class RegisterComponent implements OnInit {
         fk_id_junta_vecinal: this.selectedJuntaVecinalId || 0, // Utilizar el ID de la junta vecinal seleccionada
       };
       let rut = this.parentForm.controls['rut_vecino'].value;
-      console.log("LO QUE MANDAMOS PARA VERIFICAR:", rut);
-
       this.comunaService.verificarsiexiste(rut).subscribe(res => {
         if (res.msg === 'correo existe') {
           Swal.fire({
             position: 'center',
             icon: 'error',
-            title: 'Rut Se Encuentra Registrado como Representante',
+            title: 'Rut Se Encuentra Registrado',
             showConfirmButton: false,
             timer: 2000
           })
-        } else if(res.msg === 'no esta') {
+        } else if (res.msg === 'no esta') {
           // Aquí puedes manejar el mensaje recibido en el bloque else if
           Swal.fire({
             position: 'center',
-                  icon: 'success',
-                  title: 'Registro Correctamente!!',
-                  showConfirmButton: false,
-                  timer: 1000
+            icon: 'success',
+            title: 'Registro Correctamente!!',
+            showConfirmButton: false,
+            timer: 1000
           }).then((result) => {
             this.vecino.insertvecino(Vecino).subscribe({
               next: (v) => {
@@ -182,7 +180,7 @@ export class RegisterComponent implements OnInit {
               }
             });
           });
-          
+
         }
       }, error => {
         Swal.fire({
@@ -195,7 +193,7 @@ export class RegisterComponent implements OnInit {
         console.log('Error al obtener las juntas vecinales:', error);
       });
 
-      
+
     };
 
     reader.onerror = () => {

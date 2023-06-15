@@ -12,7 +12,6 @@ import { NewproyectComponent } from "./newproyect/newproyect.component";
 import { ReportsComponent } from "./reports/reports.component";
 import { ViewvalorComponent } from "./viewvalor/viewvalor.component";
 
-
 @NgModule({
     declarations: [
       AddmiembroComponent,

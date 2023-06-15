@@ -1,9 +1,9 @@
-import { Component,ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as CryptoJS from 'crypto-js';
-import { Solicitud3,Solicitud4 } from '../../../interfaces/modelos';
+import { Solicitud3, Solicitud4 } from '../../../interfaces/modelos';
 import { ComunaService } from 'src/app/services/servi.service';
-import {PostService} from '../../../services/postService.service';
+import { PostService } from '../../../services/postService.service';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 @Component({
@@ -20,7 +20,7 @@ export class EditsolicitudComponent implements OnInit {
   selectedSolicitudId!: number;
   selectedSolicitud!: Solicitud3 | undefined;
   listsolicitud: Solicitud3[] = [];
-  data:any = sessionStorage.getItem('data');
+  data: any = sessionStorage.getItem('data');
   fk_id_junta_vecinal!: string;
   parentForm!: FormGroup;
   submitted = false;
@@ -29,16 +29,16 @@ export class EditsolicitudComponent implements OnInit {
 
 
   constructor(
-    private auth:AuthService,
+    private auth: AuthService,
     private fb: FormBuilder,
     private RespondSolicitud: PostService,
     private solicitudeslist: ComunaService,
-  ) {}
-  bytes:any = CryptoJS.AES.decrypt(this.data, this.auth.getKey()) ;
-  org:any  = this.bytes.toString(CryptoJS.enc.Utf8);
-  obj:any = JSON.parse(this.org);
+  ) { }
+  bytes: any = CryptoJS.AES.decrypt(this.data, this.auth.getKey());
+  org: any = this.bytes.toString(CryptoJS.enc.Utf8);
+  obj: any = JSON.parse(this.org);
 
-  id_Junta:string = this.obj.id_junta_vec;
+  id_Junta: string = this.obj.id_junta_vec;
 
   ngOnInit(): void {
     this.parentForm = this.fb.group({
@@ -67,16 +67,16 @@ export class EditsolicitudComponent implements OnInit {
 
 
 
-updateSolicitud(): void {
+  updateSolicitud(): void {
     if (this.parentForm.invalid) {
       return;
     }
-    const solicitud:Solicitud4 = {
+    const solicitud: Solicitud4 = {
       id_solicitud: this.selectedSolicitud?.id_solicitud || 0,
       estado_solicitud: this.parentForm.controls['estado_solicitud'].value,
       respuesta: this.parentForm.controls['respuesta'].value,
     };
-    this.RespondSolicitud.updateSolicitud(solicitud.id_solicitud,solicitud).subscribe(
+    this.RespondSolicitud.updateSolicitud(solicitud.id_solicitud, solicitud).subscribe(
       response => {
         console.log(response);
         Swal.fire({
@@ -87,8 +87,11 @@ updateSolicitud(): void {
           timer: 1500
         }).then(() => {
           this.parentForm.reset();
-          window.location.reload();
-        });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }
+        );
       },
       error => {
         console.log(error);
@@ -110,7 +113,7 @@ updateSolicitud(): void {
       },
       error => {
         alert("Error en la petición");
-        console.log("Aqui estamos en el error",error);
+        console.log("Aqui estamos en el error", error);
         console.log(error);
       }
     );

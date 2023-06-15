@@ -21,12 +21,12 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Nombres</th>
-                    <th scope="col">Apellidos</th>
-                    <th scope="col">Celular</th>
-                    <th scope="col">Domicilio</th>
-                    <th scope="col">Acción</th>
+                    <th>Correo</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Celular</th>
+                    <th>Domicilio</th>
+                    <th>Acción</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -34,10 +34,10 @@
                     <td>{{ vecino.correo_electronico }}</td>
                     <td>{{ vecino.primer_nombre }} {{ vecino.segundo_nombre }}</td>
                     <td>{{ vecino.primer_apellido }} {{ vecino.segundo_apellido }}</td>
-                    <td>{{ vecino.telefono }}</td>
+                    <td>+569{{ vecino.telefono }}</td>
                     <td>{{ vecino.direccion }}</td>
                     <td>
-                      <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                      <button type="button" class="btn btn-primary mr-3" data-bs-toggle="modal"
                         data-bs-target="#verticalycentered" (click)="seleccionarVecino(vecino.rut_vecino)">
                         <i class="ri-user-settings-line"></i>
                       </button>
@@ -46,7 +46,7 @@
                           <div class="modal-content">
                             <div class="modal-header">
                               <h5 class="modal-title">Editar Miembro</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal"
+                              <button type="button" class="btn-close ml-3" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -86,7 +86,7 @@
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                                     (click)="salir()">Salir</button>
-                                  <button type="submit" class="btn btn-primary"
+                                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
                                     (click)="updateVecinos()">Editar</button>
                                 </div>
                               </form>

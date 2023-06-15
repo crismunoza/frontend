@@ -200,3 +200,12 @@ export interface contacto{
   correo_electronico: string,
   telefono: number,
 };
+
+export interface Publication {
+  id_actividad: number;
+  nombre: string;
+  descripcion: string;
+  ruta_imagen: string;
+  fecha_actividad: string;
+  resp?: any;
+}

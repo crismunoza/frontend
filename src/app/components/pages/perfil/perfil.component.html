@@ -1,108 +1,128 @@
 <main id="main" class="main">
-    <div class="pagetitle">
-       <h1>Perfil</h1>
-       <nav>
-          <ol class="breadcrumb">
-             <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
-             <li class="breadcrumb-item active">Perfil</li>
-          </ol>
-       </nav>
-    </div>
-    <section class="section profile">
-       <div class="row">
-          <div class="col-xl-4">
-             <div class="card">
-                <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                   <img src="assets/img/avatars/{{avatar}}" alt="Profile" class="rounded-circle">
-                   <h2>{{nombre}}</h2>
-                </div>
-             </div>
-          </div>
-          <div class="col-xl-8">
-             <div class="card">
-                <div class="card-body pt-3">
-                   <ul class="nav nav-tabs nav-tabs-bordered">
-                      <li class="nav-item"> <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Perfil</button></li>
-                      <li class="nav-item"> <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar Perfil</button></li>
-                      <li class="nav-item"> <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Clave</button></li>
-                   </ul>
-                   <div class="tab-content pt-2 mt-2">
-                      <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                         <div class="row">
-                            <div class="col-lg-3 col-md-4 label ">Nombre Completo</div>
-                            <div class="col-lg-9 col-md-8">{{nombre_completo}}</div>
-                         </div>
-                         <div class="row">
-                            <div class="col-lg-3 col-md-4 label">Junta Vecinal</div>
-                            <div class="col-lg-9 col-md-8">{{nombre_junta}}</div>
-                         </div>
-                         <div class="row">
-                            <div class="col-lg-3 col-md-4 label">Dirección</div>
-                            <div class="col-lg-9 col-md-8">{{direccion}}</div>
-                         </div>
-                         <div class="row">
-                            <div class="col-lg-3 col-md-4 label">Telefono</div>
-                            <div class="col-lg-9 col-md-8">{{telefono}}</div>
-                         </div>
-                         <div class="row">
-                            <div class="col-lg-3 col-md-4 label">Email</div>
-                            <div class="col-lg-9 col-md-8"><u>{{correo}}</u></div>
-                         </div>
-                      </div>
-                      <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-                         <form [formGroup]="formData">
-                            <div class="row mb-3">
-                               <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Telefono</label>
-                               <div class="col-md-8 col-lg-9">
-                                 <input type="text" class="form-control" id="phonePerfil" name="phonePerfil" formControlName="phonePerfil" [ngClass]="{ 'is-invalid': formData.controls['phonePerfil'].errors }"></div>
-                                 <div *ngIf="formData.controls['phonePerfil'].errors" class="invalid-feedback">
-                                    <div *ngIf="formData.controls['phonePerfil'].errors?.['required']"><span>(*) Campo Obligatorio!</span></div>
-                                    <div *ngIf="formData.controls['phonePerfil'].errors?.['pattern']"><span>Numero invalido (8 digitos)</span></div>
+   <div class="pagetitle">
+      <h1>Perfil</h1>
+      <nav>
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
+            <li class="breadcrumb-item active">Perfil</li>
+         </ol>
+      </nav>
+   </div>
+   <section class="section profile">
+      <div class="row">
+         <div class="col-xl-4">
+            <div class="card">
+               <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                  <img src="assets/img/avatars/{{avatar}}" alt="Profile" class="rounded-circle">
+                  <h2>{{nombre}}</h2>
+               </div>
+            </div>
+         </div>
+         <div class="col-xl-8">
+            <div class="card">
+               <div class="card-body pt-3">
+                  <ul class="nav nav-tabs nav-tabs-bordered">
+                     <li class="nav-item"> <button class="nav-link active" data-bs-toggle="tab"
+                           data-bs-target="#profile-overview">Perfil</button></li>
+                     <li class="nav-item"> <button class="nav-link" data-bs-toggle="tab"
+                           data-bs-target="#profile-edit">Editar Perfil</button></li>
+                     <li class="nav-item"> <button class="nav-link" data-bs-toggle="tab"
+                           data-bs-target="#profile-change-password">Clave</button></li>
+                  </ul>
+                  <div class="tab-content pt-2 mt-2">
+                     <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                        <div class="row">
+                           <div class="col-lg-3 col-md-4 label ">Nombre Completo</div>
+                           <div class="col-lg-9 col-md-8">{{nombre_completo}}</div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-3 col-md-4 label">Junta Vecinal</div>
+                           <div class="col-lg-9 col-md-8">{{nombre_junta}}</div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-3 col-md-4 label">Dirección</div>
+                           <div class="col-lg-9 col-md-8">{{direccion}}</div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-3 col-md-4 label">Telefono</div>
+                           <div class="col-lg-9 col-md-8">{{telefono}}</div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-3 col-md-4 label">Email</div>
+                           <div class="col-lg-9 col-md-8"><u>{{correo}}</u></div>
+                        </div>
+                        <div class="text-center"> <button type="submit" class="btn btn-danger"
+                           (click)="eliminarCuenta()">Eliminar Cuenta</button>
+                        </div>
+                     </div>
+                     <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+                        <form [formGroup]="formData">
+                           <div class="row mb-3">
+                              <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Telefono</label>
+                              <div class="col-md-8 col-lg-9">
+                                 <input type="text" class="form-control" id="phonePerfil" name="phonePerfil"
+                                    formControlName="phonePerfil"
+                                    [ngClass]="{ 'is-invalid': formData.controls['phonePerfil'].errors }"></div>
+                              <div *ngIf="formData.controls['phonePerfil'].errors" class="invalid-feedback">
+                                 <div *ngIf="formData.controls['phonePerfil'].errors?.['required']"><span>(*) Campo
+                                       Obligatorio!</span></div>
+                                 <div *ngIf="formData.controls['phonePerfil'].errors?.['pattern']"><span>Numero invalido
+                                       (8 digitos)</span></div>
+                              </div>
+                           </div>
+                           <div class="row mb-3">
+                              <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                              <div class="col-md-8 col-lg-9"> <input type="email" class="form-control"
+                                    name="emailPerfil" id="emailPerfil" formControlName="emailPerfil"
+                                    [ngClass]="{ 'is-invalid':formData.controls['emailPerfil'].errors }">
+                                 <div *ngIf="formData.controls['emailPerfil'].errors" class="invalid-feedback">
+                                    <div *ngIf="formData.controls['emailPerfil'].errors?.['required']"><span>(*) Campo
+                                          Obligatorio!</span></div>
+                                    <div *ngIf="formData.controls['emailPerfil'].errors?.['email']"><span>Correo
+                                          invalido</span></div>
                                  </div>
-                            </div>
-                            <div class="row mb-3">
-                               <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                               <div class="col-md-8 col-lg-9"> <input  type="email" class="form-control" name="emailPerfil" id="emailPerfil" formControlName="emailPerfil" [ngClass]="{ 'is-invalid':formData.controls['emailPerfil'].errors }" >
-                                <div *ngIf="formData.controls['emailPerfil'].errors" class="invalid-feedback">
-                                  <div *ngIf="formData.controls['emailPerfil'].errors?.['required']"><span>(*) Campo Obligatorio!</span></div>
-                                  <div *ngIf="formData.controls['emailPerfil'].errors?.['email']"><span>Correo invalido</span></div>
-                                </div>
                               </div>
-                            </div>
-                            <div class="text-center"> <button type="submit" class="btn btn-primary" (click)="enviar()">Guardar Cambios</button></div>
-                         </form>
-                      </div>
-                      <div class="tab-pane fade pt-3" id="profile-change-password">
-                        <form [formGroup]="cambioClave">
-                          <div class="row mb-3">
-                            <label for="ActualPassword" class="col-md-4 col-lg-3 col-form-label">Actual Clave</label>
-                            <div class="col-md-8 col-lg-9">
-                              <input name="ActualPassword" type="password" class="form-control" id="ActualPassword" formControlName="claveActual"
-                                     [ngClass]="{ 'is-invalid': submitted && cambioClave.controls['claveActual'].errors}">
-                              <div *ngIf="cambioClave.controls['claveActual'].errors" class="invalid-feedback">
-                                <div *ngIf="cambioClave.controls['claveActual'].errors?.['required']"><span>(*) Campo Obligatorio!</span></div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row mb-3">
-                            <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nueva Clave</label>
-                            <div class="col-md-8 col-lg-9">
-                              <input name="newPassword" type="password" class="form-control" id="newPassword" formControlName="nvaPassword"
-                                     [ngClass]="{ 'is-invalid': submitted && cambioClave.controls['nvaPassword'].errors}">
-                              <div *ngIf="cambioClave.controls['nvaPassword'].errors" class="invalid-feedback">
-                                <div *ngIf="cambioClave.controls['nvaPassword'].errors?.['required']"><span>(*) Campo Obligatorio!</span></div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="text-center">
-                            <button type="submit" class="btn btn-primary" (click)="cambiarClave()">Cambiar Password</button>
-                          </div>
+                           </div>
+                           <div class="text-center"> <button type="submit" class="btn btn-primary"
+                                 (click)="enviar()">Guardar Cambios</button></div>
                         </form>
-                      </div>
-                   </div>
-                </div>
-             </div>
-          </div>
-       </div>
-    </section>
- </main>
+                     </div>
+                     <div class="tab-pane fade pt-3" id="profile-change-password">
+                        <form [formGroup]="cambioClave">
+                           <div class="row mb-3">
+                              <label for="ActualPassword" class="col-md-4 col-lg-3 col-form-label">Actual Clave</label>
+                              <div class="col-md-8 col-lg-9">
+                                 <input name="ActualPassword" type="password" class="form-control" id="ActualPassword"
+                                    formControlName="claveActual"
+                                    [ngClass]="{ 'is-invalid': submitted && cambioClave.controls['claveActual'].errors}">
+                                 <div *ngIf="cambioClave.controls['claveActual'].errors" class="invalid-feedback">
+                                    <div *ngIf="cambioClave.controls['claveActual'].errors?.['required']"><span>(*)
+                                          Campo Obligatorio!</span></div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row mb-3">
+                              <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nueva Clave</label>
+                              <div class="col-md-8 col-lg-9">
+                                 <input name="newPassword" type="password" class="form-control" id="newPassword"
+                                    formControlName="nvaPassword"
+                                    [ngClass]="{ 'is-invalid': submitted && cambioClave.controls['nvaPassword'].errors}">
+                                 <div *ngIf="cambioClave.controls['nvaPassword'].errors" class="invalid-feedback">
+                                    <div *ngIf="cambioClave.controls['nvaPassword'].errors?.['required']"><span>(*)
+                                          Campo Obligatorio!</span></div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="text-center">
+                              <button type="submit" class="btn btn-primary" (click)="cambiarClave()">Cambiar
+                                 Password</button>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+</main>
