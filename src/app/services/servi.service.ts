@@ -2,7 +2,7 @@ import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Vecino, comuna, Solicitud, reportes, listValor } from '../interfaces/modelos';
+import { Vecino, comuna, Solicitud, reportes, listValor, RepresentanteVecinal1 } from '../interfaces/modelos';
 
 
 @Injectable({
@@ -34,6 +34,10 @@ export class ComunaService {
     const url = `${this.myAppUrl}${this.myApiUrl}/insertvecino/listVecinos?estado=1`;
 
     return this.http.get<{ listVecinos: Vecino[] }>(url);
+  }
+
+  getrepresentantes(idJuntaVec:number): Observable<{ listRepresentantes: RepresentanteVecinal1[] }> {
+    return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/juntavecinal/representantes/${idJuntaVec}`);
   }
 
   // trae a todos los miembros que estan en estado 0 que es inactivo modulo de aceptar vecinos
@@ -87,6 +91,7 @@ export class ComunaService {
     return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/juntavecinal/cantidad/Rep/${id_junta}`);
 
   }
+
 }
 
 

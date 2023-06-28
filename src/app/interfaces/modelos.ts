@@ -39,6 +39,36 @@ export interface RepresentanteVecinal {
   id_junta_vecinal: number
 };
 
+export interface RepresentanteVecinal1 {
+  rut_representante: string,
+  primer_nombre: string,
+  segundo_nombre: string,
+  primer_apellido: string,
+  segundo_apellido: string,
+  direccion: string,
+  numero: number,
+  correo_electronico: string,
+  telefono: number;
+  contrasenia: string,
+  avatar:string,
+  ruta_evidencia: string,
+  ruta_firma: string,
+  fk_id_junta_vecinal: number
+};
+
+export interface RepresentanteVecinal2 {
+  rut_representante: string,
+  primer_nombre: string,
+  segundo_nombre: string,
+  primer_apellido: string,
+  segundo_apellido: string,
+  direccion: string,
+  numero: number,
+  correo_electronico: string,
+  telefono: number,
+  contrasenia: string
+};
+
 export interface Vecino {
   rut_vecino: string,
   primer_nombre: string,

@@ -1,4 +1,4 @@
-<main id="main" class="main">
+<main id="main" class="main" >
    <div class="pagetitle">
       <h1>Perfil</h1>
       <nav>
@@ -51,7 +51,7 @@
                            <div class="col-lg-3 col-md-4 label">Email</div>
                            <div class="col-lg-9 col-md-8"><u>{{correo}}</u></div>
                         </div>
-                        <div class="text-center"> <button type="submit" class="btn btn-danger"
+                        <div class="text-center" *ngIf="rol ==='admin'"> <button type="submit" class="btn btn-danger" 
                            (click)="eliminarCuenta()">Eliminar Cuenta</button>
                         </div>
                      </div>

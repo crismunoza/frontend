@@ -106,7 +106,8 @@ export class EditproyecComponent implements OnInit {
   };
 
   submitProyect() {
-    if (this.formProyect.valid) {
+    if (this.formProyect.invalid) {
+      console.log('llega a que es c¿valido')
       const proyectId = this.formProyect.value.idProyecto;
       const proyectData = {
         nombre: this.formProyect.value.nombreProyecto,
