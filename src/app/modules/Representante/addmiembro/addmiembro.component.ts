@@ -260,13 +260,12 @@ export class AddmiembroComponent implements OnInit {
             ruta_firma: base64Image,
             id_junta_vecinal: parseInt(this.id_junta)
           };
-          console.log("ESTO ESTOY MANDANDO",RepOne)
           this.junta.inserRep2(RepOne).subscribe(response => {
             if (response.msg === 'yes') {
               Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: 'Generada con exito, Ahora puedes ingresar',
+                title: 'Representate agregado con exito',
                 showConfirmButton: false,
                 timer: 2000
               }).then(() => {

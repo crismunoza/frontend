@@ -39,11 +39,23 @@ export class PostService {
   deleteVecino(rut_vecino: string): Observable<any> {
     return this.http.delete(`${this.myAppUrl}${this.myApiUrl}/insertvecino/deletevecino/${rut_vecino}`);
   }
+    
+  deletereprese(rut_representante: string, idJuntaVec: number): Observable<any> {
+      const url = `${this.myAppUrl}${this.myApiUrl}/users/deleterepre`;
+    // Crea un objeto con los datos a enviar al backend
+    const data = {
+      rut_representante: rut_representante,
+      idJuntaVec: idJuntaVec
+    };
+    return this.http.post(url, data);
+  }
   // update del modulo de editar de vecinos
   updatevecino(rut_vecino: string, Vecino: any): Observable<any> {
     return this.http.put(`${this.myAppUrl}${this.myApiUrl}/insertvecino/updatevecino/${rut_vecino}`, Vecino);
   }
-
+  updatereprese(rut_representante: string, RepresentanteVecinal: any): Observable<any> {
+    return this.http.put(`${this.myAppUrl}${this.myApiUrl}/juntavecinal/repreupdate/${rut_representante}`, RepresentanteVecinal);
+  }
   // delete del modulo de aceptar vecinos
   noacepptado(rut_vecino: string): Observable<any> {
     return this.http.delete(`${this.myAppUrl}${this.myApiUrl}/insertvecino/noacepptado/${rut_vecino}`);
