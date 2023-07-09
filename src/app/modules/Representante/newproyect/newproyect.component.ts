@@ -22,7 +22,6 @@ export class NewproyectComponent implements OnInit {
       cupoMinimo: [null, Validators.required],
       cupoMaximo: [null, [Validators.required, this.cupoMaximoValidator]],
       descripcion: ['', [Validators.required, this.descripcionValidator]],
-      fecha: [null, [Validators.required, this.fechaValidator]],
       imagen: [null, Validators.required]
 
     });
@@ -109,23 +108,7 @@ export class NewproyectComponent implements OnInit {
    * @returns true || null
    * Método que verifica que la fecha seleccionada por el usuario sea la fecha actual
    */
-  fechaValidator(control: AbstractControl): ValidationErrors | null {
-    const selectedDate = new Date(control.value);
-    const currentDate = new Date();
 
-    // Establecer la zona horaria a GMT-4 para Chile
-    currentDate.setUTCHours(currentDate.getUTCHours() - 4);
-
-    const currentDateOptions = { timeZone: 'UTC' };
-    const currentDateFormatted = currentDate.toLocaleDateString('es', currentDateOptions);
-    const selectedDateFormatted = selectedDate.toLocaleDateString('es', currentDateOptions);
-
-    if (selectedDate && selectedDateFormatted !== currentDateFormatted) {
-      return { fechaInvalida: true };
-    }
-
-    return null;
-  }
 
   addProyect() {
     if (this.formProyect.valid) {

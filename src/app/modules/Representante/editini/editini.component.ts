@@ -26,9 +26,6 @@ export class EditiniComponent implements OnInit {
       nombrePublicacion: ['', [Validators.required, Validators.minLength(10), this.nameWhitoutNUMBERS]],
       descripcion: ['', [Validators.required, this.descripcionValidator]],
       imagen: [null, Validators.required],
-      fecha: [null, [Validators.required, this.fechaValidator]],
-
-
     });
   };
 
@@ -52,23 +49,6 @@ export class EditiniComponent implements OnInit {
     return null;
   };
 
-  fechaValidator(control: AbstractControl): ValidationErrors | null {
-    const selectedDate = new Date(control.value);
-    const currentDate = new Date();
-
-    // Establecer la zona horaria a GMT-4 para Chile
-    currentDate.setUTCHours(currentDate.getUTCHours() - 4);
-
-    const currentDateOptions = { timeZone: 'UTC' };
-    const currentDateFormatted = currentDate.toLocaleDateString('es', currentDateOptions);
-    const selectedDateFormatted = selectedDate.toLocaleDateString('es', currentDateOptions);
-
-    if (selectedDate && selectedDateFormatted !== currentDateFormatted) {
-      return { fechaInvalida: true };
-    }
-
-    return null;
-  }
   bytes: any = CryptoJS.AES.decrypt(this.data, this.auth.getKey());
   org: any = this.bytes.toString(CryptoJS.enc.Utf8);
   obj: any = JSON.parse(this.org);
@@ -101,7 +81,6 @@ export class EditiniComponent implements OnInit {
             nombre: this.formPublication.value.nombrePublicacion,
             descripcion: this.formPublication.value.descripcion,
             imagen: base64String,
-            fecha_actividad: this.formPublication.value.fecha,
             rut_user: rut
           };
           this.publicacionService.insertPublicacion(publicationData)
@@ -159,7 +138,6 @@ export class EditiniComponent implements OnInit {
             nombre: this.formPublication.value.nombrePublicacion,
             descripcion: this.formPublication.value.descripcion,
             imagen: base64String,
-            fecha_actividad: this.formPublication.value.fecha,
             rut_user: rut
           };
           this.publicacionService.updatePublication(this.idActividad, publicationData)
