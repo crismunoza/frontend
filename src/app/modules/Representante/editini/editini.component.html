@@ -120,18 +120,6 @@
                               </div>
                             </div>
                           </div>
-                          <div class="row mb-3">
-                            <label for="fecha" class="col-sm-3 col-form-label">Fecha</label>
-                            <div class="col-sm-9">
-                              <input type="date" class="form-control" formControlName="fecha" [ngClass]="{
-                                 'is-invalid': formPublication.get('fecha')?.invalid && formPublication.get('fecha')?.touched 
-                                }" />
-                              <div class="invalid-feedback"
-                                *ngIf="formPublication.get('fecha')?.invalid && formPublication.get('fecha')?.touched">
-                                Fecha inválida.
-                              </div>
-                            </div>
-                          </div>
                           <div class="modal-footer ">
                             <button type="button" class="btn btn-primary" (click)="formPublication.valid ? submitAction() : null"
                             [disabled]="formPublication.invalid"

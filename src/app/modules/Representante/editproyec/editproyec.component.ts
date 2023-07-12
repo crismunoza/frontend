@@ -26,7 +26,7 @@ export class EditproyecComponent implements OnInit {
     this.formProyect = this.formBuilder.group({
       idProyecto: [null],
       nombreProyecto: ['', [Validators.required, Validators.minLength(10), this.nameWhitoutNUMBERS]],
-      cupoMinimo: [null, Validators.required],
+      // cupoMinimo: [null, Validators.required],
       cupoMaximo: [null, [Validators.required]],
       descripcion: ['', [Validators.required, this.descripcionValidator]],
       estado: ['', [Validators.required, Validators.minLength(6), this.nameWhitoutNUMBERS]],
